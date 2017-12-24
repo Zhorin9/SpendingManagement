@@ -1,0 +1,41 @@
+﻿@model SpendingManagement.Domain.Entities.Expense
+
+@{
+    ViewBag.Title = "Administracja: edycja" + Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="p-sm-3">
+    <div class="panel-heading">
+        <h3>Edycja: @Model.Name - @Model.Date</h3>
+    </div>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(m=> m.ExpenseID)
+                @foreach(var property in ViewData.ModelMetadata.Properties)
+                {
+                    if(property.PropertyName != "ExpenseID")
+                    {
+                        <div class="form-group">
+                            <p>@(property.DisplayName ?? property.PropertyName)</p>
+                            @if(property.PropertyName == "Description")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows=5})
+                            }
+                            else
+                            {
+                                @Html.TextArea(property.PropertyName,null,new { @class = "form-control"})
+                            }
+                        </div>
+                    }
+                }
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Zapisz" class="btn btn-light"/>
+                @Html.ActionLink("Anuluj i powróć","Index",null, new { @class="btn btn-light"})
+            </div>
+        }
+    </div>
+</div>

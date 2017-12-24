@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SpendingManagement.Domain.Entities.Expense>
+
+@{
+    ViewBag.Title = "Administracja: Wszystkie dane";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="panel panel-default p-md-1">
+    <div class="panel-heading p-4">
+        <h3>Wszystkie dane</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <tr class="table-light text-dark">
+                <th>Data</th>
+                <th>Nazwa</th>
+                <th class="">Kwota</th>
+                <th>Kategoria</th>
+                <th>Akcje</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.Name</td>
+                    <td>@item.Charge.ToString("c")</td>
+                    <td>@item.Category </td>
+                    <td>
+                        @Html.ActionLink("Edytuj","Edit","Admin", new { id = item.ExpenseID },null) |
+                        @Html.ActionLink("Szczegóły", "Details", new { id = item.ExpenseID })|
+                        @Html.ActionLink("Usuń", "Delete" , new { item.ExpenseID })
+                    </td>
+                </tr>
+            }
+        </table> 
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Dodaj nowy produkt","Create",null, new { @class = "btn btn-light"})
+    </div>
+</div>
