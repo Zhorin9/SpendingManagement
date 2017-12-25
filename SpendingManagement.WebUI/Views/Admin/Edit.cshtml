@@ -6,11 +6,11 @@
 }
 
 <div class="p-sm-3">
-    <div class="panel-heading">
+    <div class="panel-heading ">
         <h3>Edycja: @Model.Name - @Model.Date</h3>
     </div>
     <div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit","Admin"))
         {
             <div class="panel-body">
                 @Html.HiddenFor(m=> m.ExpenseID)
@@ -22,12 +22,13 @@
                             <p>@(property.DisplayName ?? property.PropertyName)</p>
                             @if(property.PropertyName == "Description")
                             {
-                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows=5})
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows=4})
                             }
                             else
                             {
-                                @Html.TextArea(property.PropertyName,null,new { @class = "form-control"})
+                                @Html.TextArea(property.PropertyName,null,new { @class = "form-control", rows = 1 })
                             }
+                            @Html.ValidationMessage(property.PropertyName)
                         </div>
                     }
                 }

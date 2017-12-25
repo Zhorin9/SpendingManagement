@@ -14,11 +14,11 @@
             <li id="categories" class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#">Okno główne</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#">Wprowadź dane</a>
+            <li>
+                @Html.ActionLink("Wprowadź dane","Create","Admin",null,new { @class = "nav-link" })
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#">Zarządzaj danymi</a>
+            <li>
+                @Html.ActionLink("Zarządzaj danymi","Index","Admin",null,new { @class = "nav-link"})
             </li>
         </ul>
     </div>
