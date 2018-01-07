@@ -16,10 +16,14 @@ namespace SpendingManagement.Domain.Concrete
             get { return contex.Expenses; }
         }
 
-        public void DeleteExpense(Expense expense)
+        public Expense DeleteExpense(int expenseID)
         {
-            Expense dbEntry = contex.Expenses.Remove(expense);
-            contex.SaveChanges();
+            Expense dbEntry = contex.Expenses.Find(expenseID);
+            if (dbEntry != null) {
+                contex.Expenses.Remove(dbEntry);
+                contex.SaveChanges();
+            }
+            return dbEntry;
         }
 
         public void SaveExpense(Expense expense)

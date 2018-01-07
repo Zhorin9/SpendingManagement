@@ -1,0 +1,41 @@
+﻿@model SpendingManagement.Domain.Entities.Expense
+
+@{
+    ViewBag.Title = "Szczegóły";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <div class="bg-dark p-4">
+        <h3>Szczegóły</h3>
+    </div>
+    <div class="p-4 panel-body">
+        <table class="table table-bordered">
+            <tr>
+                <th>Data</th>
+                <th class="bg-light">@Model.Date</th>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <th class="bg-light">@Model.Name</th>
+            </tr>
+            <tr>
+                <th>Opis</th>
+                <th class="bg-light">@Model.Description</th>
+            </tr>
+            <tr>
+                <th>Koszt</th>
+                <th class="bg-light">@Model.Charge</th>
+            </tr>
+            <tr>
+                <th>Kategoria</th>
+                <th class="bg-light">@Model.Category</th>
+            </tr>
+        </table>
+        <div>
+            @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-light" })
+        </div>
+    </div>
+
+</div>
+

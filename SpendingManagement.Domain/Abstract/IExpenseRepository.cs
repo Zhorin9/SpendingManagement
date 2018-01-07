@@ -7,6 +7,6 @@ namespace SpendingManagement.Domain.Abstract
     {
         IEnumerable<Expense> Expenses { get; }
         void SaveExpense(Expense expense);
-        void DeleteExpense(Expense expense);
+        Expense DeleteExpense(int expenseID);
     }
 }

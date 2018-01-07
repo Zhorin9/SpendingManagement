@@ -1,23 +1,31 @@
-﻿@model IEnumerable<SpendingManagement.Domain.Entities.Expense>
-
+﻿@model SpendingManagement.WebUI.Models.ExpensesListViewModel
+ 
 @{
     ViewBag.Title = "Administracja: Wszystkie dane";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div class="panel panel-default p-md-1">
     <div class="panel-heading p-4">
-        <h3>Wszystkie dane</h3>
+            <h3>Wszystkie dane - @Model.PagingInfo.TotalItems rekordów</h3>
+            @using (Html.BeginForm("Index", "Admin"))
+            {
+                <p>
+                    Wyszukaj po nazwie bądź kategorii: @Html.TextBox("searchString")
+                    <input type="submit" value="Wyszukaj" />
+                </p>
+            }
+
     </div>
     <div class="panel-body">
         <table class="table table-bordered">
             <tr class="table-light text-dark">
-                <th>Data</th>
-                <th>Nazwa</th>
-                <th class="">Kwota</th>
-                <th>Kategoria</th>
+                <th>@Html.ActionLink("Data", "Index", new { sortOrder = ViewBag.DateSortParam })</th>
+                <th>@Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParam })</th>
+                <th>@Html.ActionLink("Kwota", "Index", new { sortOrder = ViewBag.ChargeSortParam })</th>
+                <th>@Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.CategorySortParam })</th>
                 <th>Akcje</th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Expenses)
             {
                 <tr>
                     <td>@item.Date</td>
@@ -25,15 +33,19 @@
                     <td>@item.Charge.ToString("c")</td>
                     <td>@item.Category </td>
                     <td>
-                        @Html.ActionLink("Edytuj","Edit","Admin", new { id = item.ExpenseID },null) |
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.ExpenseID }) |
                         @Html.ActionLink("Szczegóły", "Details", new { id = item.ExpenseID })|
-                        @Html.ActionLink("Usuń", "Delete" , new { item.ExpenseID })
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.ExpenseID })
                     </td>
                 </tr>
             }
         </table> 
     </div>
-    <div class="panel-footer">
+    <div>
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, sortOrder = Model.SortingInfo.CurrentSort, searchString = Model.SortingInfo.CurrentSearch }))   
+    </div>
+    <div class="panel-footer p-1">
         @Html.ActionLink("Dodaj nowy produkt","Create",null, new { @class = "btn btn-light"})
+        @Html.ActionLink("Powrót","List","Expense",null,new { @class="btn btn-light"})
     </div>
 </div>
