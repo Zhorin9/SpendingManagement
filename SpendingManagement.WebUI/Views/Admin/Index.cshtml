@@ -19,10 +19,10 @@
     <div class="panel-body">
         <table class="table table-bordered">
             <tr class="table-light text-dark">
-                <th>@Html.ActionLink("Data", "Index", new { sortOrder = ViewBag.DateSortParam })</th>
-                <th>@Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParam })</th>
-                <th>@Html.ActionLink("Kwota", "Index", new { sortOrder = ViewBag.ChargeSortParam })</th>
-                <th>@Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.CategorySortParam })</th>
+                <th>@Html.ActionLink("Data", "Index", new { sortOrder = Model.SortingInfo.DataSort })</th>
+                <th>@Html.ActionLink("Nazwa", "Index", new { sortOrder = Model.SortingInfo.NameSort })</th>
+                <th>@Html.ActionLink("Kwota", "Index", new { sortOrder = Model.SortingInfo.ChargeSort })</th>
+                <th>@Html.ActionLink("Kategoria", "Index", new { sortOrder = Model.SortingInfo.CategorySort })</th>
                 <th>Akcje</th>
             </tr>
             @foreach (var item in Model.Expenses)

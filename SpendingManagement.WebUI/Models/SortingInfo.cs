@@ -7,10 +7,10 @@ namespace SpendingManagement.WebUI.Models
 {
     public class SortingInfo
     {
-        //public bool DataSort { get; set; }
-        //public bool NameSort { get; set; }
-        //public bool ChargeSort { get; set; }
-       // public bool CategorySort { get; set; }
+        public string DataSort { get; set; }
+        public string NameSort { get; set; }
+        public string ChargeSort { get; set; }
+        public string CategorySort { get; set; }
         public string CurrentSearch { get; set; }
         public string CurrentSort { get; set; }
     }

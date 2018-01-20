@@ -1,4 +1,4 @@
-﻿@model SpendingManagement.Domain.Entities.Expense
+﻿@model SpendingManagement.WebUI.Models.EditModel
 
 @{
     ViewBag.Title = "Administracja: edycja";
@@ -16,29 +16,38 @@
                 @Html.HiddenFor(m=> m.ExpenseID)
                 @foreach(var property in ViewData.ModelMetadata.Properties)
                 {
-                    if(property.PropertyName != "ExpenseID")
+                    if(property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList")
                     {
                         <div class="form-group">
                             <p>@(property.DisplayName ?? property.PropertyName)</p>
-                            @if(property.PropertyName == "Description" )
+                            @if (property.PropertyName == "Name")
                             {
-                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows=4})
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
                             }
-                            else if(property.PropertyName != "Date")
+                            @if (property.PropertyName == "Charge")
                             {
-                                @Html.TextArea(property.PropertyName,null,new { @class = "form-control", rows = 1 })
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
                             }
-                            else
+                            @if (property.PropertyName == "Date")
                             {
-                                @Html.TextBox(property.PropertyName, null, new { @class ="form-control", type = "date" })
+                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control", type = "date" })
+                            }
+                            @if (property.PropertyName == "Category")
+                            {
+                                @Html.DropDownList(property.PropertyName, new SelectList(Model.CategoryList),new { @class = "form-control" }) 
+
+                            }
+                            @if (property.PropertyName == "Description")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 4 })
                             }
                             @Html.ValidationMessage(property.PropertyName)
-                        </div>
+                         </div>
                     }
                 }
             </div>
             <div class="panel-footer">
-                <input type="submit" value="Zapisz" class="btn btn-light"/>
+                <input type="submit" value="Zapisz" class="btn btn-light" />
                 <a href="javascript:history.back()" class="btn btn-light">Anuluj i powróć</a>
             </div>
         }
