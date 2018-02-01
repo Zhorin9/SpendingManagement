@@ -177,8 +177,9 @@
     <Compile Include="Models\EditModel.cs" />
     <Compile Include="Models\ExpensesListViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
-    <Compile Include="Models\PieCategoryChartViewModel.cs" />
+    <Compile Include="Models\PieChart.cs" />
     <Compile Include="Models\SortingInfo.cs" />
+    <Compile Include="Models\Statistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,15 +192,13 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Expense\List.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
-    <Content Include="Views\Expense\ChartPie.cshtml" />
-    <Content Include="Views\Expense\Chart.cshtml" />
-    <Content Include="Views\Expense\Vhart.cshtml" />
+    <Content Include="Views\Expense\Statistics.cshtml" />
+    <Content Include="Views\Shared\SelectRange.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

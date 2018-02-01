@@ -10,7 +10,6 @@ namespace SpendingManagement.WebUI.Models
 {
     public class EditModel
     {
-        //public Expense expense { get; set; }
         public IEnumerable<string> CategoryList { get; set; }
         public EditModel()
         {

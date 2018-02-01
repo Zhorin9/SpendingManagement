@@ -5,12 +5,8 @@ using DotNet.Highcharts.Options;
 using SpendingManagement.Domain.Abstract;
 using SpendingManagement.WebUI.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace SpendingManagement.WebUI.Controllers
@@ -22,26 +18,14 @@ namespace SpendingManagement.WebUI.Controllers
         {
             this.repository = expenseRepository;
         }
-        public ViewResult List()
+        public ViewResult Statistics(string dateFrom, string dateTo)
         {
-            return View(repository.Expenses);
+            Statistics statistics = new Statistics();
+            statistics.CreatePieChart(repository);
+            statistics.CreateLineChart(repository);
+            return View(statistics);
         }
-        public ActionResult Chart()
-        {
-            var category = repository.Expenses.Select(p=> p.Category).Distinct();
-            List<object> graph = new List<object>();
-            category.ToList().ForEach(x=> graph.Add(new object[] { x, repository.Expenses.
-                Where(p => p.Category == x).
-                Select(p => new { p.Category, p.Charge }).
-                Sum(p => p.Charge) }));
 
-            Highcharts chart = new Highcharts("chart").SetSeries(new Series
-            {
-                Type = ChartTypes.Pie,
-                Data = new Data(graph.ToArray()),
-            });
-            return PartialView("Chart",chart);
-        }
         public ActionResult Vhart()
         {
             Highcharts chart = new Highcharts("vhart").SetXAxis(new XAxis

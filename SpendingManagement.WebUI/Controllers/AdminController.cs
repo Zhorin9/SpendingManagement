@@ -85,28 +85,6 @@ namespace SpendingManagement.WebUI.Controllers
             };
             return View(model);
         }
-
-        /*
-        public ViewResult Edit(int id)
-        {
-            Expense expense = repository.Expenses.First(p => p.ExpenseID == id);
-            return View(expense);
-        }        
-        [HttpPost]
-        public ActionResult Edit(Expense expense)
-        {
-            if (ModelState.IsValid)
-            {
-                repository.SaveExpense(expense);
-                TempData["message"] = string.Format("Zapisano {0} ", expense.Name);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(expense);
-            }
-        }
-        */
         public ViewResult Edit(int id)
         {
             Expense expense = repository.Expenses.First(p => p.ExpenseID == id);

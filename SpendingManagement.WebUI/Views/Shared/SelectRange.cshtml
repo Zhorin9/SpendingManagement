@@ -1,0 +1,13 @@
+﻿
+
+@using (Html.BeginForm("Statistics", "Expense"))
+{ 
+    <h3>Określ zakres danych</h3>
+        <div class="panel-body">
+            <div class="panel-group">
+               <p>Zakres od: @Html.TextBox("Zakres od",null, new { @class = "ml-1", type = "date" })</p>
+                <p>Zakres do: @Html.TextBox("Zakres do", null, new { @class = "ml-1", type = "date" })</p>
+            </div>
+        </div>
+    <input type="submit" value="Potwierdź" />
+}
