@@ -1,13 +1,16 @@
-﻿@model SpendingManagement.WebUI.Models.Statistics
-
+﻿@model SpendingManagement.WebUI.Models.StatisticsViewModel
 @{
     ViewBag.Title = "Statistics";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div>
+    <p>W danym zakresie wydano: @Model.SumCharge</p>
+</div>
 <div class="row p-lg-5">
     <p>@Model.PieChart</p>
-    <p>@Model.LineChart</p>
+    <p  class="ml-lg-2">@Model.LineSumChart</p>
 </div>
-
+<div class="row p-lg-5">
+    <p>@Model.LineCategoryChart</p>
+</div>
 

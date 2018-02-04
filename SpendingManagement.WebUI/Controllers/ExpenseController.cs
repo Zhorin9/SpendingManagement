@@ -6,6 +6,7 @@ using SpendingManagement.Domain.Abstract;
 using SpendingManagement.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -18,49 +19,30 @@ namespace SpendingManagement.WebUI.Controllers
         {
             this.repository = expenseRepository;
         }
-        public ViewResult Statistics(string dateFrom, string dateTo)
+        public ViewResult Statistics(string dateFromParam, string dateToParam)
         {
-            Statistics statistics = new Statistics();
-            statistics.CreatePieChart(repository);
-            statistics.CreateLineChart(repository);
+            if (String.IsNullOrEmpty(dateFromParam)) { dateFromParam = "1900-01-01"; }
+            if (String.IsNullOrEmpty(dateToParam)) { dateToParam = "2100-01-01"; }
+            StatisticsViewModel statistics = new StatisticsViewModel();
+            var repoParam = repository.Expenses.Where(p => ConvertStringToDateTime(p.Date) >= ConvertStringToDateTime(dateFromParam)
+                    && ConvertStringToDateTime(p.Date) <= ConvertStringToDateTime(dateToParam));
+            statistics.ExtremeValues(repoParam);
+            statistics.CreatePieChart(repoParam);
+            statistics.CreateLineChart(repoParam);
+            //statistics.CreateCategoryLineChart(repository);
             return View(statistics);
         }
-
-        public ActionResult Vhart()
+        public ViewResult ReposiotoryParameter()
         {
-            Highcharts chart = new Highcharts("vhart").SetXAxis(new XAxis
-            {
-                Categories = new[] {
-                    "Jan",
-                    "Feb",
-                    "Mar",
-                    "Apr",
-                    "May",
-                    "Jun",
-                    "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
-                    "Nov",
-                    "Dec" }
-            }).SetSeries(new Series
-            {
-                Data = new Data(new object[] {
-                    29.9,
-                    71.5,
-                    106.4,
-                    129.2,
-                    144.0,
-                    176.0,
-                    135.6,
-                    148.5,
-                    216.4,
-                    .1,
-                    95.6,
-                    54.4
-                })
-            });
-            return PartialView("Vhart", chart);
+            return View();
+        }
+        public ViewResult Index()
+        {
+            return View();
+        }
+        private DateTime ConvertStringToDateTime(string date)
+        {
+            return DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
     }
 }
