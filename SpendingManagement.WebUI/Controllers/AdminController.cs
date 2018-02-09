@@ -88,7 +88,7 @@ namespace SpendingManagement.WebUI.Controllers
         public ViewResult Edit(int id)
         {
             Expense expense = repository.Expenses.First(p => p.ExpenseID == id);
-            EditModel model = new EditModel()
+            EditViewModel model = new EditViewModel()
             { 
                 ExpenseID = expense.ExpenseID,
                 Name = expense.Name,
@@ -100,7 +100,7 @@ namespace SpendingManagement.WebUI.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(EditModel model)
+        public ActionResult Edit(EditViewModel model)
         {
             Expense expense;
             if(model.ExpenseID == 0)
@@ -136,7 +136,7 @@ namespace SpendingManagement.WebUI.Controllers
         }
         public ViewResult Create()
         {
-            return View("Edit", new EditModel());
+            return View("Edit", new EditViewModel());
         }
 
         [HttpGet]

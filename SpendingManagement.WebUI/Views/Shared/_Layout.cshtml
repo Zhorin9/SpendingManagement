@@ -10,24 +10,23 @@
 
 </head>
 <body>
-    <div class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+    <div class="navbar navbar-expand-lg navbar-light bg-light p-lg-2" role="navigation">
         <h3 class="navbar-brand">Zarządzanie wydatkami</h3>
         <img src="~/Images/money_time.png" class="mr-4 " alt="time or money" height="40" width="40" />
         <ul class="nav nav-tabs">
             <li id="categories" class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#">Okno główne</a>
-            </li>
-            <li>
-                @Html.ActionLink("Wprowadź dane", "Create", "Admin", null, new { @class = "nav-link" })
+                @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
             </li>
             <li>
                 @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "nav-link" })
             </li> 
+            <li>
+                @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "nav-link" })
+            </li>
         </ul>
     </div>
-    <div class="p-lg-4">@Html.Partial("SelectRange")</div>
-    <div class="p-lg-4">@RenderBody()</div>   
-    
+    <div>@RenderBody()</div>   
+ 
     <div class="panel-footer navbar-light bg-light text-dark text-center">
         <p>Jaros™ Przemysław @DateTime.Now</p>
     </div>

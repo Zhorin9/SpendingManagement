@@ -1,7 +1,42 @@
-﻿@{
+﻿@model SpendingManagement.WebUI.Models.DashboardViewModel
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div>
 
-
-
+</div>
+<div class="row p-lg-4" style="padding-top: 30px !important;">
+    <div class="col-sm-6">
+        <div class="card text-success mb-3">
+            <div class="card-header font-weight-bold">Wydatki miesięczne</div>
+            <div class="card-body text-center">
+                <h4 class="card-title">@Model.SumMonthCharge [zł]</h4>
+                <p class="card-text">Suma wydatków w obecnym miesiącu</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-primary text-primary">
+            <div class="card-header font-weight-bold">Wydatki roczne</div>
+            <div class="card-body text-center">
+                <h4 class="card-title">@Model.SumCharge [zł]</h4>
+                <p class="card-text">Suma wszystkich wydatków</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-lg-4">
+    <div class="card text-success">
+        <div class="card-block">
+            <h4 class="card-header">Lista ostatnich 10 wydatków</h4>
+        </div>
+        <ul class="card">
+            @foreach (var p in Model.Expsenses)
+            {
+                <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date</li>
+            }
+        </ul>
+    </div>
+</div>

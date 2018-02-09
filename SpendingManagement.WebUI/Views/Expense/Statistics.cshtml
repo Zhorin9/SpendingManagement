@@ -3,8 +3,24 @@
     ViewBag.Title = "Statistics";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    <p>W danym zakresie wydano: @Model.SumCharge</p>
+
+<div class="p-lg-4">@Html.Partial("SelectRange")</div>
+<div class="panel-body p-lg-4">
+    <table class="table table-bordered ">
+        <tbody class="">
+            @foreach (var p in Model.CategoriesCharge)
+            {
+                <tr>
+                    <th class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</th>
+                    <th class="table-dark">@p[1] [zł]</th>
+                </tr>
+            }
+            <tr>
+                <th class="card">Suma wydatków w wybranym zakresie wyniosła:</th>
+                <th class="card-body">@Model.SumCharge [zł]</th>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div class="row p-lg-5">
     <p>@Model.PieChart</p>
@@ -13,4 +29,3 @@
 <div class="row p-lg-5">
     <p>@Model.LineCategoryChart</p>
 </div>
-

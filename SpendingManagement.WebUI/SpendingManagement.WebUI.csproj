@@ -117,6 +117,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\calendar.png" />
     <Content Include="Images\money_time.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -174,7 +175,8 @@
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\EditModel.cs" />
+    <Compile Include="Models\DashBoardViewModel.cs" />
+    <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\ExpensesListViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SortingInfo.cs" />

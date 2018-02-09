@@ -8,15 +8,15 @@ using System.Web.Mvc;
 
 namespace SpendingManagement.WebUI.Models
 {
-    public class EditModel
+    public class EditViewModel
     {
         public IEnumerable<string> CategoryList { get; set; }
-        public EditModel()
+        public EditViewModel()
         {
             CategoryList = new List<string>()
             {
                 "Jedzenie",
-                "Ubranie",
+                "Ubrania",
                 "Kosmetyki",
                 "Alkohol",
                 "Opłaty",

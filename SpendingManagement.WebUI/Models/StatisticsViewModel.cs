@@ -19,46 +19,12 @@ namespace SpendingManagement.WebUI.Models
         public Highcharts LineCategoryChart { get; set; }
 
         public decimal SumCharge { get; set; }
-        public decimal FoodSum { get; set; }
-        public decimal CosmeticsSum { get; set; }
-        public decimal AlcoholSum { get; set; }
-        public decimal FeeSum { get; set; }
-        public decimal RideSum { get; set; }
-        public decimal AnotherChargeSum { get; set; }
-        public decimal ClothingSum { get; set; }
+        public List<object[]> CategoriesCharge = new List<object[]>();
 
-        private List<string> CategoryList = new List<string>()
-            {
-                "Alkohol",
-                "Inne",
-                "Jedzenie",
-                "Kosmetyki",
-                "Opłaty",
-                "Przejazdy",
-                "Ubranie",                
-            };
-        public void ExtremeValues(IEnumerable<Expense> repository)
+
+
+        public void CreatePieChart(List<object> series)
         {
-           // List<string> categories = repository.OrderBy(p=>p.Category).Select(p => p.Category).Distinct().ToList();
-            SumCharge = repository.Select(p => p.Charge).Sum();
-            AlcoholSum = repository.Where(p => p.Category == CategoryList[0]).Select(p => p.Charge).Sum();
-            AnotherChargeSum = repository.Where(p => p.Category == CategoryList[1]).Select(p => p.Charge).Sum();
-            FoodSum = repository.Where(p => p.Category == CategoryList[2]).Select(p => p.Charge).Sum();
-            CosmeticsSum = repository.Where(p => p.Category == CategoryList[3]).Select(p => p.Charge).Sum();
-            FeeSum = repository.Where(p => p.Category ==  CategoryList[4]).Select(p => p.Charge).Sum();
-            RideSum = repository.Where(p => p.Category == CategoryList[5]).Select(p => p.Charge).Sum();
-            ClothingSum = repository.Where(p => p.Category == CategoryList[6]).Select(p => p.Charge).Sum();
-        }
-
-        public void CreatePieChart(IEnumerable<Expense> repository)
-        {
-            var category = repository.Select(p => p.Category).Distinct();
-            List<object> series = new List<object>();
-            category.ToList().ForEach(x => series.Add(new object[] { x, repository.
-                Where(p => p.Category == x).
-                Select(p => new { p.Category, p.Charge }).
-                Sum(p => p.Charge) }));
-
             PieChart = new Highcharts("CategoryChart").SetSeries(new Series
             {
                 Type = ChartTypes.Pie,
@@ -66,12 +32,10 @@ namespace SpendingManagement.WebUI.Models
                 Name = "Wydatki",
             }).SetTitle(new Title() { Text = "Udział poszczególnych kategorii" });
         }
-        public void CreateLineChart(IEnumerable<Expense> repository)
+        public void CreateLineChart(string[] xValuesParam, IEnumerable<decimal> yValuesParam)
         {
-            var xValues = repository.Select(p => p.Date).Distinct().ToArray();
-            var yValues = repository.GroupBy(p => p.Date).Select(g=> g.Sum(s => s.Charge));
             List<object> series = new List<object>();
-            foreach (var p in yValues) { series.Add(p); }
+            foreach (var p in yValuesParam) { series.Add(p); }
 
             LineSumChart = new Highcharts("LineChart").SetSeries(new Series
             {
@@ -86,7 +50,7 @@ namespace SpendingManagement.WebUI.Models
                 Labels = new XAxisLabels() { Enabled = false, },
                 Type = AxisTypes.Datetime,
                 Title = new XAxisTitle() { Text = "Data" },
-                Categories = xValues,
+                Categories = xValuesParam,
             }).SetYAxis(new YAxis()
             {
                 TickInterval = 50,
@@ -97,6 +61,8 @@ namespace SpendingManagement.WebUI.Models
                 Enabled = false,
             });
         }
+
+        /*
         public void CreateCategoryLineChart(IEnumerable<Expense> repository)
         {
             List<object> foodCategory = new List<object>();
@@ -150,5 +116,7 @@ namespace SpendingManagement.WebUI.Models
                 Enabled = false,
             });
         }
+        */
     }
+
 }

@@ -13,6 +13,25 @@
     <title></title>
 </head>
 <body>
+    <div class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+        <h3 class="navbar-brand">Zarządzanie wydatkami</h3>
+        <img src="~/Images/money_time.png" class="mr-4 " alt="time or money" height="40" width="40" />
+        <ul class="nav nav-tabs">
+            <li id="categories" class="nav-item">
+                @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Dodaj nowy produkt", "Create", null, new { @class = "nav-link" })
+            </li>
+        </ul>
+    </div>
+
     <div>
         @if(TempData["message"] != null)
         {
