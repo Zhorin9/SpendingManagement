@@ -8,7 +8,7 @@ namespace SpendingManagement.WebUI.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {
+    {   
         [HttpGet]
         public ActionResult Registration()
         {
