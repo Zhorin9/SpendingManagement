@@ -15,7 +15,7 @@
 <body>
     <div class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
         <h3 class="navbar-brand">Zarządzanie wydatkami</h3>
-        <img src="~/Images/money_time.png" class="mr-4 " alt="time or money" height="40" width="40" />
+        <img src="~/Images/money_time.png" class="mr-4" alt="time or money" height="40" width="40" />
         <ul class="nav nav-tabs">
             <li id="categories" class="nav-item">
                 @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
@@ -27,7 +27,10 @@
                 @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "nav-link" })
             </li>
             <li>
-                @Html.ActionLink("Dodaj nowy produkt", "Create", null, new { @class = "nav-link" })
+                @Html.ActionLink("Dodaj wydatek", "Create", null, new { @class = "nav-link text-primary" })
+            </li>
+            <li>
+                @Html.ActionLink("Dodaj przychód", "Create", null, new { @class = "nav-link text-primary" })
             </li>
         </ul>
     </div>

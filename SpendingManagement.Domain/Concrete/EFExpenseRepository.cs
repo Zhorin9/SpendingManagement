@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpendingManagement.Domain.Entities;
-
 namespace SpendingManagement.Domain.Concrete
 {
     public class EFExpenseRepository : IExpenseRepository
@@ -28,17 +27,22 @@ namespace SpendingManagement.Domain.Concrete
 
         public void SaveExpense(Expense expense)
         {
-            if (expense.ExpenseID == 0)
+            if (expense.ExpenseID == 0) {
+                expense.UserID = 1;
                 contex.Expenses.Add(expense);
+            }
+
+
             else {
                 Expense dbEntry = contex.Expenses.Find(expense.ExpenseID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.Name = expense.Name;
                     dbEntry.Description = expense.Description;
                     dbEntry.Date = expense.Date;
                     dbEntry.Charge = expense.Charge;
                     dbEntry.Category = expense.Category;
+                    dbEntry.UserID = 1;
                 }
             }
             contex.SaveChanges();

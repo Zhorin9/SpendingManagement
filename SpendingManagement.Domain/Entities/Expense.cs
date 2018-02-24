@@ -11,6 +11,9 @@ namespace SpendingManagement.Domain.Entities
         public string Description { get; set; }
         public string Date { get; set; }
         public decimal Charge { get; set; }
-        public string Category { get; set; }
+        public string Category { get; set; } 
+        public int UserID { get; set; }
+
+        public virtual User User { get; private set; }
     }
 }

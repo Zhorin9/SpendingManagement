@@ -27,6 +27,7 @@ namespace SpendingManagement.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IExpenseRepository>().To<EFExpenseRepository>();
+            kernel.Bind<IUserRepository>().To<EFUserRepository>();
         }
     }
 }

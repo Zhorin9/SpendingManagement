@@ -10,6 +10,10 @@ namespace SpendingManagement.WebUI.HtmlHelpers
         public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo, Func<int,string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
+            if(pagingInfo.TotalPages > 10)
+            {
+
+            }
             for(int i = 1; i <= pagingInfo.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");

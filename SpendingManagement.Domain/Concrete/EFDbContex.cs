@@ -6,5 +6,6 @@ namespace SpendingManagement.Domain.Concrete
     public class EFDbContex :DbContext
     {
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

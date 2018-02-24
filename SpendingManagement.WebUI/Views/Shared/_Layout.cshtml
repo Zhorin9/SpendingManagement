@@ -10,21 +10,29 @@
 
 </head>
 <body>
-    <div class="navbar navbar-expand-lg navbar-light bg-light p-lg-2" role="navigation">
-        <h3 class="navbar-brand">Zarządzanie wydatkami</h3>
-        <img src="~/Images/money_time.png" class="mr-4 " alt="time or money" height="40" width="40" />
-        <ul class="nav nav-tabs">
-            <li id="categories" class="nav-item">
-                @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "nav-link" })
-            </li> 
-            <li>
-                @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "nav-link" })
-            </li>
-        </ul>
-    </div>
+    <nav class="navbar navbar-inverse navbar-expand navbar-light bg-light" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h5 class="navbar-brand">Zarządzanie wydatkami</h5>
+                <img src="~/Images/money_time.png" class="nav-item" alt="time or money" height="40" width="40" />
+            </div>
+            <ul class="nav navbar-nav mr-auto">
+                <li id="categories">
+                    @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "btn" })
+                </li>
+                <li>
+                    @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "btn" })
+                </li>
+                <li>
+                    @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "btn" })
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Rejestracja", "Index", "Expense", null, new { @class = "" })</p></li>
+                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-log-in"></span> @Html.ActionLink("Zaloguj", "Index", "Expense", null, new { @class = "" })</p></li>
+            </ul>
+        </div>
+    </nav>
     <div>@RenderBody()</div>   
  
     <div class="panel-footer navbar-light bg-light text-dark text-center">

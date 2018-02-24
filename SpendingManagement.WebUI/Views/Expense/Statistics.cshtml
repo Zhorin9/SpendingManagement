@@ -3,29 +3,35 @@
     ViewBag.Title = "Statistics";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="p-lg-4">@Html.Partial("SelectRange")</div>
-<div class="panel-body p-lg-4">
-    <table class="table table-bordered ">
-        <tbody class="">
-            @foreach (var p in Model.CategoriesCharge)
-            {
+ 
+<div class="row m-md-4">
+    <div class="col-md-4 p-md-4">@Html.Partial("SelectRange")</div>  
+    <div class="panel-body p-lg-4 col-md-8">
+        <table class="table table-bordered ">
+            <tbody class="">
+                @foreach (var p in Model.CategoriesCharge)
+                {
+                    <tr>
+                        <th class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</th>
+                        <th class="table-dark">@p[1] [zł]</th>
+                    </tr>
+                }
                 <tr>
-                    <th class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</th>
-                    <th class="table-dark">@p[1] [zł]</th>
+                    <th class="card">Suma wydatków w wybranym zakresie wyniosła:</th>
+                    <th class="card-body">@Model.SumCharge [zł]</th>
                 </tr>
-            }
-            <tr>
-                <th class="card">Suma wydatków w wybranym zakresie wyniosła:</th>
-                <th class="card-body">@Model.SumCharge [zł]</th>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="row p-lg-5">
-    <p>@Model.PieChart</p>
-    <p  class="ml-lg-2">@Model.LineSumChart</p>
-</div>
-<div class="row p-lg-5">
-    <p>@Model.LineCategoryChart</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @Model.PieChart
+        </div>
+        <div class="col-md-6">
+            @Model.LineSumChart
+        </div>
+        <div class="m-md-4"></div>
+    </div>
 </div>
