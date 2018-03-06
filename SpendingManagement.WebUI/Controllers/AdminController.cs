@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SpendingManagement.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IExpenseRepository repository;

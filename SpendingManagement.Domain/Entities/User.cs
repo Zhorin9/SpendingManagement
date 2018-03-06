@@ -16,6 +16,7 @@ namespace SpendingManagement.Domain.Entities
         public string UserLogin { get; set; }
         public string UserPassword { get; set; }
         public Nullable<DateTime> DateOfBirth { get; set; }
+        public string Email { get; set; }
 
         public virtual ICollection<Expense> Expenses { get; set; }
     }

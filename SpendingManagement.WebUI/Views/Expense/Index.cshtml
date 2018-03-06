@@ -48,18 +48,15 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="p-lg-4 col-md-8">
-            <div class="card text-success">
-                <div class="card-block">
-                    <h4 class="card-header">Lista ostatnich 10 wydatków</h4>
-                </div>
-                <ul class="card">
+            <div class="card text-white">
+                <h5 class="card-header text-center">Lista ostatnich 10 wydatków</h5>
+                <ul class="list-group">
                     @foreach (var p in Model.Expsenses)
                     {
-                           <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date</li>
+                        <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date</li>
                     }
                 </ul>
             </div>
         </div>
     </div>
-
 </div>

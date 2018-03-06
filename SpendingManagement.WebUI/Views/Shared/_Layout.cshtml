@@ -16,20 +16,20 @@
                 <h5 class="navbar-brand">Zarządzanie wydatkami</h5>
                 <img src="~/Images/money_time.png" class="nav-item" alt="time or money" height="40" width="40" />
             </div>
-            <ul class="nav navbar-nav mr-auto">
+            <ul class="nav navbar-light mr-auto">
                 <li id="categories">
-                    @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "btn" })
+                    @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
                 </li>
                 <li>
-                    @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "btn" })
+                    @Html.ActionLink("Zarządzaj danymi", "Index", "Admin", null, new { @class = "nav-link" })
                 </li>
                 <li>
-                    @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "btn" })
+                    @Html.ActionLink("Statystyki", "Statistics", "Expense", null, new { @class = "nav-link" })
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Rejestracja", "Index", "Expense", null, new { @class = "" })</p></li>
-                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-log-in"></span> @Html.ActionLink("Zaloguj", "Index", "Expense", null, new { @class = "" })</p></li>
+                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Konto", "Index", "Expense")</p></li>
+                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-log-out"></span> @Html.ActionLink("Wyloguj", "Logout", "Account")</p></li>
             </ul>
         </div>
     </nav>

@@ -13,13 +13,15 @@ using System.Web.Mvc;
 
 namespace SpendingManagement.WebUI.Controllers
 {
+    [Authorize]
     public class ExpenseController : Controller
-    {
+    { 
         private IExpenseRepository repository;
         private IUserRepository userRepository;
         public ExpenseController(IExpenseRepository expenseRepository, IUserRepository userRepository)
         {
-            this.repository = expenseRepository;
+            //HttpContext contex = HttpContext.Current
+            this.repository = expenseRepository;//Expenses;//.Select(p=> p.ExpenseID == HttpContext.Current.;
             this.userRepository = userRepository;
         }
         public ViewResult Statistics(string dateFromParam, string dateToParam)

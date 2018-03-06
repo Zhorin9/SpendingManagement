@@ -117,6 +117,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\account_background.jpeg" />
     <Content Include="Images\calendar.png" />
     <Content Include="Images\money_time.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -175,11 +176,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
+    <Compile Include="Infrastructure\Crypto.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\DashBoardViewModel.cs" />
+    <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Expense\DashBoardViewModel.cs" />
     <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\ExpensesListViewModel.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SortingInfo.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
@@ -204,6 +207,8 @@
     <Content Include="Views\Shared\SelectRange.cshtml" />
     <Content Include="Views\Expense\Index.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,5 +15,11 @@ namespace SpendingManagement.Domain.Concrete
         {
             get { return contex.Users; }
         }
+
+        public void SaveUser(User user)
+        {
+            contex.Users.Add(user);
+            contex.SaveChanges();
+        }
     }
 }

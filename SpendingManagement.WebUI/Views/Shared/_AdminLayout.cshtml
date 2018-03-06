@@ -10,14 +10,14 @@
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    <title></title>
+    <title>Wydatki</title>
 </head>
 <body>
     <div class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
         <h3 class="navbar-brand">Zarządzanie wydatkami</h3>
         <img src="~/Images/money_time.png" class="mr-4" alt="time or money" height="40" width="40" />
-        <ul class="nav nav-tabs">
-            <li id="categories" class="nav-item">
+        <ul class="nav navbar-light mr-auto">
+            <li>
                 @Html.ActionLink("Okno główne", "Index", "Expense", null, new { @class = "nav-link" })
             </li>
             <li>
@@ -32,6 +32,10 @@
             <li>
                 @Html.ActionLink("Dodaj przychód", "Create", null, new { @class = "nav-link text-primary" })
             </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Konto", "Index", "Expense")</p></li>
+            <li class="mx-lg-2"><p><span class="glyphicon glyphicon-log-out"></span> @Html.ActionLink("Wyloguj", "Account", "Logout")</p></li>
         </ul>
     </div>
 
