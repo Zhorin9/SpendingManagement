@@ -28,7 +28,7 @@
             @foreach (var item in Model.Expenses)
             {
                 <tr>
-                    <td>@item.Date</td>
+                    <td>@item.Date.ToShortDateString()</td>
                     <td>@item.Name</td>
                     <td>@item.Charge.ToString("c")</td>
                     <td>@item.Category </td>

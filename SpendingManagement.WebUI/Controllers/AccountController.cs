@@ -114,6 +114,11 @@ namespace SpendingManagement.WebUI.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult AccountDetails()
+        {
+            return View();
+        }
+
         private bool IsEmailExist(string email)
         {
             var v = userRepository.Users.Where(p => p.Email == email).FirstOrDefault();

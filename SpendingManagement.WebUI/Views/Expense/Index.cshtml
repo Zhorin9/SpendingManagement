@@ -53,7 +53,7 @@
                 <ul class="list-group">
                     @foreach (var p in Model.Expsenses)
                     {
-                        <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date</li>
+                        <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date.ToShortDateString()</li>
                     }
                 </ul>
             </div>

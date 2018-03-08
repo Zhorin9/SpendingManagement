@@ -9,7 +9,7 @@ namespace SpendingManagement.Domain.Entities
         public int ExpenseID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public decimal Charge { get; set; }
         public string Category { get; set; } 
         public int UserID { get; set; }

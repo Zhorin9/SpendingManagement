@@ -28,7 +28,6 @@ namespace SpendingManagement.Domain.Concrete
         public void SaveExpense(Expense expense)
         {
             if (expense.ExpenseID == 0) {
-                expense.UserID = 1;
                 contex.Expenses.Add(expense);
             }
 
@@ -42,7 +41,7 @@ namespace SpendingManagement.Domain.Concrete
                     dbEntry.Date = expense.Date;
                     dbEntry.Charge = expense.Charge;
                     dbEntry.Category = expense.Category;
-                    dbEntry.UserID = 1;
+                    dbEntry.UserID = expense.UserID;
                 }
             }
             contex.SaveChanges();

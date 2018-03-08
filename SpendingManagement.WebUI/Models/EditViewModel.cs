@@ -23,7 +23,6 @@ namespace SpendingManagement.WebUI.Models
                 "Przejazdy",
                 "Inne",
             };
-
         }
         [HiddenInput(DisplayValue = false)]
         public int ExpenseID { get; set; }
@@ -37,7 +36,7 @@ namespace SpendingManagement.WebUI.Models
         public string Description { get; set; }
 
         [Display(Name = "Data")]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Proszę podać właściwą wartość")]

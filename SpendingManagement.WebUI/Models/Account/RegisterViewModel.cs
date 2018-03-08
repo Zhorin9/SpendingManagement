@@ -18,7 +18,7 @@ namespace SpendingManagement.WebUI.Models
 
         [Display(Name = "E-mail")]
         [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage ="Podaj poprawny E-Mail")]
+        [Required(ErrorMessage ="Podaj poprawny adres E-Mail")]
         public string Email { get; set; }
 
         [Display(Name ="Rok urodzin")]

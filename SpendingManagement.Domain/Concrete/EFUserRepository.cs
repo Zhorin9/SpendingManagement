@@ -21,5 +21,9 @@ namespace SpendingManagement.Domain.Concrete
             contex.Users.Add(user);
             contex.SaveChanges();
         }
+        public void DeleteUser(User user, IExpenseRepository expense)
+        {
+            expense.Expenses.Where(p=> p.UserID == user.UserID).
+        }
     }
 }

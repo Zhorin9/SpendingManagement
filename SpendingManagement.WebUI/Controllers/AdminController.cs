@@ -14,23 +14,28 @@ namespace SpendingManagement.WebUI.Controllers
     public class AdminController : Controller
     {
         private IExpenseRepository repository;
+        private IUserRepository userRepository;
+        private int currentUserID;
         private int PageSize = 8;
-        public AdminController(IExpenseRepository expenseRepository)
+        public AdminController(IExpenseRepository expenseRepository, IUserRepository userRepository)
         {
             repository = expenseRepository;
+            this.userRepository = userRepository;
         }
         public ViewResult Index(SortingInfo sortingInfo, string sortOrder, string searchString, int page = 1)
         {
+            CheckCurrentUserID();
+
             sortingInfo.DataSort = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
             sortingInfo.NameSort = sortOrder == "name" ? "name_desc" : "name";
             sortingInfo.ChargeSort = sortOrder == "charge" ? "charge_desc" : "charge";
             sortingInfo.CategorySort = sortOrder == "category" ? "category_desc" : "category";
 
-            var parameters = repository.Expenses;
+            var parameters = repository.Expenses.Where(p => p.UserID == currentUserID);
  
             if (!String.IsNullOrEmpty(searchString))
             {
-                parameters = parameters.Where(s => s.Name.Contains(searchString) || s.Category.Contains(searchString));
+                parameters = parameters.Where(p => p.Name.Contains(searchString) || p.Category.Contains(searchString) && p.UserID == currentUserID);
             }
             switch (sortOrder)
             {
@@ -88,7 +93,8 @@ namespace SpendingManagement.WebUI.Controllers
         }
         public ViewResult Edit(int id)
         {
-            Expense expense = repository.Expenses.First(p => p.ExpenseID == id);
+            CheckCurrentUserID();
+            Expense expense = repository.Expenses.First(p => p.ExpenseID == id && p.UserID == currentUserID);
             EditViewModel model = new EditViewModel()
             { 
                 ExpenseID = expense.ExpenseID,
@@ -118,6 +124,7 @@ namespace SpendingManagement.WebUI.Controllers
             expense.Category = model.Category;
             expense.Date = model.Date;
             expense.Description = model.Description;
+            expense.UserID = userRepository.Users.Where(p => p.Email == User.Identity.Name).Select(p => p.UserID).First();
 
             if (ModelState.IsValid)
             {
@@ -150,6 +157,14 @@ namespace SpendingManagement.WebUI.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+        [NonAction]
+        private void CheckCurrentUserID()
+        {
+            if (currentUserID == 0)
+            {
+                currentUserID = userRepository.Users.Where(p => p.Email == User.Identity.Name).Select(p => p.UserID).First();
+            }
         }
     }
 }
