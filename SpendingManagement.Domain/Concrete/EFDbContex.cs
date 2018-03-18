@@ -7,5 +7,6 @@ namespace SpendingManagement.Domain.Concrete
     {
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Note> Notes { get; set; }
     }
 }

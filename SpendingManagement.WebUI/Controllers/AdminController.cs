@@ -2,11 +2,9 @@
 using SpendingManagement.Domain.Entities;
 using SpendingManagement.WebUI.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
- 
+
 
 namespace SpendingManagement.WebUI.Controllers
 {
@@ -42,7 +40,6 @@ namespace SpendingManagement.WebUI.Controllers
                 case "date_desc":
                    parameters = parameters.OrderByDescending(s => s.Date);
                     break;
-
                 case "name":
                     parameters = parameters.OrderBy(s => s.Name);
                     break;

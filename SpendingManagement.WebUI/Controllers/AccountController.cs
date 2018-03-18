@@ -4,7 +4,6 @@ using SpendingManagement.WebUI.Infrastructure;
 using SpendingManagement.WebUI.Models;
 using SpendingManagement.WebUI.Models.Account;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,7 +24,7 @@ namespace SpendingManagement.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Registration(User user)
+        public ActionResult Registration( User user)
         {
             RegisterViewModel newUser = new RegisterViewModel()
             {
@@ -67,7 +66,18 @@ namespace SpendingManagement.WebUI.Controllers
             ViewBag.Status = status;
             return View(newUser);
         }
+        /*
+        public VerifyAccount(string id)
+        {
+            bool status = false;
 
+
+
+            return View();
+
+        }
+        */
+    
         public ActionResult Login()
         {
             return View();
@@ -114,10 +124,28 @@ namespace SpendingManagement.WebUI.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        public ActionResult AccountDetails()
+
+        [Authorize]
+        public ActionResult Details()
+        {
+            int currentUserID = userRepository.Users.Where(p => p.Email == User.Identity.Name).Select(p => p.UserID).First();
+            var currentUser = userRepository.Users.Where(p => p.UserID == currentUserID).First();
+            RegisterViewModel currentModel = new RegisterViewModel()
+            {
+                DateOfBirth = currentUser.DateOfBirth,
+                Email = currentUser.Email,
+                UserLogin = currentUser.UserLogin,
+            };
+            return View(currentModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult DeleteAccount()
         {
             return View();
         }
+
 
         private bool IsEmailExist(string email)
         {

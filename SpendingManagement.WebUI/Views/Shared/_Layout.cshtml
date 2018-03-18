@@ -28,7 +28,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Konto", "Index", "Expense")</p></li>
+                <li class="mx-lg-2"><p><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Konto", "Details", "Account")</p></li>
                 <li class="mx-lg-2"><p><span class="glyphicon glyphicon-log-out"></span> @Html.ActionLink("Wyloguj", "Logout", "Account")</p></li>
             </ul>
         </div>
@@ -36,7 +36,29 @@
     <div>@RenderBody()</div>   
  
     <div class="panel-footer navbar-light bg-light text-dark text-center">
-        <p>Jaros™ Przemysław @DateTime.Now</p>
+        <p>Jaros™ Przemysław <output type="text" id="clock" /></p>
+        <script type="text/javascript">
+            setInterval("settime()", 1000);
+            function settime() {
+                var dateTime = new Date();
+                var day = dateTime.getUTCDate();
+                var month = dateTime.getMonth()+1;
+                var year = dateTime.getFullYear()
+                var hour = dateTime.getHours();
+                var minute = dateTime.getMinutes();
+                var second = dateTime.getSeconds();
+                if (day < 10)
+                    day = "0" + day;
+                if (month < 10)
+                    month = "0" + month;
+                if (minute < 10)
+                    minute = "0" + minute;
+                if (second < 10)
+                    second = "0" + second;          
+                var time =day + "/" + month + "/" + year + "  " + hour + ":" + minute + ":" + second;
+                document.getElementById("clock").value = time;
+            }
+        </script>
     </div>
 </body>
 </html>

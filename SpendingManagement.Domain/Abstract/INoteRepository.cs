@@ -1,13 +1,14 @@
 ﻿using SpendingManagement.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SpendingManagement.Domain.Abstract
 {
-    public interface IUserRepository
+    interface INoteRepository
     {
-        IEnumerable<User> Users { get; }
         IEnumerable<Note> Notes { get; }
-        void SaveUser(User user);
-
     }
 }

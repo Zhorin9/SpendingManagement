@@ -209,6 +209,7 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

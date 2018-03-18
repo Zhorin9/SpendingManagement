@@ -15,15 +15,25 @@ namespace SpendingManagement.Domain.Concrete
         {
             get { return contex.Users; }
         }
+        public IEnumerable<Note> Notes
+        {
+            get { return contex.Notes; }
+        }
 
         public void SaveUser(User user)
         {
             contex.Users.Add(user);
             contex.SaveChanges();
         }
-        public void DeleteUser(User user, IExpenseRepository expense)
+        public User DeleteUser(int userID)
         {
-            expense.Expenses.Where(p=> p.UserID == user.UserID).
+            User dbEntry = contex.Users.Find(userID);
+            if (dbEntry != null)
+            {
+                contex.Users.Remove(dbEntry);
+                contex.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }

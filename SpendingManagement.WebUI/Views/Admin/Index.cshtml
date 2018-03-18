@@ -6,15 +6,14 @@
 }
 <div class="panel panel-default p-md-1">
     <div class="panel-heading p-4">
-            <h3>Wszystkie dane - @Model.PagingInfo.TotalItems rekordów</h3>
-            @using (Html.BeginForm("Index", "Admin"))
-            {
-                <p>
-                    Wyszukaj po nazwie bądź kategorii: @Html.TextBox("searchString")
-                    <input type="submit" value="Wyszukaj" />
-                </p>
-            }
-
+        <h3>Wszystkie dane - @Model.PagingInfo.TotalItems rekordów</h3>
+        @using (Html.BeginForm("Index", "Admin"))
+        {
+            <p>
+                Wyszukaj po nazwie bądź kategorii: @Html.TextBox("searchString")
+                <input type="submit" value="Wyszukaj" />
+            </p>
+        }
     </div>
     <div class="panel-body">
         <table class="table table-bordered">
@@ -39,9 +38,10 @@
                     </td>
                 </tr>
             }
-        </table> 
+        </table>
     </div>
-    <div>
-        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, sortOrder = Model.SortingInfo.CurrentSort, searchString = Model.SortingInfo.CurrentSearch }))   
-    </div>
+
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, sortOrder = Model.SortingInfo.CurrentSort, searchString = Model.SortingInfo.CurrentSearch }))
 </div>
+
+
