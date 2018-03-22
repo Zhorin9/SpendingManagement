@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpendingManagement.Domain.Concrete
 {
-    class EFNoteRepository : INoteRepository
+    public class EFNoteRepository : INoteRepository
     {
         private EFDbContex contex = new EFDbContex();
         public IEnumerable<Note> Notes

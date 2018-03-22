@@ -6,43 +6,45 @@
 }
 
 <div class="p-sm-3">
-    <div class="panel-heading">
+    <div class="ml-md-7 panel-heading">
         <h3>Edycja @Model.Name</h3> 
     </div>
-    <div class="col-md-7">
-        @using (Html.BeginForm("Edit","Admin"))
-        {
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            @using (Html.BeginForm("Edit", "Admin"))
+            {
             <div class="panel-body">
-                @Html.HiddenFor(m=> m.ExpenseID)
-                @foreach(var property in ViewData.ModelMetadata.Properties)
+                @Html.HiddenFor(m => m.ExpenseID)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
                 {
-                    if(property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList")
+                    if (property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList")
                     {
-                        <div class="form-group">
-                            <p>@(property.DisplayName ?? property.PropertyName)</p>
-                            @if (property.PropertyName == "Name")
-                            {
-                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
-                            }
-                            @if (property.PropertyName == "Charge")
-                            {
-                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
-                            }
-                            @if (property.PropertyName == "Date")
-                            {
-                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control", type = "date" })
-                            }
-                            @if (property.PropertyName == "Category")
-                            {
-                                @Html.DropDownList(property.PropertyName, new SelectList(Model.CategoryList),new { @class = "form-control" }) 
+                    <div class="form-group">
+                        <p>@(property.DisplayName ?? property.PropertyName)</p>
+                        @if (property.PropertyName == "Name")
+                        {
+                        @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
+                        }
+                        @if (property.PropertyName == "Charge")
+                        {
+                        @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
+                        }
+                        @if (property.PropertyName == "Date")
+                        {
+                        @Html.TextBox(property.PropertyName, null, new { @class = "form-control", type = "date" })
+                        }
+                        @if (property.PropertyName == "Category")
+                        {
+                        @Html.DropDownList(property.PropertyName, new SelectList(Model.CategoryList), new { @class = "form-control" })
 
-                            }
-                            @if (property.PropertyName == "Description")
-                            {
-                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 4 })
-                            }
-                            @Html.ValidationMessage(property.PropertyName)
-                         </div>
+                        }
+                        @if (property.PropertyName == "Description")
+                        {
+                        @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 4 })
+                        }
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
                     }
                 }
             </div>
@@ -50,6 +52,9 @@
                 <input type="submit" value="Zapisz" class="btn btn-light" />
                 <a href="javascript:history.back()" class="btn btn-light">Anuluj i powróć</a>
             </div>
-        }
+            }
+        </div>
+        <div class="col-md-1 col-sm-4"></div>
+        <div>@Html.Partial("Calculator")</div>
     </div>
 </div>

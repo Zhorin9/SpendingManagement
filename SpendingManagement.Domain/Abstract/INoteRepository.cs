@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpendingManagement.Domain.Abstract
 {
-    interface INoteRepository
+    public interface INoteRepository
     {
         IEnumerable<Note> Notes { get; }
     }

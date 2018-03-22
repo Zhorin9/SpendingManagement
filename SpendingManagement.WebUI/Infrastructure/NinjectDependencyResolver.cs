@@ -28,6 +28,7 @@ namespace SpendingManagement.WebUI.Infrastructure
         {
             kernel.Bind<IExpenseRepository>().To<EFExpenseRepository>();
             kernel.Bind<IUserRepository>().To<EFUserRepository>();
+            kernel.Bind<INoteRepository>().To<EFNoteRepository>();
         }
     }
 }

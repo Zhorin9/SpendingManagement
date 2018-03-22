@@ -8,6 +8,7 @@ namespace SpendingManagement.Domain.Entities
 {
     public class Note
     {
+        public int NoteID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

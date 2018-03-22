@@ -1,0 +1,45 @@
+﻿<div class="bg-primary p-md-1">
+    <h4 class="bg-dark text-light text-center">Kalkulator</h4>
+    <div class=" bg-dark">
+
+        <div class="card" style="padding:0px">
+            <textarea rows="1" class="text-right" style="resize:none; border:none" disabled="disabled" id="displayRowOne"></textarea>
+            <textarea rows="1" class="text-right" style="resize:none; border:none" disabled="disabled" id="displayRowTwo"></textarea>
+            <textarea rows="1" class="text-right" style="resize:none; border:none" disabled="disabled" id="displayRowThree">0</textarea>
+        </div>
+        <div class="btn-group-justified" onkeypress="keyPress()">
+            <p>
+                <input type="button" class="btn" value="CE" onclick="clearTextBox()" />
+                <input type="button" class="btn" value="C" onclick="clearAll()" />
+                <input type="button" class="btn" value="<" onclick="deleteLastMark()" />
+                <input type="button" class="btn" value="/" onclick="changeOperator('/')" />
+            </p>
+            <p>
+                <input type="button" class="btn" value="7" onclick="insertMark(7)" />
+                <input type="button" class="btn" value="8" onclick="insertMark(8)" />
+                <input type="button" class="btn" value="9" onclick="insertMark(9)" />
+                <input type="button" class="btn" value="*" onclick="changeOperator('*')" />
+            </p>
+            <p>
+                <input type="button" class="btn" value="4" onclick="insertMark(4)" />
+                <input type="button" class="btn" value="5" onclick="insertMark(5)" />
+                <input type="button" class="btn" value="6" onclick="insertMark(6)" />
+                <input type="button" class="btn" value="-" onclick="changeOperator('-')" />
+            </p>
+            <p>
+                <input type="button" class="btn" value="1" onclick="insertMark(1)" />
+                <input type="button" class="btn" value="2" onclick="insertMark(2)" />
+                <input type="button" class="btn" value="3" onclick="insertMark(3)" />
+                <input type="button" class="btn" value="+" onclick="changeOperator('+')" />
+            </p>
+            <p>
+                <input type="button" class="btn" value="+/-" onclick="changeSign()" />
+                <input type="button" class="btn" value="0" onclick="insertMark(0)" />
+                <input type="button" class="btn" value="." onclick="insertMark('.')" />
+                <input type="button" class="btn" value="=" onclick="calculateResult()" />
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/calculator.js"></script>
