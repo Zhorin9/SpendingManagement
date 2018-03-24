@@ -3361,6 +3361,12 @@ tbody.collapse.show {
     white-space: nowrap;
 }
 
+.blocks {
+    min-height:40px;
+    min-width:40px;
+    margin:auto;
+}
+
 .btn-group,
 .btn-group-vertical {
     position: relative;

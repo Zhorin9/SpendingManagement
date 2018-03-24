@@ -7,36 +7,36 @@
             <textarea rows="1" class="text-right" style="resize:none; border:none" disabled="disabled" id="displayRowTwo"></textarea>
             <textarea rows="1" class="text-right" style="resize:none; border:none" disabled="disabled" id="displayRowThree">0</textarea>
         </div>
-        <div class="btn-group-justified" onkeypress="keyPress()">
+        <div class="ml-lg-2 p-lg-3">
             <p>
-                <input type="button" class="btn" value="CE" onclick="clearTextBox()" />
-                <input type="button" class="btn" value="C" onclick="clearAll()" />
-                <input type="button" class="btn" value="<" onclick="deleteLastMark()" />
-                <input type="button" class="btn" value="/" onclick="changeOperator('/')" />
+                <input type="button" id="btn1" class="blocks" value="CE" onclick="clearTextBox()" />
+                <input type="button" id="btn2" class="blocks" value="C"  onclick="clearAll()" />
+                <input type="button" id="btn3" value="<" onclick="deleteLastMark()" />
+                <input type="button" id="btn4" value="/" onclick="changeOperator('/')" />
             </p>
             <p>
-                <input type="button" class="btn" value="7" onclick="insertMark(7)" />
-                <input type="button" class="btn" value="8" onclick="insertMark(8)" />
-                <input type="button" class="btn" value="9" onclick="insertMark(9)" />
-                <input type="button" class="btn" value="*" onclick="changeOperator('*')" />
+                <input type="button" id="btn5" value="7" onclick="insertSign(7)" />
+                <input type="button" id="btn6" value="8" onclick="insertSign(8)" />
+                <input type="button" id="btn7" value="9" onclick="insertSign(9)" />
+                <input type="button" id="btn8" value="*" onclick="changeOperator('*')" />
             </p>
             <p>
-                <input type="button" class="btn" value="4" onclick="insertMark(4)" />
-                <input type="button" class="btn" value="5" onclick="insertMark(5)" />
-                <input type="button" class="btn" value="6" onclick="insertMark(6)" />
-                <input type="button" class="btn" value="-" onclick="changeOperator('-')" />
+                <input type="button" class="blocks" value="4" onclick="insertSign(4)" />
+                <input type="button" class="blocks" value="5" onclick="insertSign(5)" />
+                <input type="button" class="blocks" value="6" onclick="insertSign(6)" />
+                <input type="button" class="blocks" value="-" onclick="changeOperator('-')" />
             </p>
             <p>
-                <input type="button" class="btn" value="1" onclick="insertMark(1)" />
-                <input type="button" class="btn" value="2" onclick="insertMark(2)" />
-                <input type="button" class="btn" value="3" onclick="insertMark(3)" />
-                <input type="button" class="btn" value="+" onclick="changeOperator('+')" />
+                <input type="button" class="blocks" value="1" onclick="insertSign(1)" />
+                <input type="button" class="blocks" value="2" onclick="insertSign(2)" />
+                <input type="button" class="blocks" value="3" onclick="insertSign(3)" />
+                <input type="button" class="blocks" value="+" onclick="changeOperator('+')" />
             </p>
             <p>
-                <input type="button" class="btn" value="+/-" onclick="changeSign()" />
-                <input type="button" class="btn" value="0" onclick="insertMark(0)" />
-                <input type="button" class="btn" value="." onclick="insertMark('.')" />
-                <input type="button" class="btn" value="=" onclick="calculateResult()" />
+                <input type="button" class="blocks" value="+/-" onclick="changeNumberSign()" />
+                <input type="button" class="blocks" value="0" onclick="insertSign(0)" />
+                <input type="button" class="blocks" value="." onclick="insertSign('.')" />
+                <input type="button" class="blocks" value="=" onclick="calculateResult()" />
             </p>
         </div>
     </div>
