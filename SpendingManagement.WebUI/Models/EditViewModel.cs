@@ -10,20 +10,6 @@ namespace SpendingManagement.WebUI.Models
 {
     public class EditViewModel
     {
-        public IEnumerable<string> CategoryList { get; set; }
-        public EditViewModel()
-        {
-            CategoryList = new List<string>()
-            {
-                "Jedzenie",
-                "Ubrania",
-                "Kosmetyki",
-                "Alkohol",
-                "Opłaty",
-                "Przejazdy",
-                "Inne",
-            };
-        }
         [HiddenInput(DisplayValue = false)]
         public int ExpenseID { get; set; }
 
@@ -43,8 +29,12 @@ namespace SpendingManagement.WebUI.Models
         [Display(Name = "Koszt")]
         public decimal Charge { get; set; }
 
-        [Required(ErrorMessage = "Proszę podać właściwą kategorię")]
+        [Required(ErrorMessage = "Proszę wybrać kategorię")]
         [Display(Name = "Kategoria")]
         public string Category { get; set; }
+
+        [Required(ErrorMessage = "Proszę wybrać podkategorię")]
+        [Display(Name = "Podkategoria")]
+        public string Subcategory { get; set; }
     }
 }

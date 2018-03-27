@@ -36,6 +36,7 @@ namespace SpendingManagement.Domain.Concrete
                     dbEntry.Date = expense.Date;
                     dbEntry.Charge = expense.Charge;
                     dbEntry.Category = expense.Category;
+                    dbEntry.Subcategory = expense.Subcategory;
                     dbEntry.UserID = expense.UserID;
                 }
             }

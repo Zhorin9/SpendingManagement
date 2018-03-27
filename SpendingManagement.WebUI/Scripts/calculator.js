@@ -1,73 +1,67 @@
 ﻿var currentValue = 0;
 var earlierValue = 0;
 var currentOperator = '';
+var earlierNumberTextBox = document.getElementById("displayRowOne");
+var resultTextBox = document.getElementById("displayRowTwo");
+var numberTextBox = document.getElementById("displayRowThree");
+var el = document.getElementById('buttons');                //Button click event
+
+
+if (el.addEventListener) {
+    el.addEventListener('click', function (event) {
+        checkButton(event);
+    });
+}
+else {
+    el.attachEvent('onclick', function (event) {
+        checkButton(event);
+    });
+}
 
 document.addEventListener('keydown', function (event) {
     switch (event.keyCode) {                            //ancii code
         case 13:                                        //numpad enter
             calculateResult();
             break;
-        //Numbers 0-1 on keyboard 
+        //Numbers 0-1 keyboard  and numpad
         case 48:
-            insertSign(0);
-            break;
-        case 49:
-            insertSign(1);
-            break;
-        case 50:
-            insertSign(2);
-            break;
-        case 51:
-            insertSign(3);
-            break;
-        case 52:
-            insertSign(4);
-            break;
-        case 53:
-            insertSign(5);
-            break;
-        case 54:
-            insertSign(6);
-            break;
-        case 55:
-            insertSign(7);
-            break;
-        case 56:
-            insertSign(8);
-            break;
-        case 57:
-            insertSign(9);
-            break;
-
-        //NumPad 0-9
         case 96:
             insertSign(0);
             break;
+        case 49:
         case 97:
             insertSign(1);
             break;
+        case 50:
         case 98:
             insertSign(2);
             break;
+        case 51:
         case 99:
             insertSign(3);
             break;
+        case 52:
         case 100:
             insertSign(4);
             break;
+        case 53:
         case 101:
             insertSign(5);
             break;
+        case 54:
         case 102:
             insertSign(6);
             break;
-        case 102:
+        case 55:
+        case 103:
             insertSign(7);
             break;
-        case 103:
+        case 56:
+        case 104:
             insertSign(8);
             break;
-        case 104:
+        case 57:
+        case 105:
             insertSign(9);
             break;
 
@@ -89,9 +83,35 @@ document.addEventListener('keydown', function (event) {
             break;
  
     }
-})
+})  //Keydown event
+function checkButton(event) {
+    var targetValue = event.target.value;
+    if (targetValue >= 0 && targetValue <= 9 || targetValue == '.') {
+        insertSign(targetValue);
+    }
+    if (targetValue == '+' || targetValue == '-' || targetValue == '*' || targetValue == '/') {
+        changeOperator(targetValue);
+    }
+    switch (targetValue) {
+        case '+/-':
+            changeSign();
+            break;
+        case '=':
+            calculateResult();
+            break;
+        case '<':
+            deleteLastSign();
+            break;
+        case 'C':
+            clearAll();
+            break;
+        case 'CE':
+            clearTextBox();
+            break;
+    }
+}
+
 function insertSign(sign) {
-            var numberTextBox = document.getElementById("displayRowThree");
             if (numberTextBox.value.length < 20) {
                 if (sign != '.') {
                     if (numberTextBox.value.length == 1 && numberTextBox.value[0] == '0') {
@@ -102,7 +122,6 @@ function insertSign(sign) {
                         numberTextBox.value += sign;
                         currentValue += sign;
                     }
-
                 }
                 else {
                     var i = 0;
@@ -124,20 +143,17 @@ function insertSign(sign) {
                 }
             }
         }
-function changeNumberSign() {
-            var display = document.getElementById("displayRowThree");
-            if (display.value[0] == '-') {
-                display.value = display.value.slice(1, display.value.length);
+function changeSign() {
+            if (numberTextBox.value[0] == '-') {
+                numberTextBox.value = numberTextBox.value.slice(1, numberTextBox.value.length);
                 currentValue = Math.abs(currentValue);
             }
             else {
-                display.value = '-' + display.value;
+                numberTextBox.value = '-' + numberTextBox.value;
                 currentValue = currentValue * (-1);
             }
 }
 function changeOperator(sign) {
-    var numberTextBox = document.getElementById("displayRowThree");
-    var earlierNumberTextBox = document.getElementById("displayRowOne");
     if (numberTextBox.value != '' && earlierNumberTextBox.value == '') {
         earlierValue = numberTextBox.value;
         earlierNumberTextBox.value = earlierValue + ' ' + sign;
@@ -152,9 +168,6 @@ function changeOperator(sign) {
 }
 function executeOperation() {
     var result = 0;
-    var numberTextBox = document.getElementById("displayRowThree");
-    var resultTextBox = document.getElementById("displayRowTwo");
-    var earlierNumberTextBox = document.getElementById("displayRowOne");
     currentValue = numberTextBox.value;
     if (earlierValue != '' && numberTextBox.value != '') {
         earlierValue = doOperation();
@@ -191,11 +204,7 @@ function doOperation() {
 
 }
 
-
 function calculateResult() {
-    var numberTextBox = document.getElementById("displayRowThree");
-    var resultTextBox = document.getElementById("displayRowTwo");
-    var earlierNumberTextBox = document.getElementById("displayRowOne");
     if (numberTextBox.value != '' && earlierNumberTextBox.value != '' && currentOperator != '') {
         currentValue = numberTextBox.value;
         numberTextBox.value = doOperation();
@@ -206,19 +215,17 @@ function calculateResult() {
 }
 
 //Clear windows
-function deleteLastMark() {
-    var display = document.getElementById("displayRowThree");
-    display.value = display.value.slice(0, - 1);
-    if (display.value[0] == '-' && display.value.length == 1) {
-        display.value = '';
+function deleteLastSign() {
+    numberTextBox.value = numberTextBox.value.slice(0, - 1);
+    if (numberTextBox.value[0] == '-' && numberTextBox.value.length == 1) {
+        numberTextBox.value = '';
     }
 }
 function clearAll() {
-    document.getElementById("displayRowThree").value = '';
-    document.getElementById("displayRowTwo").value = '';
-    document.getElementById("displayRowOne").value = '';
+    earlierNumberTextBox.value = '';
+    resultTextBox.value = '';
+    numberTextBox.value = '';
 }
 function clearTextBox() {
-    var display = document.getElementById("displayRowThree");
-    display.value = '';
+    numberTextBox.value = '';
 }

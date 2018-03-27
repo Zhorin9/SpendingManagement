@@ -28,7 +28,7 @@ namespace SpendingManagement.WebUI.Controllers
             sortingInfo.NameSort = sortOrder == "name" ? "name_desc" : "name";
             sortingInfo.ChargeSort = sortOrder == "charge" ? "charge_desc" : "charge";
             sortingInfo.CategorySort = sortOrder == "category" ? "category_desc" : "category";
-
+            sortingInfo.SubcategorySort = sortOrder == "subcategory" ? "subcategory_desc" : "subcategory";
             var parameters = repository.Expenses.Where(p => p.UserID == currentUserID);
  
             if (!String.IsNullOrEmpty(searchString))
@@ -46,14 +46,18 @@ namespace SpendingManagement.WebUI.Controllers
                 case "name_desc":
                     parameters = parameters.OrderByDescending(s => s.Name);
                     break;
-
                 case "category":
                     parameters = parameters.OrderBy(s => s.Category);
                     break;
                 case "category_desc":
                     parameters = parameters.OrderByDescending(s => s.Category);
                     break;
-
+                case "subcategory":
+                    parameters = parameters.OrderBy(s => s.Subcategory);
+                    break;
+                case "subcategory_desc":
+                    parameters = parameters.OrderByDescending(s => s.Subcategory);
+                    break;
                 case "charge":
                     parameters = parameters.OrderBy(s => s.Charge);
                     break;
@@ -81,6 +85,7 @@ namespace SpendingManagement.WebUI.Controllers
                     CurrentSort = sortOrder,
                     NameSort = sortingInfo.NameSort,
                     CategorySort = sortingInfo.CategorySort,
+                    SubcategorySort = sortingInfo.SubcategorySort,
                     DataSort = sortingInfo.DataSort,
                     ChargeSort = sortingInfo.ChargeSort,
                 }
@@ -121,6 +126,7 @@ namespace SpendingManagement.WebUI.Controllers
             expense.Category = model.Category;
             expense.Date = model.Date;
             expense.Description = model.Description;
+            expense.Subcategory = model.Subcategory;
             expense.UserID = userRepository.Users.Where(p => p.Email == User.Identity.Name).Select(p => p.UserID).First();
 
             if (ModelState.IsValid)

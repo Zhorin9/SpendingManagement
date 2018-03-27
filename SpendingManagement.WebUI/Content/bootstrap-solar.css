@@ -10333,3 +10333,36 @@ a.text-dark:focus, a.text-dark:hover {
 .glyphicon-wrench:before {
     content: "\1f527";
 }
+
+.category-dialog {
+    display: none;
+    z-index: 1;
+    width: auto;
+    position: fixed;
+    overflow: auto;
+    margin-left: 20%;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+.category-body {
+    list-style-type: none;
+    text-align: center;
+    border-radius: 0.25rem;
+    margin:20px;
+}
+.category-item {
+    padding: 7px;
+    margin: 5%;
+    border: 1px solid #2AA198;
+    border-radius: 0.25rem;
+}
+    .category-item:hover {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+
+.hover:hover {
+    color: #B58900;
+}

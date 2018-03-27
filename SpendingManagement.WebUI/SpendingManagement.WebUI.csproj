@@ -170,6 +170,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\SelectCategories.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@
     <Compile Include="Infrastructure\Crypto.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Infrastructure\ContainsAttribute.cs" />
     <Compile Include="Models\Expense\DashBoardViewModel.cs" />
     <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\ExpensesListViewModel.cs" />
