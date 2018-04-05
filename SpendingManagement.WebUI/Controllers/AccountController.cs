@@ -40,7 +40,7 @@ namespace SpendingManagement.WebUI.Controllers
             {
                 #region Email is allready exist
                 var isExist = IsEmailExist(user.Email);
-                if (isExist)
+                if (!isExist)
                 {
                     ModelState.AddModelError("EmailExist", "Email jest już używany.");
                     return View(newUser);
@@ -145,12 +145,17 @@ namespace SpendingManagement.WebUI.Controllers
         {
             return View();
         }
-
-
-        private bool IsEmailExist(string email)
+        public bool IsLoginExist(string login)
+        {
+            var isAvailable = userRepository.Users.Where(p => p.UserLogin == login).FirstOrDefault();
+            return isAvailable == null ? true : false;
+        }
+        public bool IsEmailExist(string email)
         {
             var v = userRepository.Users.Where(p => p.Email == email).FirstOrDefault();
-            return v == null ? false : true;
+            return v == null ? true : false;
         }
+
+
     }
 }

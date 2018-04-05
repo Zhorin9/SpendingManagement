@@ -14,6 +14,7 @@ namespace SpendingManagement.WebUI.Models
 
         [Display(Name = "Nazwa użytkownika")]
         [Required(AllowEmptyStrings = false, ErrorMessage ="Wymagana nazwa użytkownika")]
+        [MinLength(6,ErrorMessage = "Nazwa użytkownika jest za krótka")]
         public string UserLogin { get; set; }
 
         [Display(Name = "E-mail")]

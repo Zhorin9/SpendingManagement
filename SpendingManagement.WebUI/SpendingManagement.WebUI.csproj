@@ -133,6 +133,7 @@
     <Content Include="Images\account_background.jpeg" />
     <Content Include="Images\calendar.png" />
     <Content Include="Images\money_time.png" />
+    <Content Include="Scripts\Account\Register.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\calculator.js" />
