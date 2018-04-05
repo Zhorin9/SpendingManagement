@@ -105,6 +105,7 @@ namespace SpendingManagement.WebUI.Controllers
                 Category = expense.Category,
                 Date = expense.Date,
                 Description = expense.Description,
+                Subcategory = expense.Subcategory,
             };
             return View(model);
         }

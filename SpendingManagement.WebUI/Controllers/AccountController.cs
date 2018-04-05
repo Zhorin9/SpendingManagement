@@ -89,7 +89,7 @@ namespace SpendingManagement.WebUI.Controllers
         {
             string message = "";
             var v = userRepository.Users.Where(p => p.Email == login.Email).FirstOrDefault();
-            if(v != null)
+            if(v != null && login.UserPassword != null && login.Email != null)
             {
                 if (string.Compare(Crypto.Hash(login.UserPassword), v.UserPassword) == 0)
                 {

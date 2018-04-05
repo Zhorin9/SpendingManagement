@@ -31,6 +31,10 @@
                 <th>Kategoria</th>
                 <th class="bg-light">@Model.Category</th>
             </tr>
+            <tr>
+                <th>Podkategoria</th>
+                <th class="bg-light">@Model.Subcategory</th>
+            </tr>
         </table>
         <div>
             @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-light" })

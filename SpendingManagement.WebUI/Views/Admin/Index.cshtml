@@ -22,7 +22,7 @@
                 <th>@Html.ActionLink("Nazwa", "Index", new { sortOrder = Model.SortingInfo.NameSort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>@Html.ActionLink("Kwota", "Index", new { sortOrder = Model.SortingInfo.ChargeSort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>@Html.ActionLink("Kategoria", "Index", new { sortOrder = Model.SortingInfo.CategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
-                <th>@Html.ActionLink("Pod kategoria", "Index", new { sortOrder = Model.SortingInfo.SubcategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Podkategoria", "Index", new { sortOrder = Model.SortingInfo.SubcategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>Akcje</th>
             </tr>
             @foreach (var item in Model.Expenses)

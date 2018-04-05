@@ -3,9 +3,31 @@
     ViewBag.Title = "AccountDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div>
+    <div class="bg-dark p-4">
+        <h3>Moje konto</h3>
+    </div>
+    <div class="p-4 panel-body">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nazwa użytkownika</th>
+                <th class="bg-light">@Model.UserLogin</th>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <th class="bg-light">@Model.Email</th>
+            </tr>
+            <tr>
+                <th>Data urodzenia</th>
+                <th class="bg-light">@Model.DateOfBirth</th>
+            </tr>
+        </table>
+        <div>
+            <button id="return" class="btn btn-light">Powrót</button>
+        </div>
+    </div>
 
-<h2>AccountDetails</h2>
-
-@Model.DateOfBirth
-@Model.Email
-@Model.UserLogin
+</div>
+<script>
+    document.getElementById('return').addEventListener("click", function () { window.history.go(-1); })
+</script>

@@ -38,6 +38,8 @@ var avaiableCategories = [
 function checkCategories(event) {
     var id = event.target.id;
     if (id.includes('categoryReturn')) {
+        var displayCategory = document.getElementById('Category');
+        displayCategory.textContent = '';
         showBasicCategoriesList();
     }
     else if (id.includes('sub')) {

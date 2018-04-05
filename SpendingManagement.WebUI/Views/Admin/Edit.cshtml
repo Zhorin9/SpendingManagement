@@ -1,19 +1,17 @@
-﻿@model SpendingManagement.WebUI.Models.EditViewModel
+﻿@using System.Web.Optimization;
+@model SpendingManagement.WebUI.Models.EditViewModel
 
 @{
     ViewBag.Title = "Administracja: edycja";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div id="categoryWindow" class="category-dialog bg-dark border-success">
-    <div id="closeCategory" class="text-right hover"><a >Anuluj X</a></div>
+    <div id="closeCategory" class="text-right hover"><a>Anuluj X</a></div>
     <h2 id="categoryTitle" class="ml-lg-3 mr-lg-3 text-center">Wybierz kategorię</h2>
     <ul id="categoryList" class="category-body bg-dark border-success" style="padding: 0px;"></ul>
 </div>
-<div class="p-sm-3">
-    <div class="ml-md-7 panel-heading">
-        <h3>Edycja @Model.Name</h3>
-    </div>
-    <div class="row" id="lol">
+<div class="p-lg-4 p-sm-3">
+    <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
             @using (Html.BeginForm("Edit", "Admin"))
@@ -22,10 +20,13 @@
                     @Html.HiddenFor(m => m.ExpenseID)
                     @foreach (var property in ViewData.ModelMetadata.Properties)
                     {
-                        if (property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList" && property.PropertyName != "Subcategory")
+                        if (property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList")
                         {
                             <div class="form-group">
-                                <p>@(property.DisplayName ?? property.PropertyName)</p>
+                                @if (property.PropertyName != "Subcategory")
+                                {
+                                    <p>@(property.DisplayName ?? property.PropertyName)</p>
+                                }
                                 @if (property.PropertyName == "Name")
                                 {
                                     @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
@@ -34,10 +35,9 @@
                                 {
                                     <input type="button" id="categoryButton" value="Wybierz kategorię i podkategorię" class="form-control text-dark" />
                                     <div class="row justify-content-lg-center">
-                                        <textarea id="Category" name="Category" rows="1" readonly="readonly" class="form-control text-center" style="width:40%">@Model.Category</textarea>
-                                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly" class="form-control text-center" style="width:40%">@Model.Subcategory</textarea>
+                                        <textarea id="Category" name="Category" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Category</textarea>
+                                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Subcategory</textarea>
                                     </div>
-
                                 }
                                 @if (property.PropertyName == "Charge")
                                 {
@@ -58,7 +58,7 @@
                 </div>
                 <div class="panel-footer">
                     <input type="submit" value="Zapisz" class="btn btn-light" />
-                    @Html.ActionLink("Anuluj i powróć","Index", null, new { @class = "btn btn-light"})
+                    @Html.ActionLink("Anuluj i powróć", "Index", null, new { @class = "btn btn-light" })
                 </div>
             }
         </div>
@@ -66,13 +66,5 @@
         <div>@Html.Partial("Calculator")</div>
     </div>
 </div>
-    <!--
-    <script>
-        window.addEventListener('beforeunload', function (event) {
-            var message = 'Twoje zmiany nie zostałe zapisane';
-            event.returnValue = message;
-            return message;
-        });
-    </script>
-    -->
+@Scripts.Render("~/bundles/jquery-validate")
 <script type="text/javascript" src="~/Scripts/SelectCategories.js"></script>

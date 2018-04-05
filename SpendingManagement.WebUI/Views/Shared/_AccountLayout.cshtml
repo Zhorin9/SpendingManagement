@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web.Optimization;
+@{
     Layout = null;
 }
 
@@ -7,16 +8,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/bootstrap-solar.css" rel="stylesheet" />
-    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/error")
     <title>Konto</title>
 </head>
-<body  style="background-image:url(../../Images/account_background.jpeg); background-size:cover">
-    <div> 
+<body style="background-image:url(../../Images/account_background.jpeg); background-size:cover">
+    <div>
         @RenderBody()
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-validate")
+    @Scripts.Render("~/ bundles / bootstrap")
 </body>
 </html>
