@@ -31,5 +31,11 @@ namespace SpendingManagement.WebUI.Models
         [MinLength(6,ErrorMessage = "Hasło jest za krótkie. Minimum 6 znaków.")]
         public string UserPassword { get; set; }
 
+        [Display(Name = "Potwierdź hasło")]
+        [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("UserPassword", ErrorMessage = "Hasła się nie zgadzają.")]
+        public string ConfirmPassword { get; set; }
+
+
     }
 }

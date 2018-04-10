@@ -24,16 +24,8 @@ namespace SpendingManagement.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Registration( User user)
+        public ActionResult Registration(RegisterViewModel user)
         {
-            RegisterViewModel newUser = new RegisterViewModel()
-            {
-                Email = user.Email,
-                DateOfBirth = user.DateOfBirth,
-                UserID = user.UserID,
-                UserLogin = user.UserLogin,
-                UserPassword = user.UserPassword,
-            };
             bool status = false;
             string message = "";
             if (ModelState.IsValid)
@@ -43,28 +35,36 @@ namespace SpendingManagement.WebUI.Controllers
                 if (!isExist)
                 {
                     ModelState.AddModelError("EmailExist", "Email jest już używany.");
-                    return View(newUser);
+                    return View(user);
                 }
                 #endregion
 
+                User newUser = new Domain.Entities.User()
+                {
+                    Email = user.Email,
+                    DateOfBirth = user.DateOfBirth,
+                    UserID = user.UserID,
+                    UserLogin = user.UserLogin,
+                    UserPassword = user.UserPassword,
+                };
+
                 #region Password Hashing
-                user.UserPassword = Crypto.Hash(user.UserPassword);
-                newUser.UserPassword = user.UserPassword;
+                newUser.UserPassword = Crypto.Hash(user.UserPassword);
                 #endregion
 
                 #region Save to database
-                userRepository.SaveUser(user);
+                userRepository.SaveUser(newUser);
                 message = "Rejestracja przebiegła pomyślnie. Dziękujemy za założenie konta.";
                 status = true;
                 #endregion
             }
             else
             {
-                message = "Błąd, rejestracja przebiegła niepomyślnie.";
+                message = "Rejestracja przebiegła niepomyślnie.";
             }
             ViewBag.Message = message;
             ViewBag.Status = status;
-            return View(newUser);
+            return View(user);
         }
         /*
         public VerifyAccount(string id)
