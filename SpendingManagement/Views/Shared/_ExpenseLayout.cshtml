@@ -1,0 +1,53 @@
+﻿@using System.Web.Optimization;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    <title>Wydatki</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Zarządzanie wydatkami", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zarządzaj wydatkami<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Dodaj wydatek", "Create","Expenses")</li>
+                                    <li>@Html.ActionLink("Dodaj przychód", "Create","Expenses")</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Statystyki", "Statistics", "Expense")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @if (TempData["message"] != null)
+        {
+            <div class="alert-light alert-success">@TempData["message"]</div>
+        }
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/highcharts")
+</body>
+</html>

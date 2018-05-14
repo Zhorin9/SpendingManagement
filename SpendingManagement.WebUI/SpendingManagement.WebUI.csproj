@@ -242,12 +242,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SpendingManagement.Domain\SpendingManagement.Domain.csproj">
-      <Project>{cb6b1d67-54b9-406d-8c12-f1b987f37fc3}</Project>
-      <Name>SpendingManagement.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

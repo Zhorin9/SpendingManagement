@@ -22,6 +22,7 @@ namespace SpendingManagement.WebUI.Controllers
         }
         public ViewResult Index(SortingInfo sortingInfo, string sortOrder, string searchString, int page = 1)
         {
+            var userId = User.Identity.GetUserId();
             CheckCurrentUserID();
 
             sortingInfo.DataSort = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";

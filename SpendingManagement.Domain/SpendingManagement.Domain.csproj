@@ -68,21 +68,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IExpenseRepository.cs" />
-    <Compile Include="Abstract\INoteRepository.cs" />
-    <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\EFDbContex.cs" />
     <Compile Include="Concrete\EFExpenseRepository.cs" />
     <Compile Include="Concrete\EFNoteRepository.cs" />
-    <Compile Include="Concrete\EFUserRepository.cs" />
     <Compile Include="Entities\Expense.cs" />
-    <Compile Include="Entities\Note.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

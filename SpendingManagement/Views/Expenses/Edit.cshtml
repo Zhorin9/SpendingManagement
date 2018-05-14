@@ -1,0 +1,125 @@
+﻿@using System.Web.Optimization;
+@model SpendingManagement.Core.ViewModels.EditViewModel
+
+@{
+    ViewBag.Title = "Administracja: edycja";
+    Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
+}
+<div id="categoryWindow" class="category-dialog bg-dark border-success">
+    <div id="closeCategory" class="text-right hover"><a>Anuluj X</a></div>
+    <h2 id="categoryTitle" class="ml-lg-3 mr-lg-3 text-center">Wybierz kategorię</h2>
+    <ul id="categoryList" class="category-body bg-dark border-success" style="padding: 0px;"></ul>
+</div>
+<div class="p-lg-4 p-sm-3">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            @using (Html.BeginForm("Edit", "Admin"))
+            {
+                <div class="panel-body">
+                    @Html.HiddenFor(m => m.ExpenseID)
+                    @foreach (var property in ViewData.ModelMetadata.Properties)
+                    {
+                        if (property.PropertyName != "ExpenseID" && property.PropertyName != "CategoryList")
+                        {
+                            <div class="form-group">
+                                @if (property.PropertyName != "Subcategory")
+                                {
+                                    <p>@(property.DisplayName ?? property.PropertyName)</p>
+                                }
+                                @if (property.PropertyName == "Name")
+                                {
+                                    @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
+                                }
+                                @if (property.PropertyName == "Category")
+                                {
+                                    <input type="button" id="categoryButton" value="Wybierz kategorię i podkategorię" class="form-control text-dark" />
+                                    <div class="row justify-content-lg-center">
+                                        <textarea id="Category" name="Category" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Category</textarea>
+                                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Subcategory</textarea>
+                                    </div>
+                                }
+                                @if (property.PropertyName == "Charge")
+                                {
+                                    @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 1 })
+                                }
+                                @if (property.PropertyName == "Date")
+                                {
+                                    @Html.TextBox(property.PropertyName, null, new { @class = "form-control", type = "date" })
+                                }
+                                @if (property.PropertyName == "Description")
+                                {
+                                    @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 4 })
+                                }
+                                @Html.ValidationMessage(property.PropertyName)
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" value="Zapisz" class="btn btn-light" />
+                    @Html.ActionLink("Anuluj i powróć", "Index", null, new { @class = "btn btn-light" })
+                </div>
+            }
+        </div>
+        <div class="col-md-1 col-sm-4"></div>
+        <div>@Html.Partial("Calculator")</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/SelectCategories.js"></script>
+<script>
+    $(function () {
+        $('#Name').on("blur", function () {
+            if (this.value == "") {
+                var $NameValidation = $(this).next();
+                $NameValidation.text("Wprowadź nazwę wydatku");
+                $NameValidation.css('display', 'block');
+            }
+            else {
+                $(this).next().text("");
+            }
+        });
+        $('#Description').on("blur", function () {
+            if (this.value == "") {
+                var $DescriptionValidation = $(this).next();
+                $DescriptionValidation.text("Wprowadź opis");
+                $DescriptionValidation.css('display', 'block');
+            }
+            else {
+                $(this).next().text("");
+            }
+        });
+        $('#Date').on("blur", function () {
+            if (this.value == "") {
+                var $DateValidation = $(this).next();
+                $DateValidation.text("Wprowadź datę zdarzenia");
+                $DateValidation.css('display', 'block');
+            }
+            else {
+                $(this).next().text("");
+            }
+        });
+        $('#Charge').on("blur", function () {
+            if (this.value == "") {
+                var $ChargeValidation = $(this).next();
+                $ChargeValidation.text("Wprowadź kwotę");
+                $ChargeValidation.css('display', 'block');
+            }
+            else {
+                if (validateCharge(this.value)) {
+                    $(this).next().text("");
+                }
+                else {
+                    var $ChargeValidation = $(this).next();
+                    $ChargeValidation.text("Wprowadź kwotę w poprawnym formacie");
+                    $ChargeValidation.css('display', 'block');
+                }
+            }
+        });
+    });
+    function validateCharge(charge) {
+        var regex = /^[1-9]\d*(((.\d{3}){1})?(\,\d{0,2})?)$/;
+        return regex.test(charge);
+    }
+</script>

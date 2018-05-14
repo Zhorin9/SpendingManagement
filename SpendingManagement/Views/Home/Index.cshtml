@@ -1,0 +1,52 @@
+﻿@model SpendingManagement.Core.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
+}
+<div class="p-lg-4 container">
+    <div class="row">
+        <div class="col-md-4 col-sm-8">
+            <div class="card card-success border-success text-success">
+                <div class="card-header text-center">Wydatki tygodniowe</div>
+                <div class="text-center">
+                    <h4>@Model.SumWeekCharge [zł]</h4>
+                    <p>Suma wydatków w obecnym tygodniu. </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <div class="card border-secondary text-secondary">
+                <div class="card-header text-center">Wydatki w miesiacu - <i>@Model.CurrentMonthName</i></div>
+                <div class="text-center">
+                    <h4>@Model.SumMonthCharge [zł]</h4>
+                    <p>Suma wydatków w obecnym miesiącu.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <div class="card border-primary text-primary">
+                <div class="card-header text-center">Wydatki roczne </div>
+                <div class="text-center">
+                    <h4>@Model.SumYearCharge [zł]</h4>
+                    <p>Suma wydatków rocznych.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="p-lg-4 col-md-8">
+        <div class="card text-white">
+            <div class="card-header text-center">Lista ostatnich 10 wydatków</div>
+            <ul class="list-group">
+                @foreach (var p in Model.Expsenses)
+                {
+                    <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date.ToShortDateString()</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

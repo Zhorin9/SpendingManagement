@@ -1,20 +1,25 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+using SpendingManagement.Models;
 
-namespace SpendingManagement.Domain.Entities
+namespace SpendingManagement.Models
 {
     public class Expense
     {
-        public int ExpenseID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
-        public decimal Charge { get; set; }
-        public string Category { get; set; }
-        public string Subcategory { get; set; }
-        public int UserID { get; set; }
+        public int Id { get; set; }
 
-        public virtual User User { get; private set; }
+        public string Name { get; set; }
+       
+        public string Description { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public decimal Charge { get; set; }
+
+        public string Category { get; set; }
+
+        public string Subcategory { get; set; }
+
+
+        public int UserID { get; set; }
     }
 }
