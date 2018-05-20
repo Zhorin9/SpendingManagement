@@ -13,8 +13,8 @@ namespace SpendingManagement.Controllers
     [Authorize]
     public class ExpensesController : Controller
     {
-        private readonly IExpenseRepository _expensesRepository;
-        private readonly IApplicationUserRepository _usersRepository;
+        private IExpenseRepository _expensesRepository;
+        private IApplicationUserRepository _usersRepository;
 
         private int PageSize = 8;
         public ExpensesController(IExpenseRepository expenseRepository, IApplicationUserRepository userRepository)
@@ -22,7 +22,7 @@ namespace SpendingManagement.Controllers
             _expensesRepository = expenseRepository;
             _usersRepository = userRepository;
         }
-        public ViewResult Index(SortingInfo sortingInfo, string sortOrder, string searchString, int page = 1)
+        public ViewResult RecordsList(SortingInfo sortingInfo, string sortOrder, string searchString, int page = 1)
         {
             var userId = User.Identity.GetUserId();
 
@@ -95,13 +95,30 @@ namespace SpendingManagement.Controllers
             };
             return View(model);
         }
-        public ViewResult Edit(int id)
+
+        public ViewResult Create()
+        {
+            var form = new ExpenseFormViewModel()
+            {
+                Heading = "Stwórz wydatek"
+            };
+            return View("ExpenseForm", form);
+        }
+
+        public ActionResult Edit(int id)
         {
             var userId = User.Identity.GetUserId();
-            Expense expense = _expensesRepository.Expenses.First(p => p.Id == id && p.UserID == userId);
-            EditViewModel model = new EditViewModel()
-            { 
-                ExpenseID = expense.Id,
+
+            var expense = _expensesRepository.GetExpense(userId, id);
+
+            if (expense == null)
+                return HttpNotFound();
+
+            //Expense expense = _expensesRepository.Expenses.First(p => p.Id == id && p.UserID == userId);
+            ExpenseFormViewModel model = new ExpenseFormViewModel()
+            {
+                Heading = "Edycja - " + expense.Name,
+                Id = expense.Id,
                 Name = expense.Name,
                 Charge = expense.Charge,
                 Category = expense.Category,
@@ -109,50 +126,87 @@ namespace SpendingManagement.Controllers
                 Description = expense.Description,
                 Subcategory = expense.Subcategory,
             };
-            return View(model);
+            return View("ExpenseForm", model);
         }
+
         [HttpPost]
-        public ActionResult Edit(EditViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ExpenseFormViewModel model)
         {
-            var userId = User.Identity.GetUserId();
-            Expense expense;
-            if(model.ExpenseID == 0)
+            if (!ModelState.IsValid)
             {
-                expense = new Expense();
+                return View("ExpenseForm", model);
             }
-            else
-            {
-                expense = _expensesRepository.Expenses.First(p => p.Id == model.ExpenseID);
-            }
-            
-            expense.Name = model.Name;
-            expense.Charge = model.Charge;
-            expense.Category = model.Category;
-            expense.Date = model.Date;
-            expense.Description = model.Description;
-            expense.Subcategory = model.Subcategory;
-            expense.UserID = userId;
 
-            if (ModelState.IsValid)
+            var expense = new Expense
             {
-                _expensesRepository.AddExpense(expense);
-                TempData["message"] = string.Format("Zapisano {0} ", expense.Name);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(model);
-            }
+                UserID = User.Identity.GetUserId(),
+                Date = model.Date,
+                Charge = model.Charge,
+                Category = model.Category,
+                Subcategory = model.Subcategory,
+                Name = model.Name
+            };
+
+            _expensesRepository.AddExpense(expense);
+            _expensesRepository.Complete();
+
+            TempData["message"] = string.Format("Zapisano {0} ", expense.Name);
+            return RedirectToAction("RecordsList","Expenses");
         }
 
-        public ViewResult Statistics(DateTime? dateFromParam, DateTime? dateToParam)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(ExpenseFormViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            if (!ModelState.IsValid)
+            {
+                return View("ExpenseForm", model);
+            }
+            var expense = _expensesRepository.GetExpense(userId, model.Id);
+
+            if (expense == null)
+                return HttpNotFound();
+
+            expense.Name = model.Name;
+            expense.Description = model.Description;
+            expense.Date = model.Date;
+            expense.Charge = model.Charge;
+            expense.Subcategory = model.Subcategory;
+            expense.Category = model.Category;
+
+            _expensesRepository.Complete();
+
+            TempData["message"] = string.Format("Zaktualizowano {0} ", expense.Name);
+            return RedirectToAction("RecordsList", "Expenses");
+        }
+
+        public ViewResult Details(int id)
         {
             var userId = User.Identity.GetUserId();
 
-            if (dateFromParam == null) { dateFromParam = DateTime.Parse("1900-01-01"); }
-            if (dateToParam == null) { dateToParam = DateTime.Parse("2100-01-01"); }
-            var repoParam = _expensesRepository.Expenses.Where(p => p.Date >= dateFromParam
-                && p.Date <= dateToParam && p.UserID == userId);
+            var expense = _expensesRepository.GetExpense(userId, id);
+            return View(expense);
+        }
+
+
+
+
+        public ViewResult Statistics(DateTime? dateFromParam = null, DateTime? dateToParam = null)
+        {
+            var userId = User.Identity.GetUserId();
+            if (dateFromParam == null)
+                dateFromParam = DateTime.MinValue;
+            if (dateToParam == null)
+                dateToParam = DateTime.MaxValue;
+            var repoParam = _expensesRepository
+                .GetExpensesInSelectedRange(dateFromParam, dateToParam)
+                .Where(u => u.UserID == userId);
+
+            //var repoParam = _expensesRepository.Expenses.Where(p => p.Date >= dateFromParam
+            //   && p.Date <= dateToParam && p.UserID == userId);
+
             StatisticsViewModel statistics = new StatisticsViewModel()
             {
                 SumCharge = repoParam.Sum(p => p.Charge),
@@ -167,29 +221,6 @@ namespace SpendingManagement.Controllers
             return View(statistics);
         }
 
-
-        public ViewResult Details(int id)
-        {
-            Expense expense = _expensesRepository.Expenses.First(p=> p.Id == id);
-            return View(expense);
-        }
-        public ViewResult Create()
-        {
-            return View("Edit", new EditViewModel());
-        }
-        /*
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            Expense deleteExpense = repository.DeleteExpense(id);
-            if(deleteExpense != null)
-            {
-                TempData["message"] = string.Format("Usunięto {0}", deleteExpense.Name);
-            }
-            return RedirectToAction("Index");
-
-        }
-        */
         private List<object> _CreatePieSeries(IEnumerable<Expense> repoParam)
         {
             var category = repoParam.Select(p => p.Category).Distinct();

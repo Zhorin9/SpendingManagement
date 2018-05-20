@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 90px; 
+    padding-top: 70px; 
     padding-bottom: 20px;
     background-color: #e2ecef
 }
@@ -92,4 +92,66 @@ textarea {
     background-color: #f8f9fa;
     color: #000;
 }
+.blocks {
+    min-height: 40px;
+    min-width: 40px;
+    margin: auto;
+}
 
+
+/*JavaScript clases*/
+.category-dialog {
+    display: none;
+    z-index: 1;
+    width: auto;
+    position: fixed;
+    overflow: auto;
+    margin-left: 20%;
+    padding: 1rem;
+    border-radius: 2rem;
+    background-color: #14b068;
+    color: white;
+}
+
+.category-body {
+    list-style-type: none;f
+    text-align: center;
+    border-radius: 0.25rem;
+    margin: 20px;
+}
+
+.category-item {
+    padding: 7px;
+    margin: 5%;
+    border: 2px solid White;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+    .category-item:hover {
+        border-color: rgba(39, 205, 70, 0.6);
+        background-color: rgba(39, 205, 70, 0.6);
+        outline: 0;
+    }
+
+.category-textarea {
+    text-align: center;
+}
+
+div > textarea {
+    resize:none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 15px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.hover:hover {
+    color: #B58900;
+}

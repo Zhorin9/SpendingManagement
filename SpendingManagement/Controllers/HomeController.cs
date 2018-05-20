@@ -21,7 +21,7 @@ namespace SpendingManagement.Controllers
             _expenseRepository = expenseRepository;
             _userRepository = userRepository;
         }
-        public ViewResult Index()
+        public ViewResult Dashboard()
         {
             var userId = User.Identity.GetUserId();
 
@@ -50,23 +50,6 @@ namespace SpendingManagement.Controllers
                 currentDate = currentDate.AddDays(-1);
             }
             return currentDate;
-        }
-        private List<object> _CreatePieSeries(IEnumerable<Expense> repoParam)
-        {
-            var category = repoParam.Select(p => p.Category).Distinct();
-            List<object> series = new List<object>();
-            category.ToList().ForEach(x => series.Add(new object[] { x, repoParam.
-                Where(p => p.Category == x).
-                Select(p => new { p.Category, p.Charge }).
-                Sum(p => p.Charge) }));
-            return series;
-        }
-        private List<object[]> _SelectExtremeValues(IEnumerable<Expense> repoParam)
-        {
-            List<object[]> CategoriesCharge = new List<object[]>();
-            var categories = repoParam.Select(p => p.Category).Distinct();
-            categories.ToList().ForEach(x => CategoriesCharge.Add(new object[] { x, repoParam.Where(p => p.Category == x).Select(p => p.Charge).Sum() }));
-            return CategoriesCharge;
         }
     }
 }

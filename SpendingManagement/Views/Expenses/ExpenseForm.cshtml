@@ -1,0 +1,109 @@
+﻿@using System.Web.Optimization;
+@model SpendingManagement.Core.ViewModels.ExpenseFormViewModel
+
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
+}
+<div id="categoryWindow" class="category-dialog">
+    <div id="closeCategory" class="text-right hover"><a>Anuluj X</a></div>
+    <h2 id="categoryTitle" class="ml-lg-3 mr-lg-3 text-center">Wybierz kategorię</h2>
+    <ul id="categoryList" class="category-body" style="padding: 0px;"></ul>
+</div>
+<div class="p-lg-4 p-sm-3">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            @using (Html.BeginForm(Model.Action, "Expenses"))
+            {
+                @Html.AntiForgeryToken()
+                <h4>@Model.Heading</h4>
+                <div>
+                    @Html.HiddenFor(m=> m.Id)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "3" })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date)
+                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(m => m.Date)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Charge)
+                    @Html.TextBoxFor(m => m.Charge, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Charge)
+                </div>
+                <div>
+                    <input type="button" id="categoryButton" value="Wybierz kategorię i podkategorię" class="form-control" />
+                    <div>
+                        <textarea id="Category" name="Category" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Category</textarea>
+                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Subcategory</textarea>
+                    </div>
+                </div>
+                <input type="submit" value="Zapisz" class="btn" />
+                @Html.ActionLink("Anuluj i powróć", "Index", null, new { @class = "btn" })
+
+            }
+        </div>
+        <div class="col-md-1 col-sm-4"></div>
+        <div>@Html.Partial("Calculator")</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/SelectCategories.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/app")
+    <script>
+        $(function () {
+            $('#Name').on("blur", function () {
+                if (this.value == "") {
+                    var $NameValidation = $(this).next();
+                    $NameValidation.text("Wprowadź nazwę wydatku");
+                    $NameValidation.css('display', 'block');
+                }
+                else {
+                    $(this).next().text("");
+                }
+            });
+            $('#Date').on("blur", function () {
+                if (this.value == "") {
+                    var $DateValidation = $(this).next();
+                    $DateValidation.text("Wprowadź datę zdarzenia");
+                    $DateValidation.css('display', 'block');
+                }
+                else {
+                    $(this).next().text("");
+                }
+            });
+            $('#Charge').on("blur", function () {
+                if (this.value == "") {
+                    var $ChargeValidation = $(this).next();
+                    $ChargeValidation.text("Wprowadź kwotę");
+                    $ChargeValidation.css('display', 'block');
+                }
+                else {
+                    if (validateCharge(this.value)) {
+                        $(this).next().text("");
+                    }
+                    else {
+                        var $ChargeValidation = $(this).next();
+                        $ChargeValidation.text("Wprowadź kwotę w poprawnym formacie");
+                        $ChargeValidation.css('display', 'block');
+                    }
+                }
+            });
+        });
+        function validateCharge(charge) {
+            var regex = /^[1-9]\d*(((.\d{3}){1})?(\,\d{0,2})?)$/;
+            return regex.test(charge);
+        }
+    </script>
+}

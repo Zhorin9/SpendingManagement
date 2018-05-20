@@ -1,5 +1,6 @@
 ﻿using SpendingManagement.Core.Models;
 using SpendingManagement.Core.Repositiories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,10 +21,28 @@ namespace SpendingManagement.Repositiories
         {
             _contex.Expenses.Add(expense);
         }
-        public Expense GetExpense(int expenseId)
+
+        public void Complete()
+        {
+            _contex.SaveChanges();
+        }
+
+        public void DeleteExpense(Expense expense)
+        {
+            _contex.Expenses.Remove(expense);
+        }
+
+        public Expense GetExpense(string userId, int expenseId)
         {
             return _contex.Expenses
-               .SingleOrDefault(e => e.Id == expenseId);
+                .SingleOrDefault(e => e.Id == expenseId && e.UserID == userId);
+        }
+
+        public IEnumerable<Expense> GetExpensesInSelectedRange(DateTime? dateFrom, DateTime? dateTo)
+        {
+            return _contex.Expenses
+                .Where(d => d.Date > dateFrom && d.Date < dateTo)
+                .ToList();
         }
     }
 }
