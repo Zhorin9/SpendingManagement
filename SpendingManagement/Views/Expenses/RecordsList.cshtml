@@ -42,25 +42,45 @@
             }
         </table>
     </div>
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, sortOrder = Model.SortingInfo.CurrentSort, searchString = Model.SortingInfo.CurrentSearch }))
+    @Html.PageLinks(Model.PagingInfo,
+        x => Url.Action("Index", new { page = x,
+            sortOrder = Model.SortingInfo.CurrentSort,
+            searchString = Model.SortingInfo.CurrentSearch }))
 </div>
 @section scripts{
 <script>
     $(document).ready(function () {
         $(".js-delete-expense").click(function (e) {
-            var button = $(e.target);
-            $.ajax({
-                url: "/api/expense/" + button.attr("data-expense-id"),
-                method: "DELETE"
-            })
-                .done(function () {
-                    button.parents('tr').fadeOut(1000, function () {
-                        $(this).remove();
-                    });
-                })
-                .fail(function () {
-                    alert("Coś poszło nie tak");
-                });
+            bootbox.confirm({
+                message: "Czy na pewno chcesz usunąć rekord?",
+                buttons: {
+                    confirm: {
+                        label: 'Tak',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Nie',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        var button = $(e.target);
+                        $.ajax({
+                            url: "/api/expense/" + button.attr("data-expense-id"),
+                            method: "DELETE"
+                        })
+                            .done(function () {
+                                button.parents('tr').fadeOut(1000, function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function () {
+                                alert("Coś poszło nie tak");
+                            });
+                    }
+                }
+            });
         });
     });
 </script>

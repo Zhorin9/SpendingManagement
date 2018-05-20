@@ -13,15 +13,17 @@ namespace SpendingManagement.Controllers
     [Authorize]
     public class ExpensesController : Controller
     {
-        private IExpenseRepository _expensesRepository;
-        private IApplicationUserRepository _usersRepository;
+        private readonly IExpenseRepository _expensesRepository;
+        private readonly IApplicationUserRepository _usersRepository;
 
         private int PageSize = 8;
+
         public ExpensesController(IExpenseRepository expenseRepository, IApplicationUserRepository userRepository)
         {
             _expensesRepository = expenseRepository;
             _usersRepository = userRepository;
         }
+
         public ViewResult RecordsList(SortingInfo sortingInfo, string sortOrder, string searchString, int page = 1)
         {
             var userId = User.Identity.GetUserId();
@@ -35,7 +37,9 @@ namespace SpendingManagement.Controllers
  
             if (!String.IsNullOrEmpty(searchString))
             {
-                parameters = parameters.Where(p => p.Name.Contains(searchString) || p.Category.Contains(searchString) && p.UserID == userId);
+                parameters = parameters.Where(p => p.Name.Contains(searchString) 
+                        || p.Category.Contains(searchString) 
+                        && p.UserID == userId);
             }
             switch (sortOrder)
             {
@@ -66,7 +70,6 @@ namespace SpendingManagement.Controllers
                 case "charge_desc":
                     parameters = parameters.OrderByDescending(s => s.Charge);
                     break;
-
                 default:
                     parameters = parameters.OrderBy(s => s.Date);
                     break;
@@ -90,8 +93,7 @@ namespace SpendingManagement.Controllers
                     SubcategorySort = sortingInfo.SubcategorySort,
                     DataSort = sortingInfo.DataSort,
                     ChargeSort = sortingInfo.ChargeSort,
-                }
-               
+                } 
             };
             return View(model);
         }

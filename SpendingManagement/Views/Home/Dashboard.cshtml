@@ -42,7 +42,7 @@
         <div class="card text-white">
             <div class="card-header text-center">Lista ostatnich 10 wydatków</div>
             <ul class="list-group">
-                @foreach (var p in Model.Expsenses)
+                @foreach (var p in Model.LastTenExpenes)
                 {
                     <li class="list-group-item">@p.Name - @p.Charge [zł] &nbsp w dniu @p.Date.ToShortDateString()</li>
                 }

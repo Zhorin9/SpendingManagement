@@ -31,8 +31,8 @@ namespace SpendingManagement.Controllers.Api
             if (expense == null)
                 return NotFound();
 
-            _expenseRepository.DeleteExpense(expense);
-            _expenseRepository.Complete();
+            //_expenseRepository.DeleteExpense(expense);
+            //_expenseRepository.Complete();
             
             return Ok();
         }

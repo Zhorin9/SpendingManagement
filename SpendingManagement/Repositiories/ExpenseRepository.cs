@@ -38,6 +38,13 @@ namespace SpendingManagement.Repositiories
                 .SingleOrDefault(e => e.Id == expenseId && e.UserID == userId);
         }
 
+        public IEnumerable<Expense> GetExpenses(string userId, int amountOfExpenses)
+        {
+            return _contex.Expenses.Where(u=> u.UserID == userId)
+                .OrderBy(o => o.Date)
+                .Take(amountOfExpenses);
+        }
+
         public IEnumerable<Expense> GetExpensesInSelectedRange(DateTime? dateFrom, DateTime? dateTo)
         {
             return _contex.Expenses

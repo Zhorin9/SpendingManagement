@@ -11,6 +11,7 @@ namespace SpendingManagement.Core.Repositiories
         void DeleteExpense(Expense expense);
         Expense GetExpense(string userId, int expenseId);
         IEnumerable<Expense> GetExpensesInSelectedRange(DateTime? dateFrom, DateTime? dateTo);
+        IEnumerable<Expense> GetExpenses(string userId, int amountOfExpenses);
         void Complete();
     }
 }
