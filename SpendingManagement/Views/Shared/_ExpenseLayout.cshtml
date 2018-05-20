@@ -7,7 +7,6 @@
 <head>
     <meta name="viewport" content="width=device-width">
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
     <title>Wydatki</title>
 </head>
 <body>
@@ -48,8 +47,9 @@
         }
         @RenderBody()
     </div>
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
 </body>
 </html>

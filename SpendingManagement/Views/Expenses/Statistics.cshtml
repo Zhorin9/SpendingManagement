@@ -3,9 +3,9 @@
     ViewBag.Title = "Statistics";
     Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
 }
- 
+
 <div class="row m-md-4">
-    <div class="col-md-4 p-md-4">@Html.Partial("SelectRange")</div>  
+    <div class="col-md-4 p-md-4">@Html.Partial("SelectRange")</div>
     <div class="panel-body p-lg-4 col-md-8">
         <table class="table table-bordered ">
             <tbody class="">
@@ -26,7 +26,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-6" >
+        <div class="col-md-6">
             @Model.PieChart
         </div>
         <div class="col-md-6">
@@ -35,8 +35,6 @@
         <div class="m-md-4"></div>
     </div>
 </div>
-<script>
-
-
-
-</script>
+@section scripts{
+    @Scripts.Render("~/bundles/highcharts")
+}

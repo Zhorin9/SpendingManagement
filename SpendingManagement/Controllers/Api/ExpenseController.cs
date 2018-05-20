@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using SpendingManagement.Core.Repositiories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SpendingManagement.Controllers.Api
@@ -31,8 +26,8 @@ namespace SpendingManagement.Controllers.Api
             if (expense == null)
                 return NotFound();
 
-            //_expenseRepository.DeleteExpense(expense);
-            //_expenseRepository.Complete();
+            _expenseRepository.DeleteExpense(expense);
+            _expenseRepository.Complete();
             
             return Ok();
         }
