@@ -1,14 +1,14 @@
 ﻿@using System.Web.Optimization;
-@model SpendingManagement.Core.ViewModels.ExpenseFormViewModel
+@model SpendingManagement.Core.ViewModels.RecordFormViewModel
 
 @{
     ViewBag.Title = Model.Heading;
-    Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
+    Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 <div id="categoryWindow" class="category-dialog">
-    <div id="closeCategory" class="text-right hover"><a>Anuluj X</a></div>
-    <h2 id="categoryTitle" class="ml-lg-3 mr-lg-3 text-center">Wybierz kategorię</h2>
-    <ul id="categoryList" class="category-body" style="padding: 0px;"></ul>
+    <div id="closeCategory"><a>Anuluj X</a></div>
+    <h2 id="categoryTitle" class="">Wybierz kategorię</h2>
+    <ul id="categoryList" class="category-body"></ul>
 </div>
 <div class="p-lg-4 p-sm-3">
     <div class="row">
@@ -19,7 +19,7 @@
                 @Html.AntiForgeryToken()
                 <h4>@Model.Heading</h4>
                 <div>
-                    @Html.HiddenFor(m=> m.Id)
+                    @Html.HiddenFor(m => m.Id)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name)
@@ -43,14 +43,13 @@
                 </div>
                 <div>
                     <input type="button" id="categoryButton" value="Wybierz kategorię i podkategorię" class="form-control" />
-                    <div>
-                        <textarea id="Category" name="Category" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Category</textarea>
-                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly" class="form-control category-textarea">@Model.Subcategory</textarea>
+                    <div class="category-textarea">
+                        <textarea id="Category" name="Category" rows="1" readonly="readonly">@Model.Category</textarea>
+                        <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly">@Model.Subcategory</textarea>
                     </div>
                 </div>
-                <input type="submit" value="Zapisz" class="btn" />
-                @Html.ActionLink("Anuluj i powróć", "Index", null, new { @class = "btn" })
-
+                <input type="submit" value="Zapisz" class="btn btn-default" />
+                <a href="@Url.Action("RecordsList")" class="btn btn-default">Anuluj</a>
             }
         </div>
         <div class="col-md-1 col-sm-4"></div>
@@ -58,8 +57,9 @@
     </div>
 </div>
 
-<script type="text/javascript" src="~/Scripts/SelectCategories.js"></script>
 @section scripts{
+    @Scripts.Render("~/bundles/form")
+    @Scripts.Render("~/bundles/app")
     <script>
         $(function () {
             $('#Name').on("blur", function () {

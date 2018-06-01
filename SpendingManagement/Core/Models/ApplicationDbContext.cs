@@ -5,7 +5,7 @@ namespace SpendingManagement.Core.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Record> Records { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

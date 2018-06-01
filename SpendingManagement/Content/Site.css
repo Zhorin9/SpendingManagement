@@ -133,7 +133,7 @@ textarea {
     display: none;
     z-index: 1;
     width: auto;
-    position: fixed;
+    position: absolute;
     overflow: auto;
     margin-left: 20%;
     padding: 1rem;
@@ -141,21 +141,28 @@ textarea {
     background-color: #14b068;
     color: white;
 }
+    .category-dialog > div > a{
+        color:white;
+    }
 
-.category-body {
-    list-style-type: none;
-    text-align: center;
-    border-radius: 0.25rem;
-    margin: 20px;
-}
+    .category-dialog .category-body {
+        list-style-type: none;
+        text-align: center;
+        border-radius: 0.25rem;
+        padding: 0px;
+        margin: 20px;
+    }
+        .category-dialog .category-body .category-item {
+            font-weight: bold;
+            padding: 7px;
+            margin: 5%;
+            border: 2px solid White;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
 
-.category-item {
-    padding: 7px;
-    margin: 5%;
-    border: 2px solid White;
-    border-radius: 0.25rem;
-    cursor: pointer;
-}
+
+
 
     .category-item:hover {
         border-color: rgba(39, 205, 70, 0.6);
@@ -163,8 +170,9 @@ textarea {
         outline: 0;
     }
 
-.category-textarea {
-    text-align: center;
+.category-textarea > textarea {
+    width: 130px;
+    height: 30px;
 }
 
 div > textarea {

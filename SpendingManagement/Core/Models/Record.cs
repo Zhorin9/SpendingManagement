@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace SpendingManagement.Core.Models
 {
-    public class Expense
+    public class Record
     {
         public int Id { get; set; }
 

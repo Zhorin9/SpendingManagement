@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SpendingManagement.Core.ViewModels
 {
-    public class ExpenseFormViewModel
+    public class RecordFormViewModel
     {
         public string Heading { get; set; }
 
@@ -40,9 +40,9 @@ namespace SpendingManagement.Core.ViewModels
         {
             get
             {
-                Expression<Func<ExpensesController, ActionResult>> update =
+                Expression<Func<RecordsController, ActionResult>> update =
                     (c => c.Update(this));
-                Expression<Func<ExpensesController, ActionResult>> create =
+                Expression<Func<RecordsController, ActionResult>> create =
                     (c => c.Create(this));
 
                 var action = (Id != 0) ? update : create;

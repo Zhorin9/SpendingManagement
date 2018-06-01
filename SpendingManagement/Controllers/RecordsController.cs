@@ -11,16 +11,16 @@ using System.Web.Mvc;
 namespace SpendingManagement.Controllers
 {
     [Authorize]
-    public class ExpensesController : Controller
+    public class RecordsController : Controller
     {
-        private readonly IExpenseRepository _expensesRepository;
+        private readonly IRecordRepository _recordsRepository;
         private readonly IApplicationUserRepository _usersRepository;
 
         private int PageSize = 8;
 
-        public ExpensesController(IExpenseRepository expenseRepository, IApplicationUserRepository userRepository)
+        public RecordsController(IRecordRepository expenseRepository, IApplicationUserRepository userRepository)
         {
-            _expensesRepository = expenseRepository;
+            _recordsRepository = expenseRepository;
             _usersRepository = userRepository;
         }
 
@@ -33,7 +33,7 @@ namespace SpendingManagement.Controllers
             sortingInfo.ChargeSort = sortOrder == "charge" ? "charge_desc" : "charge";
             sortingInfo.CategorySort = sortOrder == "category" ? "category_desc" : "category";
             sortingInfo.SubcategorySort = sortOrder == "subcategory" ? "subcategory_desc" : "subcategory";
-            var parameters = _expensesRepository.Expenses.Where(p => p.UserID == userId);
+            var parameters = _recordsRepository.Records.Where(p => p.UserID == userId);
  
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -75,9 +75,9 @@ namespace SpendingManagement.Controllers
                     break;
             }
 
-            ExpensesListViewModel model = new ExpensesListViewModel
+            RecordsListViewModel model = new RecordsListViewModel
             {
-                Expenses = parameters.Skip((page - 1) * PageSize).Take(PageSize),
+                Records = parameters.Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -100,7 +100,7 @@ namespace SpendingManagement.Controllers
 
         public ViewResult Create()
         {
-            var form = new ExpenseFormViewModel()
+            var form = new RecordFormViewModel()
             {
                 Heading = "Stwórz wydatek"
             };
@@ -111,13 +111,13 @@ namespace SpendingManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _expensesRepository.GetExpense(userId, id);
+            var expense = _recordsRepository.GetRecord(userId, id);
 
             if (expense == null)
                 return HttpNotFound();
 
             //Expense expense = _expensesRepository.Expenses.First(p => p.Id == id && p.UserID == userId);
-            ExpenseFormViewModel model = new ExpenseFormViewModel()
+            RecordFormViewModel model = new RecordFormViewModel()
             {
                 Heading = "Edycja - " + expense.Name,
                 Id = expense.Id,
@@ -133,14 +133,14 @@ namespace SpendingManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ExpenseFormViewModel model)
+        public ActionResult Create(RecordFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View("ExpenseForm", model);
             }
 
-            var expense = new Expense
+            var expense = new Record
             {
                 UserID = User.Identity.GetUserId(),
                 Date = model.Date,
@@ -150,8 +150,8 @@ namespace SpendingManagement.Controllers
                 Name = model.Name
             };
 
-            _expensesRepository.AddExpense(expense);
-            _expensesRepository.Complete();
+            _recordsRepository.AddExpense(expense);
+            _recordsRepository.Complete();
 
             TempData["message"] = string.Format("Zapisano {0} ", expense.Name);
             return RedirectToAction("RecordsList","Expenses");
@@ -159,14 +159,14 @@ namespace SpendingManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ExpenseFormViewModel model)
+        public ActionResult Update(RecordFormViewModel model)
         {
             var userId = User.Identity.GetUserId();
             if (!ModelState.IsValid)
             {
                 return View("ExpenseForm", model);
             }
-            var expense = _expensesRepository.GetExpense(userId, model.Id);
+            var expense = _recordsRepository.GetRecord(userId, model.Id);
 
             if (expense == null)
                 return HttpNotFound();
@@ -178,8 +178,7 @@ namespace SpendingManagement.Controllers
             expense.Subcategory = model.Subcategory;
             expense.Category = model.Category;
 
-            _expensesRepository.Complete();
-
+            _recordsRepository.Complete();
             TempData["message"] = string.Format("Zaktualizowano {0} ", expense.Name);
             return RedirectToAction("RecordsList", "Expenses");
         }
@@ -188,12 +187,10 @@ namespace SpendingManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _expensesRepository.GetExpense(userId, id);
+            var expense = _recordsRepository.GetRecord(userId, id);
             return View(expense);
         }
-
-
-
+        
 
         public ViewResult Statistics(DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
@@ -202,8 +199,8 @@ namespace SpendingManagement.Controllers
                 dateFromParam = DateTime.MinValue;
             if (dateToParam == null)
                 dateToParam = DateTime.MaxValue;
-            var repoParam = _expensesRepository
-                .GetExpensesInSelectedRange(dateFromParam, dateToParam)
+            var repoParam = _recordsRepository
+                .GetRecordsInSelectedRange(dateFromParam, dateToParam)
                 .Where(u => u.UserID == userId);
 
             //var repoParam = _expensesRepository.Expenses.Where(p => p.Date >= dateFromParam
@@ -223,7 +220,7 @@ namespace SpendingManagement.Controllers
             return View(statistics);
         }
 
-        private List<object> _CreatePieSeries(IEnumerable<Expense> repoParam)
+        private List<object> _CreatePieSeries(IEnumerable<Record> repoParam)
         {
             var category = repoParam.Select(p => p.Category).Distinct();
             List<object> series = new List<object>();
@@ -233,7 +230,7 @@ namespace SpendingManagement.Controllers
                 Sum(p => p.Charge) }));
             return series;
         }
-        private List<object[]> _SelectExtremeValues(IEnumerable<Expense> repoParam)
+        private List<object[]> _SelectExtremeValues(IEnumerable<Record> repoParam)
         {
             List<object[]> CategoriesCharge = new List<object[]>();
             var categories = repoParam.Select(p => p.Category).Distinct();

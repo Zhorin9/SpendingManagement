@@ -64,7 +64,7 @@ namespace SpendingManagement.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IExpenseRepository>().To<ExpenseRepository>();
+            kernel.Bind<IRecordRepository>().To<RecordRepository>();
             kernel.Bind<IApplicationUserRepository>().To<ApplicationUserRepository>();
         }        
     }

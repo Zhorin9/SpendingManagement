@@ -7,7 +7,7 @@ namespace SpendingManagement.Core.ViewModels
 {
     public class DashboardViewModel
     {
-        public IEnumerable<Expense> LastTenExpenes = new List<Expense>();
+        public IEnumerable<Record> LastTenExpenes = new List<Record>();
         public decimal SumYearCharge { get; set; }
         public decimal SumMonthCharge { get; set; }  
         public decimal SumWeekCharge { get; set; }

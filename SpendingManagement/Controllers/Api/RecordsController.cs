@@ -5,14 +5,14 @@ using System.Web.Http;
 namespace SpendingManagement.Controllers.Api
 {
     [Authorize]
-    public class ExpenseController : ApiController
+    public class RecordsController : ApiController
     {
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IRecordRepository _recordRepository;
         private readonly IApplicationUserRepository _userRepository;
 
-        public ExpenseController(IExpenseRepository expenseRepository, IApplicationUserRepository userRepository)
+        public RecordsController(IRecordRepository recordRepository, IApplicationUserRepository userRepository)
         {
-            _expenseRepository = expenseRepository;
+            _recordRepository = recordRepository;
             _userRepository = userRepository;
         }
 
@@ -21,13 +21,13 @@ namespace SpendingManagement.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _expenseRepository.GetExpense(userId, id);
+            var expense = _recordRepository.GetRecord(userId, id);
 
             if (expense == null)
                 return NotFound();
 
-            _expenseRepository.DeleteExpense(expense);
-            _expenseRepository.Complete();
+            _recordRepository.DeleteExpense(expense);
+            _recordRepository.Complete();
             
             return Ok();
         }

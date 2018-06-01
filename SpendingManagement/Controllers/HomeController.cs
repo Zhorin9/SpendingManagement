@@ -10,10 +10,10 @@ namespace SpendingManagement.Controllers
 {
     public class HomeController : Controller
     { 
-        private IExpenseRepository _expenseRepository;
+        private IRecordRepository _expenseRepository;
         private IApplicationUserRepository _userRepository;
 
-        public HomeController(IExpenseRepository expenseRepository, IApplicationUserRepository userRepository)
+        public HomeController(IRecordRepository expenseRepository, IApplicationUserRepository userRepository)
         {
             _expenseRepository = expenseRepository;
             _userRepository = userRepository;
@@ -26,35 +26,18 @@ namespace SpendingManagement.Controllers
 
             DashboardViewModel dashboard = new DashboardViewModel()
             {
-                  
+                SumYearCharge = _expenseRepository.GetYearRecordsSum(userId),
+                SumMonthCharge = _expenseRepository.GetMonthRecordsSum(userId),
+                SumWeekCharge = _expenseRepository.GetWeekRecordsSum(userId),
+                LastTenExpenes = _expenseRepository.GetRecords(userId, 10),
             };
-
-            dashboard.SumYearCharge = _expenseRepository.Expenses.Where(p=> p.Date.Year == DateTime.Now.Year && p.UserID == userId).Select(p => p.Charge).Sum();
-            dashboard.SumMonthCharge = _expenseRepository.Expenses.Where(p => p.Date.Month == DateTime.Now.Month && p.UserID == userId)
-                .Select(p => p.Charge).Sum();
-            dashboard.SumWeekCharge = _expenseRepository.Expenses.Where(p => p.Date >= _GetFirstDayOfWeek().Date && p.Date <= DateTime.Now.Date && p.UserID == userId)
-            .Select(p => p.Charge).Sum();
             
-            dashboard.LastTenExpenes = _expenseRepository.GetExpenses(userId, 10);
-
             return View(dashboard);
         }
-
+        
         public ActionResult About()
         {
             return View();
-        }
-
-
-        private DateTime _GetFirstDayOfWeek()
-        {
-            var firstDayOfWeek = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
-            DateTime currentDate = DateTime.Now;
-            while (currentDate.DayOfWeek != firstDayOfWeek)
-            {
-                currentDate = currentDate.AddDays(-1);
-            }
-            return currentDate;
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿@model SpendingManagement.Core.ViewModels.ExpensesListViewModel
+﻿@model SpendingManagement.Core.ViewModels.RecordsListViewModel
 @using SpendingManagement.Core.HtmlHelpers;
 @{
     ViewBag.Title = "Administracja: Wszystkie dane";
-    Layout = "~/Views/Shared/_ExpenseLayout.cshtml";
+    Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 <div class="panel panel-default p-md-1">
     <div class="panel-heading p-4">
@@ -25,7 +25,7 @@
                 <th>@Html.ActionLink("Podkategoria", "Index", new { sortOrder = Model.SortingInfo.SubcategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>Akcje</th>
             </tr>
-            @foreach (var item in Model.Expenses)
+            @foreach (var item in Model.Records)
             {
             <tr id="@item.Id">
                 <td>@item.Date.ToShortDateString()</td>

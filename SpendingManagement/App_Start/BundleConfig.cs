@@ -14,11 +14,13 @@ namespace SpendingManagement
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                        "~/Scripts/App/calculator.js",
-                        "~/Scripts/App/selectCategoriesExpenseForm.js",
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(                      
                         "~/Scripts/App/services/expenseService.js",
                         "~/Scripts/App/controllers/expenseController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/form").Include(
+                "~/Scripts/App/calculator.js",
+                "~/Scripts/App/selectCategoriesExpenseForm.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                     .Include("~/Scripts/Highcharts-4.0.1/js/highcharts.js"));
