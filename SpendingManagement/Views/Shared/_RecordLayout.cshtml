@@ -18,17 +18,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Zarządzanie wydatkami", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Zarządanie budżetem", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zarządzaj wydatkami<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zarządzaj pieniędzmi<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Dodaj wydatek", "Create", "Records")</li>
-                                    <li>@Html.ActionLink("Dodaj przychód", "Create", "Records")</li>
+                                    <li>@Html.ActionLink("Dodaj wydatek", "Create","Records",new {revenue = false },null)</li>
+                                    <li>@Html.ActionLink("Dodaj przychód", "Create","Records", new { revenue = true },null)</li>
                                 </ul>
                             </li>
                         </ul>

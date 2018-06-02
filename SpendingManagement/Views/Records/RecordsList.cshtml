@@ -7,7 +7,7 @@
 <div class="panel panel-default p-md-1">
     <div class="panel-heading p-4">
         <h3>Wszystkie dane - @Model.PagingInfo.TotalItems rekordów</h3>
-        @using (Html.BeginForm("Index", "Admin"))
+        @using (Html.BeginForm("RecordsList", "Records"))
         {
             <p>
                 Wyszukaj po nazwie bądź kategorii: @Html.TextBox("searchString")
@@ -18,27 +18,45 @@
     <div class="panel-body">
         <table class="table table-bordered">
             <tr class="table-light text-dark">
-                <th>@Html.ActionLink("Data", "Index", new { sortOrder = Model.SortingInfo.DataSort, searchString = Model.SortingInfo.CurrentSearch })</th>
-                <th>@Html.ActionLink("Nazwa", "Index", new { sortOrder = Model.SortingInfo.NameSort, searchString = Model.SortingInfo.CurrentSearch })</th>
-                <th>@Html.ActionLink("Kwota", "Index", new { sortOrder = Model.SortingInfo.ChargeSort, searchString = Model.SortingInfo.CurrentSearch })</th>
-                <th>@Html.ActionLink("Kategoria", "Index", new { sortOrder = Model.SortingInfo.CategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
-                <th>@Html.ActionLink("Podkategoria", "Index", new { sortOrder = Model.SortingInfo.SubcategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Data", "RecordsList", new { sortOrder = Model.SortingInfo.DataSort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Nazwa", "RecordsList", new { sortOrder = Model.SortingInfo.NameSort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Kwota", "RecordsList", new { sortOrder = Model.SortingInfo.ChargeSort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Kategoria", "RecordsList", new { sortOrder = Model.SortingInfo.CategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
+                <th>@Html.ActionLink("Podkategoria", "RecordsList", new { sortOrder = Model.SortingInfo.SubcategorySort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>Akcje</th>
             </tr>
             @foreach (var item in Model.Records)
             {
-            <tr id="@item.Id">
-                <td>@item.Date.ToShortDateString()</td>
-                <td>@item.Name</td>
-                <td>@item.Charge.ToString("c")</td>
-                <td>@item.Category </td>
-                <td>@item.Subcategory</td>
-                <td>
-                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Szczegóły", "Details", new { id = item.Id })|
-                    <a href="#" data-expense-id= "@item.Id" class="js-delete-expense">Usuń</a>
-                </td>
-            </tr>
+                if (item.IsRevenue)
+                {
+                    <tr id="@item.Id" class="border-orange">
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.Name</td>
+                        <td>@item.Charge.ToString("c")</td>
+                        <td>@item.Category </td>
+                        <td>@item.Subcategory</td>
+                        <td>
+                            @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id })|
+                            <a href="#" data-expense-id="@item.Id" class="js-delete-expense">Usuń</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr id="@item.Id">
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.Name</td>
+                        <td>@item.Charge.ToString("c")</td>
+                        <td>@item.Category </td>
+                        <td>@item.Subcategory</td>
+                        <td>
+                            @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id })|
+                            <a href="#" data-expense-id="@item.Id" class="js-delete-expense">Usuń</a>
+                        </td>
+                    </tr>
+                }
             }
         </table>
     </div>
@@ -49,9 +67,10 @@
 </div>
 @section scripts
 {
+    @Scripts.Render("~/bundles/app")
     <script>
         $(document).ready(function () {
-            ExpenseController.init();
+            RecordController.init();
         });
     </script>
 }

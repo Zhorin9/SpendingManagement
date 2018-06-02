@@ -1,10 +1,10 @@
 ﻿
-var ExpenseController = function (expenseService) {
+var RecordController = function (recordService) {
     var deleteButton;
 
     var init = function () {
         $(".js-delete-expense").click(checkBox);
-    }
+    };
     var checkBox = function (e) {
         deleteButton = $(e.target);
         bootbox.confirm({
@@ -21,11 +21,11 @@ var ExpenseController = function (expenseService) {
             },
             callback: function (result) {
                 if (result) {
-                    expenseService.deleteExpense(deleteButton.attr("data-expense-id"), done, fail);
+                    recordService.deleteRecord(deleteButton.attr("data-expense-id"), done, fail);
                 }
             }
         });
-    }
+    };
 
     var fail = function () {
         alert("Coś poszło nie tak");
@@ -38,5 +38,5 @@ var ExpenseController = function (expenseService) {
 
     return {
         init: init
-    }
-}(ExpenseService);
+    };
+}(RecordService);

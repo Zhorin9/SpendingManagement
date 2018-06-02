@@ -230,7 +230,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\RecordsController.cs" />
+    <Compile Include="Controllers\Api\RecordController.cs" />
     <Compile Include="Controllers\RecordsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201806012130187_ChangeExpenseToRecord.Designer.cs">
       <DependentUpon>201806012130187_ChangeExpenseToRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806021202179_ChangeExpenseToRecord1.cs" />
+    <Compile Include="Migrations\201806021202179_ChangeExpenseToRecord1.Designer.cs">
+      <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Repositiories\IApplicationUserRepository.cs" />
@@ -287,9 +291,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\App\calculator.js" />
-    <Content Include="Scripts\App\controllers\expenseController.js" />
+    <Content Include="Scripts\App\controllers\recordController.js" />
     <Content Include="Scripts\App\selectCategoriesExpenseForm.js" />
-    <Content Include="Scripts\App\services\expenseService.js" />
+    <Content Include="Scripts\App\services\recordService.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -386,6 +390,7 @@
     <Content Include="Views\Shared\SelectRange.cshtml" />
     <Content Include="Views\Shared\_RecordLayout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Records\RevenueForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -407,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806012130187_ChangeExpenseToRecord.resx">
       <DependentUpon>201806012130187_ChangeExpenseToRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021202179_ChangeExpenseToRecord1.resx">
+      <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

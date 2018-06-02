@@ -59,8 +59,15 @@ textarea {
         background-color: rgba(39, 205, 70, 0.6)
     }
 .border-success {
-    border-color: #668684 !important
+    border:2px solid #217e2c !important
 }
+.border-blue {
+    border:2px solid rgba(25, 100, 185, 0.68) !important
+}
+.border-orange {
+    border: 2px solid rgb(171, 124, 55) !important
+}
+
 .card {
     position: relative;
     display: -webkit-box;
@@ -87,11 +94,15 @@ textarea {
 }
 .card-success {
     background-color: #56CC9D;
-    color: #fff;
 }
-.card-light {
-    background-color: #f8f9fa;
-    color: #000;
+.card-blue {
+    background-color: rgba(21, 132, 194, 0.69);
+}
+.card-orange {
+    background-color: rgba(224, 113, 32, 0.7);
+}
+.text-white{
+    color:#fff;
 }
 
 

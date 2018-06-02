@@ -5,40 +5,50 @@ var closeCategoryList = document.getElementById('closeCategory');
 
 var openCategoryWindow = document.getElementById('categoryButton');
 var choosedCategory = '';
-var avaiableCategories = [
-    {
-        name: 'Jedzenie',
-        subCategories: ['Bar', 'Sklep', 'Kanapki', 'Inne'],
-    }, {
-        name: 'Osobiste',
-        subCategories: ['Ubranie', 'Prezent', 'Kosmetyki','Fryzjer', 'Inne'],
-    }, {
-        name: 'Alkohol',
-        subCategories: ['Sklep', 'Bar'],
-    }, {
-        name: 'Dom',
-        subCategories: ['Sprzęt', 'Środki czystości', 'Inne'],
-    }, {
-        name: 'Opłaty',
-        subCategories: ['Mieszkanie', 'Telefon', 'Internet', 'Inne'],
-    }, {
-        name: 'Przejazdy',
-        subCategories: ['Powrót do domu', 'Miesięczny', 'Inne'],
-    }, {
-        name: 'Inne',
-        subCategories: ['Książka', 'Inne'],
-    }, {
-        name: 'Rozrywka',
-        subCategories: ['Koncerty', 'Kino','StandUp', 'Sporty', 'Inne'],
-    }, {
-        name: 'Hobby',
-        subCategories: ['Terrarystyka', 'Elektronika', 'Grawerowanie'],
-    }];
-
+var avaiableCategories;
+var isRevenue = $(".js-isRecord-revenue").val();
+if (isRevenue == "True") {
+    avaiableCategories = [
+        {
+            name: 'Przychód',
+            subCategories: ['Praca', 'Przelew', 'Wygrana', 'Inne']
+        }];
+}
+else {
+    avaiableCategories = [
+        {
+            name: 'Jedzenie',
+            subCategories: ['Bar', 'Sklep', 'Kanapki', 'Inne']
+        }, {
+            name: 'Osobiste',
+            subCategories: ['Ubranie', 'Prezent', 'Kosmetyki', 'Fryzjer', 'Inne']
+        }, {
+            name: 'Alkohol',
+            subCategories: ['Sklep', 'Bar']
+        }, {
+            name: 'Dom',
+            subCategories: ['Sprzęt', 'Środki czystości', 'Inne']
+        }, {
+            name: 'Opłaty',
+            subCategories: ['Mieszkanie', 'Telefon', 'Internet', 'Inne']
+        }, {
+            name: 'Przejazdy',
+            subCategories: ['Powrót do domu', 'Miesięczny', 'Inne']
+        }, {
+            name: 'Inne',
+            subCategories: ['Książka', 'Inne']
+        }, {
+            name: 'Rozrywka',
+            subCategories: ['Koncerty', 'Kino', 'StandUp', 'Sporty', 'Inne']
+        }, {
+            name: 'Hobby',
+            subCategories: ['Terrarystyka', 'Elektronika', 'Grawerowanie']
+        }];
+}
 function checkCategories(event) {
     var id = event.target.id;
     if (id.includes('categoryReturn')) {
-        var displayCategory = document.getElementById('Category');
+        displayCategory = document.getElementById('Category');
         displayCategory.textContent = '';
         showBasicCategoriesList();
     }

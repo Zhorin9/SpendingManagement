@@ -9,6 +9,8 @@ namespace SpendingManagement.Core.Models
     {
         public int Id { get; set; }
 
+        public bool IsRevenue { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

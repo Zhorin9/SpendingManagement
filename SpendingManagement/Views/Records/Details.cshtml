@@ -1,8 +1,8 @@
-﻿@model SpendingManagement.Core.Models.Expense
+﻿@model SpendingManagement.Core.Models.Record
 
 @{
     ViewBag.Title = "Szczegóły";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 
 <div>
@@ -37,7 +37,7 @@
             </tr>
         </table>
         <div>
-            @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-light" })
+            @Html.ActionLink("Powrót", "RecordsList", null, new { @class = "btn btn-light" })
         </div>
     </div>
 

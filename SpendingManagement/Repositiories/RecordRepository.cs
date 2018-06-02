@@ -18,12 +18,12 @@ namespace SpendingManagement.Repositiories
 
         public IEnumerable<Record> Records { get { return _contex.Records; } }
 
-        public void AddExpense(Record record)
+        public void AddRecord(Record record)
         {
             _contex.Records.Add(record);
         }
 
-        public void DeleteExpense(Record record)
+        public void DeleteRecord(Record record)
         {
             _contex.Records.Remove(record);
         }

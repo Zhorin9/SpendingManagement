@@ -5,28 +5,28 @@ using System.Web.Http;
 namespace SpendingManagement.Controllers.Api
 {
     [Authorize]
-    public class RecordsController : ApiController
+    public class RecordController : ApiController
     {
         private readonly IRecordRepository _recordRepository;
         private readonly IApplicationUserRepository _userRepository;
 
-        public RecordsController(IRecordRepository recordRepository, IApplicationUserRepository userRepository)
+        public RecordController(IRecordRepository recordRepository, IApplicationUserRepository userRepository)
         {
             _recordRepository = recordRepository;
             _userRepository = userRepository;
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteExpense(int id)
+        public IHttpActionResult DeleteRecord(int id)
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _recordRepository.GetRecord(userId, id);
+            var record = _recordRepository.GetRecord(userId, id);
 
-            if (expense == null)
+            if (record == null)
                 return NotFound();
 
-            _recordRepository.DeleteExpense(expense);
+            _recordRepository.DeleteRecord(record);
             _recordRepository.Complete();
             
             return Ok();

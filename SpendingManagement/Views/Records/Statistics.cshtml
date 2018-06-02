@@ -24,17 +24,18 @@
         </table>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            @Model.PieChart
-        </div>
-        <div class="col-md-6">
-            @Model.LineSumChart
-        </div>
-        <div class="m-md-4"></div>
-    </div>
-</div>
+
 @section scripts{
     @Scripts.Render("~/bundles/highcharts")
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                @Model.PieChart
+            </div>
+            <div class="col-md-6">
+                @Model.LineSumChart
+            </div>
+            <div class="m-md-4"></div>
+        </div>
+    </div>
 }

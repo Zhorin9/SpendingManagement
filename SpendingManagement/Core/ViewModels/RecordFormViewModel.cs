@@ -13,19 +13,23 @@ namespace SpendingManagement.Core.ViewModels
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [HiddenInput(DisplayValue =false)]
+        public bool IsRevenue { get; set; }
+
         [Display(Name = "Nazwa")]
-        [Required(ErrorMessage = "Proszę podać nazwę wydatku")]
+        [Required(ErrorMessage = "Proszę podać nazwę")]
         public string Name { get; set; }
 
         [Display(Name = "Opis"), DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Data")]
+        [Required(ErrorMessage = "Wprowadź datę")]
         public DateTime Date { get; set; }
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Proszę podać właściwą wartość")]
-        [Display(Name = "Koszt")]
+        [Display(Name = "Wartość")]
         public decimal Charge { get; set; }
 
         [Required(ErrorMessage = "Proszę wybrać kategorię")]

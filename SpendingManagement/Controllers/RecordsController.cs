@@ -18,9 +18,9 @@ namespace SpendingManagement.Controllers
 
         private int PageSize = 8;
 
-        public RecordsController(IRecordRepository expenseRepository, IApplicationUserRepository userRepository)
+        public RecordsController(IRecordRepository recordsRepository, IApplicationUserRepository userRepository)
         {
-            _recordsRepository = expenseRepository;
+            _recordsRepository = recordsRepository;
             _usersRepository = userRepository;
         }
 
@@ -98,13 +98,17 @@ namespace SpendingManagement.Controllers
             return View(model);
         }
 
-        public ViewResult Create()
+        public ViewResult Create(bool revenue)
         {
-            var form = new RecordFormViewModel()
+            var form = new RecordFormViewModel();
+            if (revenue)
             {
-                Heading = "Stwórz wydatek"
-            };
-            return View("ExpenseForm", form);
+                form.Heading = "Dodaj przychód";
+                form.IsRevenue = true;
+            }
+            else 
+                form.Heading = "Stwórz wydatek";
+            return View("RecordForm", form);
         }
 
         public ActionResult Edit(int id)
@@ -128,7 +132,7 @@ namespace SpendingManagement.Controllers
                 Description = expense.Description,
                 Subcategory = expense.Subcategory,
             };
-            return View("ExpenseForm", model);
+            return View("RecordForm", model);
         }
 
         [HttpPost]
@@ -137,12 +141,13 @@ namespace SpendingManagement.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("ExpenseForm", model);
+                return View("RecordForm", model);
             }
 
-            var expense = new Record
+            var record = new Record
             {
                 UserID = User.Identity.GetUserId(),
+                IsRevenue = model.IsRevenue,
                 Date = model.Date,
                 Charge = model.Charge,
                 Category = model.Category,
@@ -150,11 +155,11 @@ namespace SpendingManagement.Controllers
                 Name = model.Name
             };
 
-            _recordsRepository.AddExpense(expense);
+            _recordsRepository.AddRecord(record);
             _recordsRepository.Complete();
 
-            TempData["message"] = string.Format("Zapisano {0} ", expense.Name);
-            return RedirectToAction("RecordsList","Expenses");
+            TempData["message"] = string.Format("Zapisano {0} ", record.Name);
+            return RedirectToAction("RecordsList","Records");
         }
 
         [HttpPost]
@@ -164,31 +169,32 @@ namespace SpendingManagement.Controllers
             var userId = User.Identity.GetUserId();
             if (!ModelState.IsValid)
             {
-                return View("ExpenseForm", model);
+                return View("RecordForm", model);
             }
-            var expense = _recordsRepository.GetRecord(userId, model.Id);
+            var record = _recordsRepository.GetRecord(userId, model.Id);
 
-            if (expense == null)
+            if (record == null)
                 return HttpNotFound();
 
-            expense.Name = model.Name;
-            expense.Description = model.Description;
-            expense.Date = model.Date;
-            expense.Charge = model.Charge;
-            expense.Subcategory = model.Subcategory;
-            expense.Category = model.Category;
+            record.Name = model.Name;
+            record.IsRevenue = model.IsRevenue;
+            record.Description = model.Description;
+            record.Date = model.Date;
+            record.Charge = model.Charge;
+            record.Subcategory = model.Subcategory;
+            record.Category = model.Category;
 
             _recordsRepository.Complete();
-            TempData["message"] = string.Format("Zaktualizowano {0} ", expense.Name);
-            return RedirectToAction("RecordsList", "Expenses");
+            TempData["message"] = string.Format("Zaktualizowano {0} ", record.Name);
+            return RedirectToAction("RecordsList", "Records");
         }
 
         public ViewResult Details(int id)
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _recordsRepository.GetRecord(userId, id);
-            return View(expense);
+            var record = _recordsRepository.GetRecord(userId, id);
+            return View(record);
         }
         
 
@@ -202,9 +208,6 @@ namespace SpendingManagement.Controllers
             var repoParam = _recordsRepository
                 .GetRecordsInSelectedRange(dateFromParam, dateToParam)
                 .Where(u => u.UserID == userId);
-
-            //var repoParam = _expensesRepository.Expenses.Where(p => p.Date >= dateFromParam
-            //   && p.Date <= dateToParam && p.UserID == userId);
 
             StatisticsViewModel statistics = new StatisticsViewModel()
             {

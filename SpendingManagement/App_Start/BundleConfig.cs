@@ -15,8 +15,8 @@ namespace SpendingManagement
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(                      
-                        "~/Scripts/App/services/expenseService.js",
-                        "~/Scripts/App/controllers/expenseController.js"));
+                        "~/Scripts/App/services/recordService.js",
+                        "~/Scripts/App/controllers/recordController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                 "~/Scripts/App/calculator.js",
