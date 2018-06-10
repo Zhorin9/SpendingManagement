@@ -16,8 +16,8 @@
         }
     </div>
     <div class="panel-body">
-        <table class="table table-bordered">
-            <tr class="table-light text-dark">
+        <table class="table table-bordered table-head-green">
+            <tr>
                 <th>@Html.ActionLink("Data", "RecordsList", new { sortOrder = Model.SortingInfo.DataSort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>@Html.ActionLink("Nazwa", "RecordsList", new { sortOrder = Model.SortingInfo.NameSort, searchString = Model.SortingInfo.CurrentSearch })</th>
                 <th>@Html.ActionLink("Kwota", "RecordsList", new { sortOrder = Model.SortingInfo.ChargeSort, searchString = Model.SortingInfo.CurrentSearch })</th>

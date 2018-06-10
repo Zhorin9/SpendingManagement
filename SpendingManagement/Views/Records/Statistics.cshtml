@@ -4,21 +4,21 @@
     Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 
-<div class="row m-md-4">
+<div class="row m-md-4 panel">
     <div class="col-md-4 p-md-4">@Html.Partial("SelectRange")</div>
     <div class="panel-body p-lg-4 col-md-8">
-        <table class="table table-bordered ">
-            <tbody class="">
+        <table class="table table-bordered table-head-green">
+            <tbody>
                 @foreach (var p in Model.CategoriesCharge)
                 {
                     <tr>
                         <th class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</th>
-                        <th class="table-dark">@p[1] [zł]</th>
+                        <td class="table-dark">@p[1] [zł]</td>
                     </tr>
                 }
                 <tr>
-                    <th class="card">Suma wydatków w wybranym zakresie wyniosła:</th>
-                    <th class="card-body">@Model.SumCharge [zł]</th>
+                    <th>Suma wydatków w wybranym zakresie wyniosła:</th>
+                    <td>@Model.SumCharge [zł]</td>
                 </tr>
             </tbody>
         </table>

@@ -11,6 +11,12 @@ namespace SpendingManagement.Core.ViewModels
         public decimal SumYearCharge { get; set; }
         public decimal SumMonthCharge { get; set; }  
         public decimal SumWeekCharge { get; set; }
+
+        public IEnumerable<Record> LastTenRevenues { get; set; }
+        public decimal MonthRevenue { get; set; }
+        public decimal YearRevenue { get; set; }
+        public decimal WeekRevenue { get; set; }
+
         public string CurrentMonthName { get; set; }
 
         public DashboardViewModel()

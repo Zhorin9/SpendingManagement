@@ -68,6 +68,11 @@ textarea {
     border: 2px solid rgb(171, 124, 55) !important
 }
 
+.hr-green {
+    height: 3px;
+    background-color: #14b068;
+}
+
 .card {
     position: relative;
     display: -webkit-box;
@@ -104,7 +109,15 @@ textarea {
 .text-white{
     color:#fff;
 }
-
+.text-green {
+    color: #14b068;
+}
+.table-head-green tr th{
+    color: #14b068;
+}
+.table-head-green a {
+    color: #14b068;
+}
 
 .calculator {
     color:white;

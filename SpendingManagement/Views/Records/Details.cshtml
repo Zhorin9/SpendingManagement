@@ -5,35 +5,35 @@
     Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 
-<div>
-    <div class="bg-dark p-4">
-        <h3>Szczegóły</h3>
+<div class="panel panel-default">
+    <div>
+        <h3 class="text-center text-green">Szczegóły</h3>
     </div>
     <div class="p-4 panel-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-head-green">
             <tr>
                 <th>Data</th>
-                <th class="bg-light">@Model.Date.ToShortDateString()</th>
+                <td>@Model.Date.ToShortDateString()</td>
             </tr>
             <tr>
                 <th>Nazwa</th>
-                <th class="bg-light">@Model.Name</th>
+                <td>@Model.Name</td>
             </tr>
             <tr>
                 <th>Opis</th>
-                <th class="bg-light">@Model.Description</th>
+                <td>@Model.Description</td>
             </tr>
             <tr>
                 <th>Koszt</th>
-                <th class="bg-light">@Model.Charge</th>
+                <td>@Model.Charge</td>
             </tr>
             <tr>
                 <th>Kategoria</th>
-                <th class="bg-light">@Model.Category</th>
+                <td>@Model.Category</td>
             </tr>
             <tr>
                 <th>Podkategoria</th>
-                <th class="bg-light">@Model.Subcategory</th>
+                <td class="bg-light">@Model.Subcategory</td>
             </tr>
         </table>
         <div>

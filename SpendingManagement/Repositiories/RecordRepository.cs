@@ -39,9 +39,9 @@ namespace SpendingManagement.Repositiories
                 .SingleOrDefault(e => e.Id == recordId && e.UserID == userId);
         }
 
-        public IEnumerable<Record> GetRecords(string userId, int amountOfRecords)
+        public IEnumerable<Record> GetRecords(string userId, int amountOfRecords, bool isRevenue)
         {
-            return _contex.Records.Where(u=> u.UserID == userId)
+            return _contex.Records.Where(u=> u.UserID == userId && u.IsRevenue == isRevenue)
                 .OrderBy(o => o.Date)
                 .Take(amountOfRecords);
         }
@@ -53,27 +53,27 @@ namespace SpendingManagement.Repositiories
                 .ToList();
         }
 
-        public decimal GetYearRecordsSum(string userId)
+        public decimal GetYearRecordsSum(string userId, bool isRevenue)
         {
             var list = _contex.Records
-                .Where(p => p.Date.Year == DateTime.Now.Year && p.UserID == userId)
+                .Where(p => p.Date.Year == DateTime.Now.Year && p.IsRevenue == isRevenue && p.UserID == userId)
                 .Select(p => p.Charge).ToList();
             return list == null ? 0 : list.Sum();
         }
 
-        public decimal GetMonthRecordsSum(string userId)
+        public decimal GetMonthRecordsSum(string userId, bool isRevenue)
         {
             var list = _contex.Records
-                .Where(p => p.Date.Month == DateTime.Now.Month && p.UserID == userId)
+                .Where(p => p.Date.Month == DateTime.Now.Month && p.IsRevenue == isRevenue && p.UserID == userId)
                 .Select(p => p.Charge).ToList();
             return list == null ? 0 : list.Sum();
         }
 
-        public decimal GetWeekRecordsSum(string userId)
+        public decimal GetWeekRecordsSum(string userId, bool isRevenue)
         {
             var currentWeek = _GetFirstDayOfWeek().Date;
             var list = _contex.Records
-                .Where(p => p.Date >= currentWeek && p.UserID == userId)
+                .Where(p => p.Date >= currentWeek && p.IsRevenue == isRevenue && p.UserID == userId)
                 .Select(p => p.Charge).ToList();
             return list == null ? 0 : list.Sum();
         }

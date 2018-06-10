@@ -26,10 +26,15 @@ namespace SpendingManagement.Controllers
 
             DashboardViewModel dashboard = new DashboardViewModel()
             {
-                SumYearCharge = _expenseRepository.GetYearRecordsSum(userId),
-                SumMonthCharge = _expenseRepository.GetMonthRecordsSum(userId),
-                SumWeekCharge = _expenseRepository.GetWeekRecordsSum(userId),
-                LastTenExpenes = _expenseRepository.GetRecords(userId, 10),
+                SumYearCharge = _expenseRepository.GetYearRecordsSum(userId, false),
+                SumMonthCharge = _expenseRepository.GetMonthRecordsSum(userId, false),
+                SumWeekCharge = _expenseRepository.GetWeekRecordsSum(userId, false),
+                LastTenExpenes = _expenseRepository.GetRecords(userId, 10, false),
+
+                YearRevenue = _expenseRepository.GetYearRecordsSum(userId, true),
+                MonthRevenue = _expenseRepository.GetMonthRecordsSum(userId,true),
+                WeekRevenue = _expenseRepository.GetWeekRecordsSum(userId, true),
+                LastTenRevenues = _expenseRepository.GetRecords(userId, 10,true),
             };
             
             return View(dashboard);

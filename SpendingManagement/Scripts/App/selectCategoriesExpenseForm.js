@@ -36,7 +36,7 @@ else {
             subCategories: ['Powrót do domu', 'Miesięczny', 'Inne']
         }, {
             name: 'Inne',
-            subCategories: ['Książka', 'Inne']
+            subCategories: ['Książka', 'Inne', 'Wakacje']
         }, {
             name: 'Rozrywka',
             subCategories: ['Koncerty', 'Kino', 'StandUp', 'Sporty', 'Inne']
