@@ -29,10 +29,10 @@
             {
                 if (item.IsRevenue)
                 {
-                    <tr id="@item.Id" class="border-orange">
+                    <tr id="@item.Id" class="text-primary">
                         <td>@item.Date.ToShortDateString()</td>
                         <td>@item.Name</td>
-                        <td>@item.Charge.ToString("c")</td>
+                        <td>+@item.Charge.ToString("c")</td>
                         <td>@item.Category </td>
                         <td>@item.Subcategory</td>
                         <td>

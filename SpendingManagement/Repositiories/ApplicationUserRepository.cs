@@ -21,7 +21,7 @@ namespace SpendingManagement.Repositiories
         {
             return _context.Users
                     .Where(u => u.Id == userId)
-                    .Include(e=> e.Expenses);
+                    .Include(e=> e.Records);
         }
 
     }

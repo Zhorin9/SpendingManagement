@@ -235,7 +235,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Core\HtmlHelpers\PagingHelpers.cs" />
+    <Compile Include="Core\Models\Categories.cs" />
     <Compile Include="Core\Models\Record.cs" />
+    <Compile Include="Core\Models\Subcategories.cs" />
+    <Compile Include="Core\Repositiories\ICategoryRepository.cs" />
     <Compile Include="Core\ViewModels\RecordFormViewModel.cs" />
     <Compile Include="Core\ViewModels\RecordsListViewModel.cs" />
     <Compile Include="Core\ViewModels\Expense\DashBoardViewModel.cs" />
@@ -269,11 +272,32 @@
     <Compile Include="Migrations\201806021202179_ChangeExpenseToRecord1.Designer.cs">
       <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806132028190_AddedCategories.cs" />
+    <Compile Include="Migrations\201806132028190_AddedCategories.Designer.cs">
+      <DependentUpon>201806132028190_AddedCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806132038019_PopulateCategory.cs" />
+    <Compile Include="Migrations\201806132038019_PopulateCategory.Designer.cs">
+      <DependentUpon>201806132038019_PopulateCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806161952304_PopulateSubcategory.cs" />
+    <Compile Include="Migrations\201806161952304_PopulateSubcategory.Designer.cs">
+      <DependentUpon>201806161952304_PopulateSubcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806162054473_AddSubcategory.cs" />
+    <Compile Include="Migrations\201806162054473_AddSubcategory.Designer.cs">
+      <DependentUpon>201806162054473_AddSubcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.cs" />
+    <Compile Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.Designer.cs">
+      <DependentUpon>201806172047475_AddBoolColumntToCategoryEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Repositiories\IApplicationUserRepository.cs" />
     <Compile Include="Core\Repositiories\IRecordRepository.cs" />
     <Compile Include="Repositiories\ApplicationUserRepository.cs" />
+    <Compile Include="Repositiories\CategoryRepository.cs" />
     <Compile Include="Repositiories\RecordRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -415,6 +439,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806021202179_ChangeExpenseToRecord1.resx">
       <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806132028190_AddedCategories.resx">
+      <DependentUpon>201806132028190_AddedCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806132038019_PopulateCategory.resx">
+      <DependentUpon>201806132038019_PopulateCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806161952304_PopulateSubcategory.resx">
+      <DependentUpon>201806161952304_PopulateSubcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806162054473_AddSubcategory.resx">
+      <DependentUpon>201806162054473_AddSubcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.resx">
+      <DependentUpon>201806172047475_AddBoolColumntToCategoryEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

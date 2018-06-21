@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
 using SpendingManagement.Core.Repositiories;
+using System.Web;
 using System.Web.Http;
+using Newtonsoft.Json;
+using System.Web.Http.Results;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 
 namespace SpendingManagement.Controllers.Api
 {
@@ -9,11 +14,25 @@ namespace SpendingManagement.Controllers.Api
     {
         private readonly IRecordRepository _recordRepository;
         private readonly IApplicationUserRepository _userRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public RecordController(IRecordRepository recordRepository, IApplicationUserRepository userRepository)
+        public RecordController(IRecordRepository recordRepository, IApplicationUserRepository userRepository, ICategoryRepository categoryRepository)
         {
             _recordRepository = recordRepository;
             _userRepository = userRepository;
+            _categoryRepository = categoryRepository;
+        }
+
+        [HttpGet]
+        public string PopulateCategoriesDicitonary(bool isRevenue = false)
+        {
+            var serializer = new JavaScriptSerializer();
+
+            var categoriesDictionary = _categoryRepository.GetCategoriesDictionary(isRevenue);
+
+            var serializedResult = serializer.Serialize(categoriesDictionary);
+
+            return serializedResult;
         }
 
         [HttpDelete]

@@ -66,6 +66,7 @@ namespace SpendingManagement.App_Start
         {
             kernel.Bind<IRecordRepository>().To<RecordRepository>();
             kernel.Bind<IApplicationUserRepository>().To<ApplicationUserRepository>();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
         }        
     }
 }

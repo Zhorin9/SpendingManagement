@@ -22,7 +22,7 @@
                     @Html.HiddenFor(m => m.Id)
                 </div>
                 <div>
-                    @Html.HiddenFor(m => m.IsRevenue, new { @class = "js-isRecord-revenue"})
+                    @Html.HiddenFor(m => m.IsRevenue, new { @class = "js-isRecord-revenue" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name)
@@ -52,7 +52,7 @@
                         <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly">@Model.Subcategory</textarea>
                     </div>
                 </div>
-                
+
                 <input type="submit" value="Zapisz" class="btn btn-default" />
                 <a href="@Url.Action("RecordsList")" class="btn btn-default">Anuluj</a>
             }
@@ -66,6 +66,7 @@
     @Scripts.Render("~/bundles/form")
     @Scripts.Render("~/bundles/app")
     <script>
+        wow();
         $(function () {
             $('#Name').on("blur", function () {
                 if (this.value == "") {

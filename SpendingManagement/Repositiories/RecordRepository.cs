@@ -42,14 +42,14 @@ namespace SpendingManagement.Repositiories
         public IEnumerable<Record> GetRecords(string userId, int amountOfRecords, bool isRevenue)
         {
             return _contex.Records.Where(u=> u.UserID == userId && u.IsRevenue == isRevenue)
-                .OrderBy(o => o.Date)
+                .OrderByDescending(o => o.Date)
                 .Take(amountOfRecords);
         }
 
-        public IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo)
+        public IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo, bool IsRevenue)
         {
             return _contex.Records
-                .Where(d => d.Date > dateFrom && d.Date < dateTo)
+                .Where(d => d.Date > dateFrom && d.Date < dateTo && d.IsRevenue == IsRevenue)
                 .ToList();
         }
 

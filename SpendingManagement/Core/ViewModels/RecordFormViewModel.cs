@@ -1,5 +1,6 @@
 ﻿using SpendingManagement.Controllers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace SpendingManagement.Core.ViewModels
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [HiddenInput(DisplayValue =false)]
+        [HiddenInput(DisplayValue = false)]
         public bool IsRevenue { get; set; }
 
         [Display(Name = "Nazwa")]

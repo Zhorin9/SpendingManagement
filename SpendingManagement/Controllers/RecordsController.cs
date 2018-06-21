@@ -115,22 +115,21 @@ namespace SpendingManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var expense = _recordsRepository.GetRecord(userId, id);
+            var record = _recordsRepository.GetRecord(userId, id);
 
-            if (expense == null)
+            if (record == null)
                 return HttpNotFound();
 
-            //Expense expense = _expensesRepository.Expenses.First(p => p.Id == id && p.UserID == userId);
             RecordFormViewModel model = new RecordFormViewModel()
             {
-                Heading = "Edycja - " + expense.Name,
-                Id = expense.Id,
-                Name = expense.Name,
-                Charge = expense.Charge,
-                Category = expense.Category,
-                Date = expense.Date,
-                Description = expense.Description,
-                Subcategory = expense.Subcategory,
+                Heading = "Edycja - " + record.Name,
+                Id = record.Id,
+                Name = record.Name,
+                Charge = record.Charge,
+                Category = record.Category,
+                Date = record.Date,
+                Description = record.Description,
+                Subcategory = record.Subcategory,
             };
             return View("RecordForm", model);
         }
@@ -206,7 +205,7 @@ namespace SpendingManagement.Controllers
             if (dateToParam == null)
                 dateToParam = DateTime.MaxValue;
             var repoParam = _recordsRepository
-                .GetRecordsInSelectedRange(dateFromParam, dateToParam)
+                .GetRecordsInSelectedRange(dateFromParam, dateToParam, false)
                 .Where(u => u.UserID == userId);
 
             StatisticsViewModel statistics = new StatisticsViewModel()
