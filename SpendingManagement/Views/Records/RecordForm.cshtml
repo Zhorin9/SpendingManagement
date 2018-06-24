@@ -46,7 +46,7 @@
                 </div>
 
                 <div>
-                    <input type="button" id="categoryButton" value="Wybierz kategorię i podkategorię" class="form-control" />
+                    <input type="button" id="openCategoryWindow" value="Wybierz kategorię i podkategorię" class="form-control" />
                     <div class="category-textarea">
                         <textarea id="Category" name="Category" rows="1" readonly="readonly">@Model.Category</textarea>
                         <textarea id="Subcategory" name="Subcategory" rows="1" readonly="readonly">@Model.Subcategory</textarea>
@@ -66,7 +66,7 @@
     @Scripts.Render("~/bundles/form")
     @Scripts.Render("~/bundles/app")
     <script>
-        wow();
+        CategoriesForm.init();
         $(function () {
             $('#Name').on("blur", function () {
                 if (this.value == "") {
