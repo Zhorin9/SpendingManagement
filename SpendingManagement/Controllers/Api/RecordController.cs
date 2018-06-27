@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Web.Http.Results;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
+using System.Collections.Generic;
 
 namespace SpendingManagement.Controllers.Api
 {
@@ -34,6 +35,14 @@ namespace SpendingManagement.Controllers.Api
 
             return serializedResult;
         }
+
+        /*
+        [HttpGet]
+        public List<object> GetChart()
+        {
+
+        }
+        */
 
         [HttpDelete]
         public IHttpActionResult DeleteRecord(int id)

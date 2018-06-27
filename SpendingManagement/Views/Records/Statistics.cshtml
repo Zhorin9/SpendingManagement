@@ -12,7 +12,7 @@
                 @foreach (var p in Model.CategoriesCharge)
                 {
                     <tr>
-                        <th><a href="@Url.Action("RecordsList","Records",new {searchString = p[0] }) " class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</a></th>
+                        <th><a href="@Url.Action("RecordsList","Records",new {searchString = p[0] }) " id="category-@p[0]" class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</a></th>
                         <td class="table-dark">@p[1] [zł]</td>
                     </tr>
                 }

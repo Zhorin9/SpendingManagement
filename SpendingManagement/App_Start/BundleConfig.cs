@@ -20,7 +20,8 @@ namespace SpendingManagement
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                 "~/Scripts/App/form/calculator.js",
-                "~/Scripts/App/form/selectCategoriesForm.js"));
+                "~/Scripts/App/form/selectCategoriesForm.js",
+                "~/Scripts/App/form/validateForm.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                     .Include("~/Scripts/Highcharts-4.0.1/js/highcharts.js"));

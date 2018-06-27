@@ -316,7 +316,9 @@
     </Content>
     <Content Include="Scripts\App\form\calculator.js" />
     <Content Include="Scripts\App\controllers\recordController.js" />
+    <Content Include="Scripts\App\form\validateForm.js" />
     <Content Include="Scripts\App\form\selectCategoriesForm.js" />
+    <Content Include="Scripts\App\controllers\getSubcategoriesGraph.js" />
     <Content Include="Scripts\App\services\recordService.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
