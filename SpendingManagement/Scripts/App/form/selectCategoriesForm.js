@@ -66,11 +66,12 @@
         $("#categoryWindow").hide();
     }
 
-    var getCategoriesObject = function () {
+    var getCategoriesObject = function (isRevenue) {
         $.ajax({
             url: "/api/record/PopulateCategoriesDicitonary",
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            data: ({ isRevenue: $("#IsRevenue").val()})
         })
             .done(function (response) {
                 categoriesObject = jQuery.parseJSON(response);

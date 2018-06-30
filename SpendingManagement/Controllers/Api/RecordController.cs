@@ -7,6 +7,8 @@ using System.Web.Http.Results;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Collections.Generic;
+using System;
+using SpendingManagement.Core.Models;
 
 namespace SpendingManagement.Controllers.Api
 {
@@ -36,13 +38,18 @@ namespace SpendingManagement.Controllers.Api
             return serializedResult;
         }
 
-        /*
         [HttpGet]
-        public List<object> GetChart()
+        public string GetChart(string categoryId, DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
-
+            var selectedCategory ="";
+            foreach (var cat in _categoryRepository.GetCategoriesList())
+            {
+                selectedCategory = cat;
+            }
+            var subcategoriesValuesList = _recordRepository
+                .GetRecordsInSelectedRange(dateFromParam, dateToParam, selectedCategory);
+            return selectedCategory;
         }
-        */
 
         [HttpDelete]
         public IHttpActionResult DeleteRecord(int id)
@@ -59,5 +66,25 @@ namespace SpendingManagement.Controllers.Api
             
             return Ok();
         }
+        /*
+        private List<object> _CreatePieSeries(string category, DateTime dateFromParam, DateTime dateToParam)
+        {
+            var subcategoriesList = _categoryRepository.GetSubcategoriesList(category);
+            var subcategoriesValuesList = _recordRepository
+                .GetRecordsInSelectedRange(dateFromParam, dateToParam, category);
+            List<object> series = new List<object>();
+            foreach (var p in subcategoriesList)
+            {
+                series.Add(new object[] { p, subcategoriesValuesList.
+                .Where(p => p.Category == x).
+                Select(p => new { p.Category, p.Charge }).
+                Sum(p => p.Charge) });
+            }
+
+            return series;
+            
+        };
+        */
+        
     }
 }

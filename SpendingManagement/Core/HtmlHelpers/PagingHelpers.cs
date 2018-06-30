@@ -60,8 +60,8 @@ namespace SpendingManagement.Core.HtmlHelpers
                 tag.InnerHtml = i.ToString();
                 if(i== pagingInfo.CurrentPage)
                 {
-                    tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-dark");
+                    tag.AddCssClass("text-white");
+                    tag.AddCssClass("navbar-inverse");
                 }
                 tag.AddCssClass("btn btn-default");
                 result.Append(tag.ToString());

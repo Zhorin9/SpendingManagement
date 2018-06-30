@@ -21,6 +21,8 @@ namespace SpendingManagement.Core.Repositiories
         void DeleteRecord(Record record);
         Record GetRecord(string userId, int recordId);
         IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo, bool isRevenue);
+        IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo, string category);
+
         IEnumerable<Record> GetRecords(string userId, int amountOfRecords, bool isRevenue);
 
         /// <summary>

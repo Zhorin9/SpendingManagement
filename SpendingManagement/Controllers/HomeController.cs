@@ -20,6 +20,10 @@ namespace SpendingManagement.Controllers
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Return the view with general information about expenses and revenues of current user
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public ViewResult Dashboard()
         {
@@ -42,6 +46,10 @@ namespace SpendingManagement.Controllers
             return View(dashboard);
         }
 
+        /// <summary>
+        /// Return the view with information about application
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
             return View();

@@ -98,6 +98,12 @@ namespace SpendingManagement.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// Returns the view with the form to create a record
+        /// </summary>
+        /// <param name="revenue">True when create revenue/false when expense</param>
+        /// <returns></returns>
         public ViewResult Create(bool revenue)
         {
             var form = new RecordFormViewModel();
@@ -106,8 +112,11 @@ namespace SpendingManagement.Controllers
                 form.Heading = "Dodaj przychód";
                 form.IsRevenue = true;
             }
-            else 
+            else
+            {
                 form.Heading = "Stwórz wydatek";
+                form.IsRevenue = false;
+            }
             return View("RecordForm", form);
         }
 
@@ -188,6 +197,12 @@ namespace SpendingManagement.Controllers
             return RedirectToAction("RecordsList", "Records");
         }
 
+
+        /// <summary>
+        /// Returns the view with details about the record
+        /// </summary>
+        /// <param name="id">Unique id record</param>
+        /// <returns></returns>
         public ViewResult Details(int id)
         {
             var userId = User.Identity.GetUserId();
@@ -196,7 +211,6 @@ namespace SpendingManagement.Controllers
             return View(record);
         }
         
-
         public ViewResult Statistics(DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
             var userId = User.Identity.GetUserId();
