@@ -1,7 +1,7 @@
 ﻿
 var DrawChart = function () {
 
-    var drawPieChart = function (chartObject) {
+    var drawPieChart = function (chartObject, title) {
 
         var chart = {
             plotBackgroundColor: null,
@@ -9,7 +9,7 @@ var DrawChart = function () {
             plotShadow: false
         };
         var title = {
-            text: 'Udział poszczególnych podkategorii'
+            text: title,
         };
         var plotOptions = {
             pie: {

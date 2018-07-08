@@ -25,7 +25,11 @@ var GetDataForChart = function (drawChart) {
             },
         })
             .done(function (response) {
-                drawChart.drawPieChart(response);
+                var title = 'Udział poszczególnych podkategorii';
+                if (selectedCategory === "" || selectedCategory == undefined) {
+                    title = 'Udział poszczególnych kategorii';
+                }
+                drawChart.drawPieChart(response, title);
             })
             .fail(function () {
                 alert("Nie udało pobrać się wykresu");
