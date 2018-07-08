@@ -8,22 +8,12 @@ namespace SpendingManagement.Core.ViewModels
 {
     public class StatisticsViewModel
     {
-        public Highcharts PieChart { get; set; }
         public Highcharts LineSumChart { get; set; }
         public Highcharts LineCategoryChart { get; set; }
 
         public decimal SumCharge { get; set; }
         public List<object[]> CategoriesCharge = new List<object[]>();
 
-        public void CreatePieChart(List<object> series)
-        {
-            PieChart = new Highcharts("CategoryChart").SetSeries(new Series
-            {
-                Type = ChartTypes.Pie,
-                Data = new Data(series.ToArray()),
-                Name = "Wydatki",
-            }).SetTitle(new Title() { Text = "Udział poszczególnych kategorii" });
-        }
         public void CreateLineChart(string[] xValuesParam, IEnumerable<decimal> yValuesParam)
         {
             List<object> series = new List<object>();

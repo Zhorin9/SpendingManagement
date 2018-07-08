@@ -27,19 +27,26 @@ namespace SpendingManagement.Repositiories
                 .ToDictionary(p => p.Name, p => p.Subcategories.Select(n => n.Name).ToList());
         }
 
-        public IEnumerable<string> GetCategoriesList()
+        public IEnumerable<string> GetCategoriesList(bool isRevenue)
         {
             return _contex.Categories
+                .Where(p=> p.isRevenue == isRevenue)
                 .Select(p => p.Name)
                 .ToList();
         }
 
-        public List<string> GetSubcategoriesList(string category)
+        public IEnumerable<string> GetSubcategoriesList(string category)
         {
-            return _contex.Categories
-                .Where(c => c.Name == category)
-                .Select(p => p.Subcategories.ToString())
-                .ToList() ;
+            var subcategoriesList = _contex.Categories
+                .Where(p => p.Name == category)
+                .Select(p => p.Subcategories)
+                .FirstOrDefault();
+            if (subcategoriesList != null)
+                return subcategoriesList.Select(g => g.Name).ToList();
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
     }
 }

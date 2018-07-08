@@ -74,10 +74,10 @@
             data: ({ isRevenue: $("#IsRevenue").val()})
         })
             .done(function (response) {
-                categoriesObject = jQuery.parseJSON(response);
+                categoriesObject = response;
             })
             .fail(function () {
-                alert("Nie udało się");
+                alert("Nie udało się pobrać kategori");
             });
     }
     return {

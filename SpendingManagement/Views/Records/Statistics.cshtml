@@ -4,38 +4,54 @@
     Layout = "~/Views/Shared/_RecordLayout.cshtml";
 }
 
-<div class="row m-md-4 panel">
-    <div class="col-md-4 p-md-4">@Html.Partial("SelectRange")</div>
-    <div class="panel-body p-lg-4 col-md-8">
-        <table class="table table-bordered table-head-green">
+<div class="row panel">
+    <div class="col-md-3 p-md-4">@Html.Partial("SelectRange")</div>
+    <div class="panel-body p-lg-2 col-md-7 ">
+        <table class="table table-bordered table-head-green text-center">
             <tbody>
-                @foreach (var p in Model.CategoriesCharge)
-                {
-                    <tr>
-                        <th><a href="@Url.Action("RecordsList","Records",new {searchString = p[0] }) " id="category-@p[0]" class="table-secondary text-dark">Na elementy związane z kategorią - "@p[0]" wydano:</a></th>
-                        <td class="table-dark">@p[1] [zł]</td>
-                    </tr>
-                }
                 <tr>
-                    <th>Suma wydatków w wybranym zakresie wyniosła:</th>
-                    <td>@Model.SumCharge [zł]</td>
+                    @foreach (var p in Model.CategoriesCharge)
+                    {
+                       <th style="min-width:90px">
+                            <a href="@Url.Action("RecordsList","Records",new {searchString = p[0] }) " id="category-@p[0]" class="table-secondary text-dark">@p[0]</a>
+                        </th>
+                    }
+                </tr>
+                <tr>
+                    @foreach (var p in Model.CategoriesCharge)
+                    {
+                        <td class="table-dark">
+                            <button class="btn-graph" js-graph-category="@p[0]">Wykres</button>
+                            @p[1] [zł]
+                        </td>
+                    }
                 </tr>
             </tbody>
+        </table>
+        <table class="table table-bordered text-center">
+            <tr>
+                <th>Suma wydatków dla wszystkich kategorii:</th>
+                <td>@Model.SumCharge [zł]</td>
+            </tr>
         </table>
     </div>
 </div>
 
 @section scripts{
-    @Scripts.Render("~/bundles/highcharts")
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                @Model.PieChart
+            <div id="pieChart" class="col-md-6">
             </div>
-            <div class="col-md-6">
+            <div id="lineChart" class="col-md-6">
                 @Model.LineSumChart
             </div>
             <div class="m-md-4"></div>
         </div>
     </div>
+    @Scripts.Render("~/bundles/highcharts")
+    <script>
+        $(document).ready(function () {
+            GetDataForChart.init();
+        });
+    </script>
 }

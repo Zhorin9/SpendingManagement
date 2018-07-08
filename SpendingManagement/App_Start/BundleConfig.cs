@@ -17,15 +17,17 @@ namespace SpendingManagement
             bundles.Add(new ScriptBundle("~/bundles/app").Include(                      
                         "~/Scripts/App/services/recordService.js",
                         "~/Scripts/App/controllers/recordController.js"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                 "~/Scripts/App/form/calculator.js",
                 "~/Scripts/App/form/selectCategoriesForm.js",
                 "~/Scripts/App/form/validateForm.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/highcharts")
-                    .Include("~/Scripts/Highcharts-4.0.1/js/highcharts.js"));
             
+            bundles.Add(new ScriptBundle("~/bundles/highcharts")
+                    .Include("~/Scripts/Highcharts-4.0.1/js/highcharts.js",
+                    "~/Scripts/App/charts/drawCharts.js",
+                     "~/Scripts/App/charts/getDataForChart.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

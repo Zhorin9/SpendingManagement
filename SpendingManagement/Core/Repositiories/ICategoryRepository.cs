@@ -20,13 +20,13 @@ namespace SpendingManagement.Core.Repositiories
         /// Return prepared list with all categoriess
         /// </summary>
         /// <returns></returns>
-        IEnumerable<string> GetCategoriesList();
+        IEnumerable<string> GetCategoriesList(bool isRevenue);
 
         /// <summary>
         /// Return prepared subcategories list for selected category
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        List<string> GetSubcategoriesList(string category);
+        IEnumerable<string> GetSubcategoriesList(string category);
     }
 }

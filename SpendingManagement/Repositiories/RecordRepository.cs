@@ -48,16 +48,26 @@ namespace SpendingManagement.Repositiories
 
         public IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo, bool isRevenue)
         {
+            if (dateFrom == null)
+                dateFrom = DateTime.MinValue;
+            if (dateTo == null)
+                dateTo = DateTime.MaxValue;
+
             return _contex.Records
-                .Where(d => d.Date > dateFrom && d.Date < dateTo && d.IsRevenue == isRevenue)
+                .Where(d => d.Date >= dateFrom && d.Date <= dateTo && d.IsRevenue == isRevenue)
                 .ToList();
         }
 
 
         public IEnumerable<Record> GetRecordsInSelectedRange(DateTime? dateFrom, DateTime? dateTo, string category)
         {
+            if (dateFrom == null)
+                dateFrom = DateTime.MinValue;
+            if (dateTo == null)
+                dateTo = DateTime.MaxValue;
+
             return _contex.Records
-                .Where(d => d.Date > dateFrom && d.Date < dateTo && d.Category == category)
+                .Where(d => d.Date >= dateFrom && d.Date <= dateTo && d.Category == category)
                 .ToList();
         }
 

@@ -197,7 +197,6 @@ namespace SpendingManagement.Controllers
             return RedirectToAction("RecordsList", "Records");
         }
 
-
         /// <summary>
         /// Returns the view with details about the record
         /// </summary>
@@ -214,10 +213,7 @@ namespace SpendingManagement.Controllers
         public ViewResult Statistics(DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
             var userId = User.Identity.GetUserId();
-            if (dateFromParam == null)
-                dateFromParam = DateTime.MinValue;
-            if (dateToParam == null)
-                dateToParam = DateTime.MaxValue;
+
             var repoParam = _recordsRepository
                 .GetRecordsInSelectedRange(dateFromParam, dateToParam, false)
                 .Where(u => u.UserID == userId);
@@ -228,23 +224,11 @@ namespace SpendingManagement.Controllers
                 CategoriesCharge = _SelectExtremeValues(repoParam),
             };
 
-            string[] xValuesLineSeries = repoParam.Select(p => p.Date.ToShortDateString()).Distinct().ToArray();                                    //create array with arguments to line function
+            string[] xValuesLineSeries = repoParam.Select(p => p.Date.ToShortDateString()).Distinct().ToArray();                //create array with arguments to line function
             IEnumerable<decimal> yValuesLineSeries = repoParam.GroupBy(p => p.Date).Select(g => g.Sum(s => s.Charge));          //create list with values of the function
             statistics.CreateLineChart(xValuesLineSeries, yValuesLineSeries);
 
-            statistics.CreatePieChart(_CreatePieSeries(repoParam));
             return View(statistics);
-        }
-
-        private List<object> _CreatePieSeries(IEnumerable<Record> repoParam)
-        {
-            var category = repoParam.Select(p => p.Category).Distinct();
-            List<object> series = new List<object>();
-            category.ToList().ForEach(x => series.Add(new object[] { x, repoParam.
-                Where(p => p.Category == x).
-                Select(p => new { p.Category, p.Charge }).
-                Sum(p => p.Charge) }));
-            return series;
         }
         private List<object[]> _SelectExtremeValues(IEnumerable<Record> repoParam)
         {

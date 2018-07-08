@@ -27,28 +27,71 @@ namespace SpendingManagement.Controllers.Api
         }
 
         [HttpGet]
-        public string PopulateCategoriesDicitonary(bool isRevenue = false)
+        public IHttpActionResult PopulateCategoriesDicitonary(bool isRevenue = false)
         {
-            var serializer = new JavaScriptSerializer();
-
             var categoriesDictionary = _categoryRepository.GetCategoriesDictionary(isRevenue);
 
-            var serializedResult = serializer.Serialize(categoriesDictionary);
+            if (categoriesDictionary == null)
+                return NotFound();
 
-            return serializedResult;
+            return Json(categoriesDictionary);
         }
 
         [HttpGet]
-        public string GetChart(string categoryId, DateTime? dateFromParam = null, DateTime? dateToParam = null)
+        public IHttpActionResult GetPieChart(string categoryName, DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
-            var selectedCategory ="";
-            foreach (var cat in _categoryRepository.GetCategoriesList())
+            IEnumerable<string> categoriesNameList = new List<string>();
+            IEnumerable<Record> recordValuesList = new List<Record>();
+            bool isSubcategory = false;
+
+            //If the categoryName is empty or null, the data will be preapared for general categories
+            if (categoryName != null && categoryName != "")
+                isSubcategory = true;
+
+            if (isSubcategory)
             {
-                selectedCategory = cat;
+                categoriesNameList = _categoryRepository.GetSubcategoriesList(categoryName);
+                if (categoriesNameList == null)
+                    return NotFound();
+                recordValuesList = _recordRepository
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName);
+                if (recordValuesList == null)
+                    return NotFound();
             }
-            var subcategoriesValuesList = _recordRepository
-                .GetRecordsInSelectedRange(dateFromParam, dateToParam, selectedCategory);
-            return selectedCategory;
+            else
+            {
+                categoriesNameList = _categoryRepository.GetCategoriesList(false);
+                recordValuesList = _recordRepository
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false);
+            }
+
+            //Dictionary used as base for creating a pie chart
+            Dictionary<string, decimal> pieChartDictionary = new Dictionary<string, decimal>();
+
+            //Add keys to the dictionary 
+            foreach(var catName in categoriesNameList)
+            {
+                pieChartDictionary.Add(catName, 0);
+            }
+
+            if (isSubcategory)
+            {
+                //Adding a sum of expenses for individual subcategories.  
+                foreach (var record in recordValuesList)
+                {
+                    pieChartDictionary[record.Subcategory] += record.Charge;
+                }
+            }
+            else
+            {
+                //Adding a sum of expenses for individual general categories.  
+                foreach (var record in recordValuesList)
+                {
+                    pieChartDictionary[record.Category] += record.Charge;
+                }
+            }
+
+            return Json(pieChartDictionary);
         }
 
         [HttpDelete]
@@ -65,26 +108,6 @@ namespace SpendingManagement.Controllers.Api
             _recordRepository.Complete();
             
             return Ok();
-        }
-        /*
-        private List<object> _CreatePieSeries(string category, DateTime dateFromParam, DateTime dateToParam)
-        {
-            var subcategoriesList = _categoryRepository.GetSubcategoriesList(category);
-            var subcategoriesValuesList = _recordRepository
-                .GetRecordsInSelectedRange(dateFromParam, dateToParam, category);
-            List<object> series = new List<object>();
-            foreach (var p in subcategoriesList)
-            {
-                series.Add(new object[] { p, subcategoriesValuesList.
-                .Where(p => p.Category == x).
-                Select(p => new { p.Category, p.Charge }).
-                Sum(p => p.Charge) });
-            }
-
-            return series;
-            
-        };
-        */
-        
+        }     
     }
 }

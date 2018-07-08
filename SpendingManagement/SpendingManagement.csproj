@@ -314,11 +314,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\App\charts\drawCharts.js" />
     <Content Include="Scripts\App\form\calculator.js" />
     <Content Include="Scripts\App\controllers\recordController.js" />
     <Content Include="Scripts\App\form\validateForm.js" />
     <Content Include="Scripts\App\form\selectCategoriesForm.js" />
-    <Content Include="Scripts\App\controllers\getSubcategoriesGraph.js" />
+    <Content Include="Scripts\App\charts\getDataForChart.js" />
     <Content Include="Scripts\App\services\recordService.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -416,7 +417,6 @@
     <Content Include="Views\Shared\SelectRange.cshtml" />
     <Content Include="Views\Shared\_RecordLayout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Shared\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
