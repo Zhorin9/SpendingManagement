@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
-using SpendingManagement.Core.Repositiories;
-using System.Web;
-using System.Web.Http;
-using Newtonsoft.Json;
-using System.Web.Http.Results;
-using System.Web.Script.Serialization;
-using System.Web.Script.Services;
-using System.Collections.Generic;
-using System;
 using SpendingManagement.Core.Models;
+using SpendingManagement.Core.Repositiories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 
 namespace SpendingManagement.Controllers.Api
 {
@@ -42,11 +38,8 @@ namespace SpendingManagement.Controllers.Api
         {
             IEnumerable<string> categoriesNameList = new List<string>();
             IEnumerable<Record> recordValuesList = new List<Record>();
-            bool isSubcategory = false;
 
-            //If the categoryName is empty or null, the data will be preapared for general categories
-            if (categoryName != null && categoryName != "")
-                isSubcategory = true;
+            bool isSubcategory = _ChectCategoryName(categoryName);
 
             if (isSubcategory)
             {
@@ -93,6 +86,45 @@ namespace SpendingManagement.Controllers.Api
 
             return Json(pieChartDictionary);
         }
+        
+        [HttpGet]
+        public IHttpActionResult GetLineChart(string categoryName, DateTime? dateFromParam = null, DateTime? dateToParam = null)
+        {
+            IEnumerable<Record> recordValuesList = new List<Record>();
+            bool isSubcategory = _ChectCategoryName(categoryName);
+
+            if (isSubcategory)
+            {
+                recordValuesList = _recordRepository
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName);
+                if (recordValuesList == null)
+                    return NotFound();
+            }
+            else
+            {
+                recordValuesList = _recordRepository
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false);
+                if (recordValuesList == null)
+                    return NotFound();
+            }
+
+            //Prepare data to x serie
+            IEnumerable<string> xSerie = recordValuesList
+                .Select(p => p.Date.ToShortDateString())
+                .Distinct();
+
+            //Preapare values to defined data
+            IEnumerable<decimal> yValues = recordValuesList
+                .GroupBy(p => p.Date)
+                .Select(p => p.Sum(s => s.Charge));
+
+            List<object> lineChartData = new List<object>();
+            lineChartData.Add(xSerie);
+            lineChartData.Add(yValues);
+
+            return Json(lineChartData);
+        }
+        
 
         [HttpDelete]
         public IHttpActionResult DeleteRecord(int id)
@@ -109,5 +141,17 @@ namespace SpendingManagement.Controllers.Api
             
             return Ok();
         }     
+
+        /// <summary>
+        /// Return true if incoming value is not empty or null
+        /// </summary>
+        /// <param name="categoryName"></param>
+        /// <returns></returns>
+        private bool _ChectCategoryName(string categoryName)
+        {
+            if (categoryName != null && categoryName != "")
+                return true;
+            return false;
+        }
     }
 }

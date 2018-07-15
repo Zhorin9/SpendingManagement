@@ -17,7 +17,6 @@ var DrawChart = function () {
                 cursor: 'pointer',
             }
         };
-
         var series = [{
             type: 'pie',
             name: 'Wartość',
@@ -39,7 +38,60 @@ var DrawChart = function () {
         $('#pieChart').empty().highcharts(json);
     }
 
+    var drawLineChart = function (chartObject, title, selectedCategory) {
+        var xSerie = Object.values(chartObject[0]);
+        var yValues = Object.values(chartObject[1]);
+
+        if (selectedCategory == undefined || selectedCategory === "") {
+            selectedCategory = "Łącznie";
+        }
+        var title = {
+            text: title
+        };
+
+        var xAxis = {
+            categories: xSerie,
+            labels: {
+                enabled: false,
+            }
+        };
+
+        var plotOptions = {
+            color: '#14b068'
+        };
+
+        var legend = {
+            enabled: false
+        };
+
+        var yAxis = {
+            title: 'Wartość [zł]',
+            min: 0,
+        };
+
+        var tooltip = {
+            valueSuffix: ' zł'
+        }
+
+        var series = [{
+            name: selectedCategory,
+            data: yValues
+        },
+        ];
+
+        var json = {};
+        json.series = series;
+        json.title = title;
+        json.plotOptions = plotOptions;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
+        $('#lineChart').empty().highcharts(json);
+    }
+
     return {
-        drawPieChart: drawPieChart
+        drawPieChart: drawPieChart,
+        drawLineChart: drawLineChart
     }
 }();

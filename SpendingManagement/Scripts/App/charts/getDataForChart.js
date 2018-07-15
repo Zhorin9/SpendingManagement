@@ -1,27 +1,25 @@
 ﻿
 var GetDataForChart = function (drawChart) {
-    var xSeries;
-    var ySeries;
 
     var init = function () {
         $("td > button").click(function () {
-            var dateFrom = $("#rangeFrom").val();
-            var dateTo = $("#rangeTo").val();
             var selectedCategoryName = $(this).attr("js-graph-category");
-            getChart(dateFrom, dateTo, selectedCategoryName);
+            getPieChart(selectedCategoryName);
+            getLineChart(selectedCategoryName);
         });
-        getChart(null, null, "");
+        getPieChart("");
+        getLineChart("");
     };
 
-    var getChart = function (dateFrom, dateTo, selectedCategory) {
+    var getPieChart = function (selectedCategory) {
         $.ajax({
             url: "/api/record/GetPieChart",
             method: "GET",
             dataType: "json",
             data: {
                 categoryName: selectedCategory,
-                dateFromParam: dateFrom,
-                dateToParam: dateTo
+                dateFromParam: $("#rangeFrom").val(),
+                dateToParam: $("#rangeTo").val()
             },
         })
             .done(function (response) {
@@ -35,7 +33,31 @@ var GetDataForChart = function (drawChart) {
                 alert("Nie udało pobrać się wykresu");
             });
     };
-    return {
-        init: init
+    var getLineChart = function (selectedCategory) {
+        $.ajax({
+            url: "/api/record/GetLineChart",
+            method: "GET",
+            dataType: "json",
+            data: {
+                categoryName: selectedCategory,
+                dateFromParam: $("#rangeFrom").val(),
+                dateToParam: $("#rangeTo").val()
+            },
+        })
+            .done(function (response) {
+                var title = 'Udział poszczególnych podkategorii';
+                if (selectedCategory === "" || selectedCategory == undefined) {
+                    title = 'Udział poszczególnych kategorii';
+                }
+                drawChart.drawLineChart(response, title, selectedCategory);
+            })
+            .fail(function () {
+                alert("Nie udało pobrać się wykresu");
+            });
     };
+
+    return {
+        init: init,
+    };
+
 }(DrawChart);
