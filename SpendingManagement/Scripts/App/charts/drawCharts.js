@@ -56,10 +56,6 @@ var DrawChart = function () {
             }
         };
 
-        var plotOptions = {
-            color: '#14b068'
-        };
-
         var legend = {
             enabled: false
         };
@@ -75,14 +71,14 @@ var DrawChart = function () {
 
         var series = [{
             name: selectedCategory,
-            data: yValues
+            data: yValues,
+            color: '#14b068'
         },
         ];
 
         var json = {};
         json.series = series;
         json.title = title;
-        json.plotOptions = plotOptions;
         json.xAxis = xAxis;
         json.yAxis = yAxis;
         json.tooltip = tooltip;

@@ -5,6 +5,16 @@ namespace SpendingManagement.Core.Repositiories
 {
     public interface IApplicationUserRepository
     {
-        IEnumerable<ApplicationUser> GetUserById(string userId);
+        ApplicationUser GetUserById(string userId);
+
+        /// <summary>
+        /// Function to delete user and all dependencies form database
+        /// </summary>
+        void DeleteUser(ApplicationUser user);
+
+        /// <summary>
+        /// Save changes in database
+        /// </summary>
+        void Complete();
     }
 }

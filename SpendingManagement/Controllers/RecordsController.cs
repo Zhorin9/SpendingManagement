@@ -215,7 +215,7 @@ namespace SpendingManagement.Controllers
             var userId = User.Identity.GetUserId();
 
             var repoParam = _recordsRepository
-                .GetRecordsInSelectedRange(dateFromParam, dateToParam, false)
+                .GetRecordsInSelectedRange(dateFromParam, dateToParam, false, userId)
                 .Where(u => u.UserID == userId);
 
             StatisticsViewModel statistics = new StatisticsViewModel()
@@ -223,11 +223,6 @@ namespace SpendingManagement.Controllers
                 SumCharge = repoParam.Sum(p => p.Charge),
                 CategoriesCharge = _SelectExtremeValues(repoParam),
             };
-
-            string[] xValuesLineSeries = repoParam.Select(p => p.Date.ToShortDateString()).Distinct().ToArray();                //create array with arguments to line function
-            IEnumerable<decimal> yValuesLineSeries = repoParam.GroupBy(p => p.Date).Select(g => g.Sum(s => s.Charge));          //create list with values of the function
-            statistics.CreateLineChart(xValuesLineSeries, yValuesLineSeries);
-
             return View(statistics);
         }
         private List<object[]> _SelectExtremeValues(IEnumerable<Record> repoParam)

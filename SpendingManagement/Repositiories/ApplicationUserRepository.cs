@@ -17,11 +17,22 @@ namespace SpendingManagement.Repositiories
             _context = context;
         }
 
-        public IEnumerable<ApplicationUser> GetUserById(string userId)
+        public void Complete()
+        {
+            _context.SaveChanges();
+        }
+
+        public void DeleteUser(ApplicationUser user)
+        {
+            _context.Users.Remove(user);
+        }
+
+        public ApplicationUser GetUserById(string userId)
         {
             return _context.Users
                     .Where(u => u.Id == userId)
-                    .Include(e=> e.Records);
+                    .Include(e=> e.Records)
+                    .FirstOrDefault();
         }
 
     }

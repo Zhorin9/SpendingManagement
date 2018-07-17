@@ -36,6 +36,7 @@ namespace SpendingManagement.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetPieChart(string categoryName, DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
+            var userId = User.Identity.GetUserId();
             IEnumerable<string> categoriesNameList = new List<string>();
             IEnumerable<Record> recordValuesList = new List<Record>();
 
@@ -47,7 +48,7 @@ namespace SpendingManagement.Controllers.Api
                 if (categoriesNameList == null)
                     return NotFound();
                 recordValuesList = _recordRepository
-                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName);
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName, userId);
                 if (recordValuesList == null)
                     return NotFound();
             }
@@ -55,7 +56,7 @@ namespace SpendingManagement.Controllers.Api
             {
                 categoriesNameList = _categoryRepository.GetCategoriesList(false);
                 recordValuesList = _recordRepository
-                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false);
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false, userId);
             }
 
             //Dictionary used as base for creating a pie chart
@@ -90,20 +91,21 @@ namespace SpendingManagement.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetLineChart(string categoryName, DateTime? dateFromParam = null, DateTime? dateToParam = null)
         {
+            var userId = User.Identity.GetUserId();
             IEnumerable<Record> recordValuesList = new List<Record>();
             bool isSubcategory = _ChectCategoryName(categoryName);
 
             if (isSubcategory)
             {
                 recordValuesList = _recordRepository
-                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName);
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, categoryName, userId);
                 if (recordValuesList == null)
                     return NotFound();
             }
             else
             {
                 recordValuesList = _recordRepository
-                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false);
+                    .GetRecordsInSelectedRange(dateFromParam, dateToParam, false, userId);
                 if (recordValuesList == null)
                     return NotFound();
             }

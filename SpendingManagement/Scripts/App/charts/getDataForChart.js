@@ -4,12 +4,16 @@ var GetDataForChart = function (drawChart) {
     var init = function () {
         $("td > button").click(function () {
             var selectedCategoryName = $(this).attr("js-graph-category");
-            getPieChart(selectedCategoryName);
-            getLineChart(selectedCategoryName);
+            getChartsData(selectedCategoryName);
         });
-        getPieChart("");
-        getLineChart("");
+        getChartsData();
     };
+    var getChartsData = function (selectedCategory) {
+        if (selectedCategory == undefined)
+            selectedCategory = "";
+        getPieChart(selectedCategory);
+        getLineChart(selectedCategory);
+    }
 
     var getPieChart = function (selectedCategory) {
         $.ajax({
