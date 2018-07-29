@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SpendingManagement.Core.Models;
+using SpendingManagement.Core.Repositiories;
 
 namespace SpendingManagement.Controllers
 {
@@ -14,12 +15,14 @@ namespace SpendingManagement.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IApplicationUserRepository _userRepository;
 
-        public AccountController()
+        public AccountController(IApplicationUserRepository userRepository)
         {
+            _userRepository = userRepository;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -31,9 +34,9 @@ namespace SpendingManagement.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -48,6 +51,26 @@ namespace SpendingManagement.Controllers
                 _userManager = value;
             }
         }
+
+        [HttpPost]
+        public ActionResult Delete(string password)
+        {
+
+            IPasswordHasher passwordHasher = new PasswordHasher();
+            var userId = User.Identity.GetUserId();
+            var user = _userRepository.GetUserById(userId);
+            
+            if(passwordHasher.VerifyHashedPassword(user.PasswordHash,password) == PasswordVerificationResult.Success)
+            {
+                _userRepository.DeleteUser(user);
+                _userRepository.Complete();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return RedirectToAction("Login", "Account");
+            }
+            return View("Error");
+
+        }
+
 
         //
         // GET: /Account/Login
@@ -83,7 +106,7 @@ namespace SpendingManagement.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Błędny login.");
                     return View(model);
             }
         }

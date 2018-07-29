@@ -10,8 +10,6 @@ namespace SpendingManagement.Core.Models
     {
         public int Id { get; set; }
 
-        public int CategoryId { get; set; }
-
         [Required]
         [MaxLength(150)]
         public string Name { get; set; }

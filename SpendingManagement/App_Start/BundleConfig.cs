@@ -11,10 +11,10 @@ namespace SpendingManagement
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/account").Include(
+                "~/Scripts/App/controllers/accountController.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(                      
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/Scripts/App/services/recordService.js",
                         "~/Scripts/App/controllers/recordController.js"));
             
