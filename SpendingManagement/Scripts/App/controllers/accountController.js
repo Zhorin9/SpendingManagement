@@ -6,12 +6,28 @@ var AccountController = function () {
         $(".js-delete-user").click(checkBox);
     };
     var checkBox = function () {
-        bootbox.confirm("<h3>Czy na pewno chcesz usunąć konto?</h1><form id='deleteUser' action='/Account/Delete' method='POST'><div class='form-group'><label class='ml-4'>Hasło:  </label><input class='form-control' type='password' name='password' value=''/></div></form>", function (result) {
-            if (result)
-                $('#deleteUser').submit();
+        bootbox.confirm({
+            message: "Czy na pewno chcesz usunąć konto? Stracisz wszystkie dane!!!",
+            buttons: {
+                confirm: {
+                    label: 'Tak',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Nie',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    bootbox.confirm("<h3>Podaj hasło:</h1><form id='deleteUser' action='/Account/Delete' method='POST'><div class='form-group'><input class='form-control' type='password' name='password' value=''/></div></form>", function (result) {
+                        if (result)
+                            $('#deleteUser').submit();
+                    });
+                }
+            }
         });
     };
-
     return {
         init: init
     };
