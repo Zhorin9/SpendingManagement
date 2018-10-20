@@ -3,8 +3,8 @@ Budget management application
 
 ### Description
 It is an application that allows you to manage expenses and revenues.
-I made it easier to track my expenses. The application provides the ability to view the table with expenses. 
-It also generates charts related to expenditure categories.
+I made it to track my expenses easier. The application provides the ability to view the table with expenses and 
+generated charts related to expenditure categories.
 
 
 
