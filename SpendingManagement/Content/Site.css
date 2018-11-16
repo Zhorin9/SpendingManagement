@@ -228,3 +228,7 @@ div > textarea {
 .hover:hover {
     color: #B58900;
 }
+
+.input-date {
+    padding: 1px 1px 1px 10px;
+}
