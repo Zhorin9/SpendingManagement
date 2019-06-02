@@ -8,28 +8,28 @@ namespace SpendingManagement.Repositiories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly ApplicationDbContext _contex = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         public CategoryRepository(ApplicationDbContext contex)
         {
-            _contex = contex;
+            _context = contex;
         }
 
         public IEnumerable<Categories> GetCategories()
         {
-            return _contex.Categories;
+            return _context.Categories;
         }
 
         public Dictionary<string, List<string>> GetCategoriesDictionary(bool isRevenue)
         {
-            return _contex.Categories.Where(p=> p.isRevenue == isRevenue)
+            return _context.Categories.Where(p=> p.isRevenue == isRevenue)
                 .Select(p => new { p.Name, p.Subcategories })
                 .ToDictionary(p => p.Name, p => p.Subcategories.Select(n => n.Name).ToList());
         }
 
         public IEnumerable<string> GetCategoriesList(bool isRevenue)
         {
-            return _contex.Categories
+            return _context.Categories
                 .Where(p=> p.isRevenue == isRevenue)
                 .Select(p => p.Name)
                 .ToList();
@@ -37,7 +37,7 @@ namespace SpendingManagement.Repositiories
 
         public IEnumerable<string> GetSubcategoriesList(string category)
         {
-            var subcategoriesList = _contex.Categories
+            var subcategoriesList = _context.Categories
                 .Where(p => p.Name == category)
                 .Select(p => p.Subcategories)
                 .FirstOrDefault();
