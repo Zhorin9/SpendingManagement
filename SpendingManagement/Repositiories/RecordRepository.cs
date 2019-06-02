@@ -82,8 +82,11 @@ namespace SpendingManagement.Repositiories
         public decimal GetMonthRecordsSum(string userId, bool isRevenue)
         {
             var list = _context.Records
-                .Where(p => p.Date.Month == DateTime.Now.Month && p.IsRevenue == isRevenue && p.UserID == userId)
-                .Select(p => p.Charge).ToList();
+                .Where(p => p.Date.Month == DateTime.Now.Month && 
+                    p.Date.Year == DateTime.Now.Year && 
+                    p.IsRevenue == isRevenue && p.UserID == userId)
+                .Select(p => p.Charge)
+                .ToList();
             return list == null ? 0 : list.Sum();
         }
 
