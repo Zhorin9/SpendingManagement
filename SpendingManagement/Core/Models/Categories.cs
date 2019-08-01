@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace SpendingManagement.Core.Models
+﻿namespace SpendingManagement.Core.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Categories
     {
         public byte Id { get; set; }
@@ -12,7 +11,7 @@ namespace SpendingManagement.Core.Models
         [MaxLength(150)]
         public string Name { get; set; }
 
-        public bool isRevenue { get; set; }
+        public bool IsRevenue { get; set; }
 
         public virtual ICollection<Subcategories> Subcategories { get; set; }
     }

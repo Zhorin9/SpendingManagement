@@ -7,7 +7,7 @@ namespace SpendingManagement.Core.Models
     {
         public DbSet<Record> Records { get; set; }
         public DbSet<Categories> Categories { get; set; }
-        //public DbSet<Subcategories> Subcategories { get; set; }
+        public DbSet<Subcategories> Subcategories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -22,7 +22,7 @@ namespace SpendingManagement.Repositiories
 
         public Dictionary<string, List<string>> GetCategoriesDictionary(bool isRevenue)
         {
-            return _context.Categories.Where(p=> p.isRevenue == isRevenue)
+            return _context.Categories.Where(p=> p.IsRevenue == isRevenue)
                 .Select(p => new { p.Name, p.Subcategories })
                 .ToDictionary(p => p.Name, p => p.Subcategories.Select(n => n.Name).ToList());
         }
@@ -30,7 +30,7 @@ namespace SpendingManagement.Repositiories
         public IEnumerable<string> GetCategoriesList(bool isRevenue)
         {
             return _context.Categories
-                .Where(p=> p.isRevenue == isRevenue)
+                .Where(p=> p.IsRevenue == isRevenue)
                 .Select(p => p.Name)
                 .ToList();
         }

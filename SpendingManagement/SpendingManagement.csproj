@@ -249,49 +249,9 @@
     <Compile Include="Core\Models\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\ManageViewModels.cs" />
-    <Compile Include="Migrations\201805132055306_InitMigration.cs" />
-    <Compile Include="Migrations\201805132055306_InitMigration.Designer.cs">
-      <DependentUpon>201805132055306_InitMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805132059013_AddExpense.cs" />
-    <Compile Include="Migrations\201805132059013_AddExpense.Designer.cs">
-      <DependentUpon>201805132059013_AddExpense.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805141013171_AddExpense1.cs" />
-    <Compile Include="Migrations\201805141013171_AddExpense1.Designer.cs">
-      <DependentUpon>201805141013171_AddExpense1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806012130187_ChangeExpenseToRecord.cs" />
-    <Compile Include="Migrations\201806012130187_ChangeExpenseToRecord.Designer.cs">
-      <DependentUpon>201806012130187_ChangeExpenseToRecord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806021202179_ChangeExpenseToRecord1.cs" />
-    <Compile Include="Migrations\201806021202179_ChangeExpenseToRecord1.Designer.cs">
-      <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806132028190_AddedCategories.cs" />
-    <Compile Include="Migrations\201806132028190_AddedCategories.Designer.cs">
-      <DependentUpon>201806132028190_AddedCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806132038019_PopulateCategory.cs" />
-    <Compile Include="Migrations\201806132038019_PopulateCategory.Designer.cs">
-      <DependentUpon>201806132038019_PopulateCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806161952304_PopulateSubcategory.cs" />
-    <Compile Include="Migrations\201806161952304_PopulateSubcategory.Designer.cs">
-      <DependentUpon>201806161952304_PopulateSubcategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806162054473_AddSubcategory.cs" />
-    <Compile Include="Migrations\201806162054473_AddSubcategory.Designer.cs">
-      <DependentUpon>201806162054473_AddSubcategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.cs" />
-    <Compile Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.Designer.cs">
-      <DependentUpon>201806172047475_AddBoolColumntToCategoryEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807291301175_FixSubcategoryModel.cs" />
-    <Compile Include="Migrations\201807291301175_FixSubcategoryModel.Designer.cs">
-      <DependentUpon>201807291301175_FixSubcategoryModel.cs</DependentUpon>
+    <Compile Include="Migrations\201908011734272_Init.cs" />
+    <Compile Include="Migrations\201908011734272_Init.Designer.cs">
+      <DependentUpon>201908011734272_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -424,42 +384,12 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805132055306_InitMigration.resx">
-      <DependentUpon>201805132055306_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805132059013_AddExpense.resx">
-      <DependentUpon>201805132059013_AddExpense.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805141013171_AddExpense1.resx">
-      <DependentUpon>201805141013171_AddExpense1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806012130187_ChangeExpenseToRecord.resx">
-      <DependentUpon>201806012130187_ChangeExpenseToRecord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806021202179_ChangeExpenseToRecord1.resx">
-      <DependentUpon>201806021202179_ChangeExpenseToRecord1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806132028190_AddedCategories.resx">
-      <DependentUpon>201806132028190_AddedCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806132038019_PopulateCategory.resx">
-      <DependentUpon>201806132038019_PopulateCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806161952304_PopulateSubcategory.resx">
-      <DependentUpon>201806161952304_PopulateSubcategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806162054473_AddSubcategory.resx">
-      <DependentUpon>201806162054473_AddSubcategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806172047475_AddBoolColumntToCategoryEntity.resx">
-      <DependentUpon>201806172047475_AddBoolColumntToCategoryEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807291301175_FixSubcategoryModel.resx">
-      <DependentUpon>201807291301175_FixSubcategoryModel.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <EmbeddedResource Include="Migrations\201908011734272_Init.resx">
+      <DependentUpon>201908011734272_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

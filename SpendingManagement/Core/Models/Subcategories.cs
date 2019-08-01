@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace SpendingManagement.Core.Models
+﻿namespace SpendingManagement.Core.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Subcategories
     {
         public int Id { get; set; }
